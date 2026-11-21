@@ -31,7 +31,10 @@ export default function SlideView({ slide }: SlideViewProps) {
     const SketchComponent = sketches[slide.sketch]
     return (
       <div className="relative h-full w-full">
-        <SketchComponent initialForestMode={slide.initialForestMode} />
+        <SketchComponent
+          initialForestMode={slide.initialForestMode}
+          mode={slide.sketchMode}
+        />
         {slide.overlay && (
           <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 sm:p-10">
             <div className="animate-fade-up max-w-2xl">

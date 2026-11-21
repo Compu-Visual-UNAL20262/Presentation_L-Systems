@@ -56,6 +56,8 @@ export interface Slide {
   sketch?: SketchId
   /** Arranca Sketch1 directamente en modo bosque (3 árboles) para el cierre. */
   initialForestMode?: boolean
+  /** Modo de Sketch5: 'stochastic' (variación) o 'stress' (prueba de FPS). */
+  sketchMode?: 'stochastic' | 'stress'
   /** Texto breve superpuesto sobre el sketch. */
   overlay?: string
   /** Columnas para kind "compare". */
@@ -243,6 +245,7 @@ export const SLIDES: Slide[] = [
     kind: 'sketch',
     accent: 'magenta',
     sketch: 'sketch5',
+    sketchMode: 'stochastic',
     overlay: 'Ningún árbol repite la silueta del vecino.',
   },
   {
@@ -259,11 +262,12 @@ export const SLIDES: Slide[] = [
   {
     n: 17,
     act: 5,
-    kind: 'statement',
+    kind: 'sketch',
     accent: 'cyan',
     badge: 'ACTO V',
-    title: 'El Peligro Exponencial',
-    subtitle: 'O(bⁿ): de cientos de segmentos a millones. El navegador se congela.',
+    sketch: 'sketch5',
+    sketchMode: 'stress',
+    overlay: 'El Peligro Exponencial: O(bⁿ) dispara los segmentos y hunde los FPS.',
   },
   {
     n: 18,

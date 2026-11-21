@@ -72,3 +72,26 @@
 .thin-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Slider estilizado (pixel-arcade) para los controles de Sketch 4 */
+.plant-range {
+  background: rgba(255, 255, 255, 0.1);
+}
+.plant-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #22c55e;
+  border: 2px solid #86efac;
+  cursor: pointer;
+  box-shadow: 0 0 8px -1px rgba(34, 197, 94, 0.7);
+}
+.plant-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #22c55e;
+  border: 2px solid #86efac;
+  cursor: pointer;
+  box-shadow: 0 0 8px -1px rgba(34, 197, 94, 0.7);
+}
