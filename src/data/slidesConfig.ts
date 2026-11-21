@@ -1,26 +1,43 @@
-import type { SketchId } from '../sketches'
-
 /**
- * Configuración declarativa de la presentación.
+ * Configuración declarativa del flujo de la presentación.
  *
- * 6 Actos narrativos · 21 slides. Cada slide declara a qué Acto pertenece,
- * su tipo de layout y el contenido mínimo (regla de oro: ≤ 15 palabras
- * visibles; la explicación vive en la voz del equipo). No hay notas de
- * presentador ni guion en pantalla: la interfaz es 100 % limpia.
+ * 6 Actos narrativos · 21 slides en orden lineal. Cada entrada declara su
+ * número, el Acto al que pertenece, su acento neón, un título corto (para el
+ * menú y el HUD) y el identificador del componente que lo renderiza.
+ *
+ * Regla de oro: cada slide muestra ≤ 15 palabras; la explicación vive en la
+ * voz del equipo. Interfaz 100 % limpia, sin notas ni guion en pantalla.
  */
 
 /** Acentos neón disponibles por Acto. */
 export type Accent = 'cyan' | 'emerald' | 'amber' | 'magenta'
 
-/** Tipos de layout que el renderizador de slides sabe dibujar. */
-export type SlideKind =
-  | 'cover' // Portada / título grande
-  | 'statement' // Título + subtítulo centrado
-  | 'sketch' // Lienzo p5 a pantalla completa (con overlay opcional)
-  | 'compare' // Dos columnas enfrentadas
-  | 'list' // Lista de ingredientes / pasos / niveles
-  | 'rule' // Reglas L-System en monoespaciado
-  | 'closing' // Cierre
+/**
+ * Identificador del componente que dibuja cada slide. Los `sketch*` montan un
+ * <P5Canvas>; el resto son slides conceptuales con SVG + CSS.
+ */
+export type SlideComponentId =
+  | 'sketch-hook' // 01 Sketch1 (árbol)
+  | 'cover' // 02
+  | 'history' // 03
+  | 'parallel' // 04
+  | 'ingredients' // 05
+  | 'algae-diagram' // 06
+  | 'sketch-algae' // 07 Sketch2
+  | 'turtle' // 08
+  | 'sketch-koch' // 09 Sketch3
+  | 'stack' // 10
+  | 'edge-node' // 11
+  | 'sketch-plant' // 12 Sketch4
+  | 'levels' // 13
+  | 'dice' // 14
+  | 'sketch-forest' // 15 Sketch5 stochastic
+  | 'phototropism' // 16
+  | 'exponential' // 17
+  | 'sketch-stress' // 18 Sketch5 stress
+  | 'three-d' // 19
+  | 'applications' // 20
+  | 'closing' // 21 Sketch1 bosque
 
 export interface Act {
   id: number
@@ -30,47 +47,16 @@ export interface Act {
   accent: Accent
 }
 
-export interface ColumnItem {
-  title: string
-  body?: string
-}
-
-export interface ListItem {
-  key: string
-  title: string
-  body?: string
-}
-
 export interface Slide {
   /** Número de slide 1..21. */
   n: number
   /** Acto al que pertenece (1..6). */
   act: number
-  kind: SlideKind
   accent: Accent
-  /** Badge pixel corto (p. ej. "ACTO I"). */
-  badge?: string
-  title?: string
-  subtitle?: string
-  /** Sketch a montar en slides de tipo "sketch". */
-  sketch?: SketchId
-  /** Arranca Sketch1 directamente en modo bosque (3 árboles) para el cierre. */
-  initialForestMode?: boolean
-  /** Modo de Sketch5: 'stochastic' (variación) o 'stress' (prueba de FPS). */
-  sketchMode?: 'stochastic' | 'stress'
-  /** Texto breve superpuesto sobre el sketch. */
-  overlay?: string
-  /** Columnas para kind "compare". */
-  columns?: [ColumnItem, ColumnItem]
-  /** Elementos para kind "list". */
-  items?: ListItem[]
-  /** Reglas / código para kind "rule". */
-  rule?: {
-    lines: string[]
-    caption?: string
-  }
-  /** Equipo (solo portada). */
-  team?: string[]
+  /** Título corto para el menú / HUD (no es necesariamente el texto en pantalla). */
+  title: string
+  /** Componente que renderiza el slide. */
+  component: SlideComponentId
 }
 
 export const ACTS: Act[] = [
@@ -90,231 +76,38 @@ export const TEAM = [
 ]
 
 export const SLIDES: Slide[] = [
-  // ─── ACTO I ───────────────────────────────────────────────────────────
-  {
-    n: 1,
-    act: 1,
-    kind: 'sketch',
-    accent: 'emerald',
-    sketch: 'sketch1',
-    overlay: 'Cuatro líneas de texto, un bosque entero.',
-  },
-  {
-    n: 2,
-    act: 1,
-    kind: 'cover',
-    accent: 'cyan',
-    badge: 'ACTO I',
-    title: 'L-Systems: El ADN de las Formas',
-    subtitle: 'Programar el crecimiento en lugar de esculpirlo.',
-    team: TEAM,
-  },
-  {
-    n: 3,
-    act: 1,
-    kind: 'statement',
-    accent: 'cyan',
-    badge: 'ACTO I',
-    title: '1968 · Aristid Lindenmayer',
-    subtitle: 'Un biólogo estudiando algas inventó un lenguaje para el crecimiento.',
-  },
-  {
-    n: 4,
-    act: 1,
-    kind: 'compare',
-    accent: 'cyan',
-    badge: 'ACTO I',
-    title: 'Uno a la Vez vs. Todos al Tiempo',
-    columns: [
-      { title: 'Gramática de Chomsky', body: 'Una regla, un símbolo, por turnos. Como una línea de ensamblaje.' },
-      { title: 'L-System', body: 'Todas las reglas en paralelo, cada latido. Como la división celular.' },
-    ],
-  },
+  // ── Acto I ──
+  { n: 1, act: 1, accent: 'emerald', title: 'Gancho: árbol en vivo', component: 'sketch-hook' },
+  { n: 2, act: 1, accent: 'cyan', title: 'L-Systems: El ADN de las Formas', component: 'cover' },
+  { n: 3, act: 1, accent: 'cyan', title: '1968: Aristid Lindenmayer', component: 'history' },
+  { n: 4, act: 1, accent: 'cyan', title: 'Uno a la Vez vs. Todos al Tiempo', component: 'parallel' },
 
-  // ─── ACTO II ──────────────────────────────────────────────────────────
-  {
-    n: 5,
-    act: 2,
-    kind: 'list',
-    accent: 'emerald',
-    badge: 'ACTO II',
-    title: 'Los 3 Ingredientes',
-    items: [
-      { key: 'V', title: 'Alfabeto', body: 'Las piezas con las que jugamos.' },
-      { key: 'ω', title: 'Axioma', body: 'La semilla inicial en n=0.' },
-      { key: 'P', title: 'Reglas', body: 'Qué le pasa a cada pieza en el siguiente turno.' },
-    ],
-  },
-  {
-    n: 6,
-    act: 2,
-    kind: 'rule',
-    accent: 'emerald',
-    badge: 'ACTO II',
-    title: 'El Alga que Sabe Contar',
-    rule: {
-      lines: ['ω = A', 'A → AB', 'B → A'],
-      caption: 'n: A · AB · ABA · ABAAB → 1, 2, 3, 5, 8… (Fibonacci)',
-    },
-  },
-  {
-    n: 7,
-    act: 2,
-    kind: 'sketch',
-    accent: 'emerald',
-    sketch: 'sketch2',
-    overlay: 'Nadie programó Fibonacci. Emerge de dos reglas.',
-  },
+  // ── Acto II ──
+  { n: 5, act: 2, accent: 'emerald', title: 'Los 3 Ingredientes', component: 'ingredients' },
+  { n: 6, act: 2, accent: 'emerald', title: 'El Alga que Sabe Contar', component: 'algae-diagram' },
+  { n: 7, act: 2, accent: 'emerald', title: 'Sketch: Fibonacci emergente', component: 'sketch-algae' },
 
-  // ─── ACTO III ─────────────────────────────────────────────────────────
-  {
-    n: 8,
-    act: 3,
-    kind: 'statement',
-    accent: 'amber',
-    badge: 'ACTO III',
-    title: 'De Letras a Píxeles: La Tortuga',
-    subtitle: 'F avanza · + gira a la izquierda · − gira a la derecha.',
-  },
-  {
-    n: 9,
-    act: 3,
-    kind: 'sketch',
-    accent: 'amber',
-    sketch: 'sketch3',
-    overlay: 'Una regla, cuatro iteraciones: el copo de Koch.',
-  },
-  {
-    n: 10,
-    act: 3,
-    kind: 'statement',
-    accent: 'amber',
-    badge: 'ACTO III',
-    title: 'El Superpoder de Recordar: [ y ]',
-    subtitle: 'Guardar posición → explorar rama → volver al tronco. Una pila LIFO.',
-  },
-  {
-    n: 11,
-    act: 3,
-    kind: 'compare',
-    accent: 'amber',
-    badge: 'ACTO III',
-    title: 'Crecer por Tallos vs. por Yemas',
-    columns: [
-      { title: 'Reescritura de aristas', body: 'Los segmentos F se subdividen y brotan ramas.' },
-      { title: 'Reescritura de nodos', body: 'Yemas invisibles (X) controlan la edad de cada rama.' },
-    ],
-  },
-  {
-    n: 12,
-    act: 3,
-    kind: 'sketch',
-    accent: 'amber',
-    sketch: 'sketch4',
-    overlay: 'Cambia δ y el ciprés se vuelve arbusto.',
-  },
+  // ── Acto III ──
+  { n: 8, act: 3, accent: 'amber', title: 'De Letras a Píxeles: La Tortuga', component: 'turtle' },
+  { n: 9, act: 3, accent: 'amber', title: 'Sketch: copo de Koch', component: 'sketch-koch' },
+  { n: 10, act: 3, accent: 'amber', title: 'El Superpoder de Recordar: [ y ]', component: 'stack' },
+  { n: 11, act: 3, accent: 'amber', title: 'Crecer por Tallos vs. por Yemas', component: 'edge-node' },
+  { n: 12, act: 3, accent: 'amber', title: 'Sketch: planta ramificada', component: 'sketch-plant' },
 
-  // ─── ACTO IV ──────────────────────────────────────────────────────────
-  {
-    n: 13,
-    act: 4,
-    kind: 'list',
-    accent: 'magenta',
-    badge: 'ACTO IV',
-    title: 'Los 5 Niveles de Realismo',
-    items: [
-      { key: '1', title: 'Exacto', body: 'D0L determinista: fractales perfectos.' },
-      { key: '2', title: 'Aleatorio', body: 'Estocástico: variación orgánica.' },
-      { key: '3', title: 'Vecinos', body: 'Sensible al contexto: hormonas.' },
-      { key: '4', title: 'Con medidas', body: 'Paramétrico: grosor y edad.' },
-      { key: '5', title: 'Con entorno', body: 'Abierto: luz, colisiones, gravedad.' },
-    ],
-  },
-  {
-    n: 14,
-    act: 4,
-    kind: 'statement',
-    accent: 'magenta',
-    badge: 'ACTO IV',
-    title: 'El Bosque de los Dados',
-    subtitle: 'Tres reglas con probabilidad: 40 % izquierda, 40 % derecha, 20 % recto.',
-  },
-  {
-    n: 15,
-    act: 4,
-    kind: 'sketch',
-    accent: 'magenta',
-    sketch: 'sketch5',
-    sketchMode: 'stochastic',
-    overlay: 'Ningún árbol repite la silueta del vecino.',
-  },
-  {
-    n: 16,
-    act: 4,
-    kind: 'statement',
-    accent: 'magenta',
-    badge: 'ACTO IV',
-    title: 'Cuando la Planta Mira al Sol',
-    subtitle: 'Sistemas abiertos: fototropismo y evasión de obstáculos en 3D.',
-  },
+  // ── Acto IV ──
+  { n: 13, act: 4, accent: 'magenta', title: 'Los 5 Niveles de Realismo', component: 'levels' },
+  { n: 14, act: 4, accent: 'magenta', title: 'El Bosque de los Dados', component: 'dice' },
+  { n: 15, act: 4, accent: 'magenta', title: 'Sketch: bosque estocástico', component: 'sketch-forest' },
+  { n: 16, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
 
-  // ─── ACTO V ───────────────────────────────────────────────────────────
-  {
-    n: 17,
-    act: 5,
-    kind: 'sketch',
-    accent: 'cyan',
-    badge: 'ACTO V',
-    sketch: 'sketch5',
-    sketchMode: 'stress',
-    overlay: 'El Peligro Exponencial: O(bⁿ) dispara los segmentos y hunde los FPS.',
-  },
-  {
-    n: 18,
-    act: 5,
-    kind: 'rule',
-    accent: 'cyan',
-    badge: 'ACTO V',
-    title: 'El Doble Cuaderno',
-    rule: {
-      lines: ['leer   Sₙ   (solo lectura)', 'escribir Sₙ₊₁ (buffer limpio)', 'swap   Sₙ ⇄ Sₙ₊₁'],
-      caption: 'Double buffering: nunca reescribir la cadena in-place.',
-    },
-  },
-  {
-    n: 19,
-    act: 5,
-    kind: 'statement',
-    accent: 'cyan',
-    badge: 'ACTO V',
-    title: 'Del Plano 2D al Mundo 3D',
-    subtitle: 'La tortuga pilotea como un avión: yaw, pitch, roll. Líneas → cilindros.',
-  },
+  // ── Acto V ──
+  { n: 17, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
+  { n: 18, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
+  { n: 19, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
 
-  // ─── ACTO VI ──────────────────────────────────────────────────────────
-  {
-    n: 20,
-    act: 6,
-    kind: 'list',
-    accent: 'emerald',
-    badge: 'ACTO VI',
-    title: 'Mundos Infinitos en Pocos Kilobytes',
-    items: [
-      { key: '🎮', title: 'Videojuegos', body: 'SpeedTree, No Man\'s Sky: una semilla cultiva la flora.' },
-      { key: '🏙️', title: 'Ciudades', body: 'Redes viales que crecen como raíces (Parish & Müller).' },
-      { key: '🌾', title: 'Ciencia y arte', body: 'Cultivos virtuales y música algorítmica fractal.' },
-    ],
-  },
-  {
-    n: 21,
-    act: 6,
-    kind: 'sketch',
-    accent: 'emerald',
-    badge: 'ACTO VI',
-    sketch: 'sketch1',
-    initialForestMode: true,
-    overlay: 'Reglas simples, mundos enteros. Muchas gracias.',
-  },
+  // ── Acto VI ──
+  { n: 20, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
+  { n: 21, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
 ]
 
 /** Devuelve el Acto al que pertenece un slide. */
