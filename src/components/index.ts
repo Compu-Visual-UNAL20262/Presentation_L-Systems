@@ -1,0 +1,4 @@
+export { default as SlideDeck } from './SlideDeck'
+export { default as NavigationHUD } from './NavigationHUD'
+export { default as ActMenu } from './ActMenu'
+export { default as P5Canvas } from './P5Canvas'
