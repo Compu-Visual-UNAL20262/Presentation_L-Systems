@@ -44,9 +44,9 @@ export default function NavigationHUD({ index, total, onPrev, onNext }: Navigati
         >
           ACTO {act.label}
         </span>
-        <span className="font-pixel text-[11px] text-slate-500">
+        <span className="font-pixel text-[11px] text-slate-200 bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2 py-1.5">
           {String(current.n).padStart(2, '0')}
-          <span className="text-slate-700"> / {String(total).padStart(2, '0')}</span>
+          <span className="text-slate-400"> / {String(total).padStart(2, '0')}</span>
         </span>
       </div>
 

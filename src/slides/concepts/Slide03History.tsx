@@ -12,7 +12,7 @@ export default function Slide03History() {
       <Card accent="cyan" className="w-full max-w-2xl p-6 sm:p-8">
         <svg viewBox="0 0 440 120" className="w-full" role="img" aria-label="Filamento de alga Anabaena">
           {/* Filamento: cápsulas conectadas (células) */}
-          <line x1="20" y1="60" x2="420" y2="60" stroke="#1E293B" strokeWidth="18" strokeLinecap="round" />
+          <line x1="20" y1="60" x2="420" y2="60" stroke="#475569" strokeWidth="18" strokeLinecap="round" />
           {cells.map((_, i) => {
             const x = 40 + i * 60
             const dividing = i % 3 === 1
@@ -29,7 +29,7 @@ export default function Slide03History() {
                 />
                 {dividing && (
                   // Línea de división celular
-                  <line x1={x} y1={44} x2={x} y2={76} stroke="#0B0F19" strokeWidth="2" />
+                  <line x1={x} y1={44} x2={x} y2={76} stroke="#070A12" strokeWidth="2" />
                 )}
               </g>
             )

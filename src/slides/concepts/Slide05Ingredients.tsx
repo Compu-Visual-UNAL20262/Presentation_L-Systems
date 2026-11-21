@@ -20,7 +20,7 @@ function SeedIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
       <ellipse cx="24" cy="30" rx="9" ry="13" fill="#2ECC71" />
-      <path d="M24 17 q6 -8 2 -13 q-8 4 -2 13 Z" fill="#6B8E23" />
+      <path d="M24 17 q6 -8 2 -13 q-8 4 -2 13 Z" fill="#84CC16" />
     </svg>
   )
 }
@@ -56,9 +56,9 @@ export default function Slide05Ingredients() {
             <div className="flex justify-center animate-float-y" style={{ animationDelay: `${i * 0.4}s` }}>
               {c.icon}
             </div>
-            <div className="mt-4 font-pixel text-xs text-slate-500">{c.sym}</div>
+            <div className="mt-4 font-pixel text-xs text-slate-300">{c.sym}</div>
             <div className="mt-1 font-display text-xl font-semibold text-slate-100">{c.name}</div>
-            <div className="font-display text-sm text-slate-400">{c.note}</div>
+            <div className="font-display text-sm text-slate-300">{c.note}</div>
           </div>
         ))}
       </div>

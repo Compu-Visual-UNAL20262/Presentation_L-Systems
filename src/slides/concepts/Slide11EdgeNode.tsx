@@ -17,20 +17,20 @@ export default function Slide11EdgeNode() {
               <path d="M60 70 L60 40" />
               <path d="M44 52 L34 40 M76 52 L86 40" />
             </g>
-            <text x="60" y="118" textAnchor="middle" className="fill-slate-500" fontSize="8">
+            <text x="60" y="118" textAnchor="middle" className="fill-slate-300" fontSize="8">
               F se subdivide
             </text>
           </svg>
           <h3 className="mt-2 font-display text-lg font-semibold text-slate-100">
             Reescritura de aristas
           </h3>
-          <p className="font-mono text-xs text-slate-400">F → F[+F]F[-F]F</p>
+          <p className="font-mono text-xs text-slate-300">F → F[+F]F[-F]F</p>
         </div>
 
         {/* Reescritura de nodos: yemas X en las puntas */}
         <div className="pixel-bevel border-t-2 border-neon-emerald bg-surface p-6 text-center">
           <svg viewBox="0 0 120 120" className="mx-auto h-40">
-            <g stroke="#6B8E23" strokeWidth="2.5" fill="none" strokeLinecap="round">
+            <g stroke="#84CC16" strokeWidth="2.5" fill="none" strokeLinecap="round">
               <path d="M60 110 L60 66" />
               <path d="M60 66 L40 44 M60 66 L80 44" />
             </g>
@@ -50,14 +50,14 @@ export default function Slide11EdgeNode() {
                 style={{ animationDelay: `${i * 0.3}s` }}
               />
             ))}
-            <text x="60" y="118" textAnchor="middle" className="fill-slate-500" fontSize="8">
+            <text x="60" y="118" textAnchor="middle" className="fill-slate-300" fontSize="8">
               yemas en las puntas
             </text>
           </svg>
           <h3 className="mt-2 font-display text-lg font-semibold text-slate-100">
             Reescritura de nodos
           </h3>
-          <p className="font-mono text-xs text-slate-400">X → F[+X][-X]FX</p>
+          <p className="font-mono text-xs text-slate-300">X → F[+X][-X]FX</p>
         </div>
       </div>
     </ConceptFrame>

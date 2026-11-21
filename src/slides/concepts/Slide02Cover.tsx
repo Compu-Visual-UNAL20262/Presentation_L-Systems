@@ -20,7 +20,7 @@ export default function Slide02Cover() {
           {TEAM.map((name) => (
             <span
               key={name}
-              className="pixel-bevel bg-surface px-2.5 py-1 font-mono text-xs text-slate-400 sm:text-sm"
+              className="pixel-bevel bg-surface px-2.5 py-1 font-mono text-xs text-slate-300 sm:text-sm"
             >
               {name}
             </span>

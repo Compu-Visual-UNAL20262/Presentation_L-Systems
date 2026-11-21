@@ -54,7 +54,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
       {open && (
         <div
           className="thin-scroll mt-2 max-h-[70vh] w-72 overflow-y-auto pixel-bevel
-            bg-surface/95 backdrop-blur-sm p-3 shadow-xl"
+            bg-surface/95 backdrop-blur-sm p-3 shadow-xl border border-white/15"
         >
           {ACTS.map((act) => {
             const accent = ACCENT[act.accent]
@@ -68,7 +68,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
                   >
                     ACTO {act.label}
                   </span>
-                  <span className="font-display text-[11px] text-slate-400 truncate">
+                  <span className="font-display text-[11px] text-slate-300 truncate">
                     {act.title}
                   </span>
                 </div>
@@ -86,7 +86,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
                           ${
                             active
                               ? `${accent.bg} text-base`
-                              : 'bg-base text-slate-400 hover:text-slate-100'
+                              : 'bg-base text-slate-300 hover:text-slate-50'
                           }`}
                       >
                         {String(s.n).padStart(2, '0')}

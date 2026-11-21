@@ -38,7 +38,7 @@ export default function Slide06Algae() {
             className="flex items-center gap-4 pixel-bevel bg-surface px-4 py-2.5 animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
-            <span className="w-10 shrink-0 font-mono text-xs text-slate-500">n={i}</span>
+            <span className="w-10 shrink-0 font-mono text-xs text-slate-300">n={i}</span>
             <div className="flex flex-1 flex-wrap gap-1.5">
               {row.str.split('').map((ch, j) => (
                 <Capsule key={j} letter={ch} />
@@ -49,7 +49,7 @@ export default function Slide06Algae() {
             </span>
           </div>
         ))}
-        <p className="pt-1 text-center font-mono text-xs text-slate-500">
+        <p className="pt-1 text-center font-mono text-xs text-slate-300">
           1, 2, 3, 5 … Fibonacci emergente
         </p>
       </div>

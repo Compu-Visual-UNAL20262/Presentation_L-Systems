@@ -8,7 +8,7 @@ import { ConceptFrame } from './shared'
 function TreeGlyph({ d, color }: { d: string; color: string }) {
   return (
     <svg viewBox="0 0 60 80" className="h-20">
-      <path d="M30 78 L30 50" stroke="#5C4033" strokeWidth="3" strokeLinecap="round" />
+      <path d="M30 78 L30 50" stroke="#8C6239" strokeWidth="3" strokeLinecap="round" />
       <path d={d} stroke={color} strokeWidth="2.5" fill="none" strokeLinecap="round" />
     </svg>
   )
@@ -25,7 +25,7 @@ function Die() {
         [15, 33],
         [33, 33],
       ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="3.2" fill="#131A2A" />
+        <circle key={i} cx={cx} cy={cy} r="3.2" fill="#162033" />
       ))}
     </svg>
   )
@@ -42,13 +42,13 @@ export default function Slide14Dice() {
   return (
     <ConceptFrame badge="ACTO IV" accent="magenta" title="El Bosque de los Dados">
       <div className="grid w-full max-w-4xl gap-4 sm:grid-cols-2">
-        <div className="pixel-bevel border-t-2 border-slate-600 bg-surface p-5 text-center">
+        <div className="pixel-bevel border-t-2 border-slate-400 bg-surface p-5 text-center">
           <div className="flex justify-center gap-3">
             {[0, 1, 2].map((i) => (
-              <TreeGlyph key={i} d={CLONE} color="#64748B" />
+              <TreeGlyph key={i} d={CLONE} color="#94A3B8" />
             ))}
           </div>
-          <p className="mt-3 font-display text-sm text-slate-400">Determinista · clones idénticos</p>
+          <p className="mt-3 font-display text-sm text-slate-300">Determinista · clones idénticos</p>
         </div>
 
         <div className="pixel-bevel border-t-2 border-neon-magenta bg-surface p-5 text-center">
@@ -58,7 +58,7 @@ export default function Slide14Dice() {
             ))}
             <Die />
           </div>
-          <p className="mt-3 font-display text-sm text-slate-400">Estocástico · cada árbol único</p>
+          <p className="mt-3 font-display text-sm text-slate-300">Estocástico · cada árbol único</p>
         </div>
       </div>
     </ConceptFrame>

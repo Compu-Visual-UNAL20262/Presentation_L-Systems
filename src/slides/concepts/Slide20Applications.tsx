@@ -9,8 +9,8 @@ function GameIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
       <rect x="6" y="18" width="36" height="18" rx="9" fill="#38BDF8" />
-      <circle cx="16" cy="27" r="3" fill="#0B0F19" />
-      <path d="M30 24 v6 M27 27 h6" stroke="#0B0F19" strokeWidth="2" />
+      <circle cx="16" cy="27" r="3" fill="#070A12" />
+      <path d="M30 24 v6 M27 27 h6" stroke="#070A12" strokeWidth="2" />
     </svg>
   )
 }
@@ -27,7 +27,7 @@ function CityIcon() {
 function CropIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <path d="M24 42 V18" stroke="#6B8E23" strokeWidth="2.5" />
+      <path d="M24 42 V18" stroke="#84CC16" strokeWidth="2.5" />
       <path d="M24 26 q-10 -4 -12 -14 q10 2 12 12 Z" fill="#2ECC71" />
       <path d="M24 22 q10 -4 12 -14 q-10 2 -12 12 Z" fill="#4ADE80" />
     </svg>
@@ -54,7 +54,7 @@ export default function Slide20Applications() {
               {c.icon}
             </div>
             <div className="mt-4 font-display text-lg font-semibold text-slate-100">{c.title}</div>
-            <div className="mt-1 font-display text-xs text-slate-400">{c.note}</div>
+            <div className="mt-1 font-display text-xs text-slate-300">{c.note}</div>
           </div>
         ))}
       </div>

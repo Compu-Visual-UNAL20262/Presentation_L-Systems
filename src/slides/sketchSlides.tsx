@@ -15,7 +15,8 @@ function CornerBadge({ text, className = '' }: { text: string; className?: strin
   return (
     <span
       className={`pointer-events-none font-pixel text-[9px] uppercase tracking-widest
-        text-slate-400 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${className}`}
+        text-slate-200 bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2 py-1
+        drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${className}`}
     >
       {text}
     </span>
@@ -28,7 +29,7 @@ export function Slide01Hook() {
     <div className="relative h-full w-full">
       <Sketch1Tree initialForestMode={false} />
       <div className="pointer-events-none absolute bottom-16 left-1/2 -translate-x-1/2">
-        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald animate-pulse-soft">
+        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2.5 py-1.5 animate-pulse-soft">
           CLICK / ESPACIO PARA CRECER
         </span>
       </div>
@@ -95,7 +96,7 @@ export function Slide21Closing() {
     <div className="relative h-full w-full">
       <Sketch1Tree initialForestMode={true} />
       <div className="pointer-events-none absolute inset-x-0 top-14 flex flex-col items-center px-6 text-center sm:top-20">
-        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald">
+        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2.5 py-1.5">
           ACTO VI · CIERRE
         </span>
         <h2 className="mt-2 font-display text-2xl font-bold text-slate-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] sm:text-4xl">

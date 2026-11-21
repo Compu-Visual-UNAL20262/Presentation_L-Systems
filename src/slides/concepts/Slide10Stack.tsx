@@ -27,14 +27,14 @@ function Step({
       <span className="font-pixel text-lg" style={{ color }}>
         {sym}
       </span>
-      <span className="font-display text-xs text-slate-400">{label}</span>
+      <span className="font-display text-xs text-slate-300">{label}</span>
     </div>
   )
 }
 
 function Arrow() {
   return (
-    <svg viewBox="0 0 40 24" className="h-5 w-10 text-slate-600 animate-slide-right">
+    <svg viewBox="0 0 40 24" className="h-5 w-10 text-slate-300 animate-slide-right">
       <path d="M2 12 H30" stroke="currentColor" strokeWidth="2" />
       <path d="M30 6 l8 6 l-8 6" fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
@@ -50,14 +50,14 @@ export default function Slide10Stack() {
             {/* Pin de ubicación */}
             <svg viewBox="0 0 32 32" className="h-8 w-8">
               <path d="M16 3 a9 9 0 0 1 9 9 c0 7 -9 17 -9 17 s-9 -10 -9 -17 a9 9 0 0 1 9 -9 Z" fill="#F39C12" />
-              <circle cx="16" cy="12" r="3.5" fill="#131A2A" />
+              <circle cx="16" cy="12" r="3.5" fill="#162033" />
             </svg>
           </Step>
           <Arrow />
           <Step sym="↳" label="explorar rama" color="#2ECC71">
             <svg viewBox="0 0 32 32" className="h-8 w-8">
               <path d="M16 28 V14" stroke="#2ECC71" strokeWidth="2.5" />
-              <path d="M16 18 l8 -8 M16 16 l-7 -6" stroke="#6B8E23" strokeWidth="2.5" />
+              <path d="M16 18 l8 -8 M16 16 l-7 -6" stroke="#84CC16" strokeWidth="2.5" />
             </svg>
           </Step>
           <Arrow />
@@ -71,12 +71,12 @@ export default function Slide10Stack() {
 
         {/* Pila LIFO */}
         <div className="flex flex-col items-center">
-          <span className="mb-1 font-pixel text-[10px] tracking-widest text-slate-500">PILA LIFO</span>
+          <span className="mb-1 font-pixel text-[10px] tracking-widest text-slate-300">PILA LIFO</span>
           <div className="flex flex-col-reverse gap-1">
             {['estado 1', 'estado 2', 'estado 3'].map((s, i) => (
               <div
                 key={s}
-                className="pixel-bevel bg-base px-6 py-1.5 font-mono text-xs text-slate-400 animate-fade-up"
+                className="pixel-bevel bg-base px-6 py-1.5 font-mono text-xs text-slate-300 animate-fade-up"
                 style={{ animationDelay: `${i * 0.15}s`, width: `${160 - i * 24}px` }}
               >
                 {s}

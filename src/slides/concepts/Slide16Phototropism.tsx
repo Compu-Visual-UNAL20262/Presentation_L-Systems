@@ -29,8 +29,8 @@ export default function Slide16Phototropism() {
           </g>
 
           {/* Obstáculo */}
-          <rect x="150" y="90" width="34" height="60" rx="3" fill="#334155" />
-          <text x="167" y="165" textAnchor="middle" className="fill-slate-500" fontSize="9">
+          <rect x="150" y="90" width="34" height="60" rx="3" fill="#475569" />
+          <text x="167" y="165" textAnchor="middle" className="fill-slate-300" fontSize="9">
             muro
           </text>
 

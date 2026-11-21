@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base oscura tipo hackathon/tech
-        base: '#0B0F19',
-        surface: '#131A2A',
+        // Base oscura tipo hackathon/tech (optimizado para proyector)
+        base: '#070A12',
+        surface: '#162033',
         // Acentos neón
         neon: {
           cyan: '#38BDF8',

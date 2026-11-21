@@ -26,7 +26,7 @@ export default function Slide13Levels() {
             <span className="mb-1 font-display text-[10px] font-semibold text-slate-200 sm:text-sm">
               {lvl.name}
             </span>
-            <span className="mb-1.5 hidden font-mono text-[10px] text-slate-500 sm:block">
+            <span className="mb-1.5 hidden font-mono text-[10px] text-slate-300 sm:block">
               {lvl.tag}
             </span>
             <div

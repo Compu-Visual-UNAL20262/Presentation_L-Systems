@@ -27,9 +27,9 @@ const RULES: Record<string, string> = {
 const ITERATIONS = 5
 const ANGLE_DEG = 25
 
-const BARK = '#5C4033'
-const OLIVE = '#6B8E23'
-const BG = '#121417'
+const BARK = '#8C6239'
+const OLIVE = '#84CC16'
+const BG = '#0D1117'
 const GROW_FRAMES = 240 // ~4 s a 60 FPS
 
 /** Expande el axioma con double buffering (leer actual, escribir siguiente). */
@@ -160,7 +160,7 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
             break
           case ']':
             p.noStroke()
-            p.fill(46, 204, 113, 210) // #2ECC71, alpha 210
+            p.fill(52, 211, 153, 235) // #34D399, alpha 235
             p.push()
             p.rotate(p.radians(depth % 2 === 0 ? 20 : -20))
             p.ellipse(0, 0, 6 * k, 11 * k) // hoja inclinada
@@ -171,6 +171,16 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
           default:
             break
         }
+      }
+
+      // Equilibra la pila de transformación: durante el crecimiento animado el
+      // bucle puede terminar con símbolos `[` abiertos sin su `]`. Si no se
+      // cierran, la matriz de p5 queda contaminada y desplaza/inclina los
+      // árboles siguientes en modo bosque. Cada árbol deja la pila 100 %
+      // balanceada en cada frame.
+      while (depth > 0) {
+        p.pop()
+        depth--
       }
     }
 
@@ -200,7 +210,7 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
       const centerOffset = -((bounds.minX + bounds.maxX) / 2) * len
 
       if (forest) {
-        const xs = [p.width * 0.25, p.width * 0.5, p.width * 0.75]
+        const xs = [p.width * 0.22, p.width * 0.5, p.width * 0.78]
         for (const x of xs) {
           p.push()
           p.translate(x + centerOffset, baseY)

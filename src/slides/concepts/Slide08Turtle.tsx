@@ -22,7 +22,7 @@ function CommandCard({
       <div className="mt-3 font-pixel text-2xl" style={{ color }}>
         {sym}
       </div>
-      <div className="mt-1 font-display text-sm text-slate-400">{label}</div>
+      <div className="mt-1 font-display text-sm text-slate-300">{label}</div>
     </div>
   )
 }
