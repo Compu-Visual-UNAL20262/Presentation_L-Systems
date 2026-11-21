@@ -2,11 +2,10 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 06 — El Alga que Sabe Contar.
- * 4 filas con cápsulas coloreadas (A ámbar, B cian), recreando el esquema de
- * generaciones del Sketch 2: A(1) → AB(2) → ABA(3) → ABAAB(5).
+ * 4 filas con cápsulas 16-bit de alto contraste (A moneda, B cian).
  */
 
-const AMBER = '#F39C12'
+const AMBER = '#FACC15'
 const CYAN = '#38BDF8'
 
 const ROWS: { str: string; count: number }[] = [
@@ -20,7 +19,7 @@ function Capsule({ letter }: { letter: string }) {
   const bg = letter === 'A' ? AMBER : CYAN
   return (
     <span
-      className="flex h-8 w-8 items-center justify-center rounded-md font-mono text-sm font-bold text-base sm:h-10 sm:w-10"
+      className="flex h-8 w-8 items-center justify-center pixel-bevel-sm font-mono text-sm font-extrabold text-[#0F172A] sm:h-10 sm:w-10"
       style={{ backgroundColor: bg }}
     >
       {letter}
@@ -35,21 +34,23 @@ export default function Slide06Algae() {
         {ROWS.map((row, i) => (
           <div
             key={i}
-            className="flex items-center gap-4 pixel-bevel bg-surface px-4 py-2.5 animate-fade-up"
+            className="flex items-center gap-4 pixel-bevel bg-white px-4 py-2.5 animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
-            <span className="w-10 shrink-0 font-mono text-xs text-slate-300">n={i}</span>
+            <span className="w-12 shrink-0 font-mono text-xs font-extrabold text-[#0F172A]">
+              n={i}
+            </span>
             <div className="flex flex-1 flex-wrap gap-1.5">
               {row.str.split('').map((ch, j) => (
                 <Capsule key={j} letter={ch} />
               ))}
             </div>
-            <span className="w-8 shrink-0 text-right font-mono text-lg text-neon-emerald">
+            <span className="pixel-bevel-sm bg-[#A3E635] px-2.5 py-0.5 text-right font-mono text-base font-extrabold text-[#0F172A]">
               {row.count}
             </span>
           </div>
         ))}
-        <p className="pt-1 text-center font-mono text-xs text-slate-300">
+        <p className="pt-1 text-center font-mono text-xs font-bold text-[#0F172A]">
           1, 2, 3, 5 … Fibonacci emergente
         </p>
       </div>

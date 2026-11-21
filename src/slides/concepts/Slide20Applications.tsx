@@ -2,15 +2,16 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 20 — Mundos Infinitos en Pocos Kilobytes.
- * 3 tarjetas: Videojuegos, Ciudades Procedurales, Agronomía & Arte.
+ * 3 tarjetas 16-bit de día: Videojuegos, Ciudades Procedurales, Agronomía & Arte.
  */
 
 function GameIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <rect x="6" y="18" width="36" height="18" rx="9" fill="#38BDF8" />
-      <circle cx="16" cy="27" r="3" fill="#070A12" />
-      <path d="M30 24 v6 M27 27 h6" stroke="#070A12" strokeWidth="2" />
+      <rect x="6" y="16" width="36" height="20" rx="8" fill="#38BDF8" stroke="#0F172A" strokeWidth="2.5" />
+      <circle cx="32" cy="24" r="2.5" fill="#FACC15" stroke="#0F172A" strokeWidth="1.5" />
+      <circle cx="36" cy="28" r="2.5" fill="#F472B6" stroke="#0F172A" strokeWidth="1.5" />
+      <path d="M16 22 v8 M12 26 h8" stroke="#0F172A" strokeWidth="2.5" />
     </svg>
   )
 }
@@ -18,8 +19,8 @@ function GameIcon() {
 function CityIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <path d="M8 40 L24 8 L40 40" fill="none" stroke="#2ECC71" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M24 8 V40 M16 24 H32 M12 32 H36" stroke="#2ECC71" strokeWidth="2" opacity="0.7" />
+      <rect x="8" y="8" width="32" height="32" rx="4" fill="#ECFCCB" stroke="#0F172A" strokeWidth="2.5" />
+      <path d="M8 24 H40 M24 8 V40 M16 8 V24 M32 24 V40" stroke="#15803D" strokeWidth="2.5" />
     </svg>
   )
 }
@@ -27,17 +28,17 @@ function CityIcon() {
 function CropIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <path d="M24 42 V18" stroke="#84CC16" strokeWidth="2.5" />
-      <path d="M24 26 q-10 -4 -12 -14 q10 2 12 12 Z" fill="#2ECC71" />
-      <path d="M24 22 q10 -4 12 -14 q-10 2 -12 12 Z" fill="#4ADE80" />
+      <path d="M24 42 V18" stroke="#14532D" strokeWidth="3" />
+      <path d="M24 28 q-10 -4 -12 -14 q10 2 12 12 Z" fill="#22C55E" stroke="#0F172A" strokeWidth="2" />
+      <path d="M24 24 q10 -4 12 -14 q-10 2 -12 12 Z" fill="#A3E635" stroke="#0F172A" strokeWidth="2" />
     </svg>
   )
 }
 
 const CARDS = [
-  { icon: <GameIcon />, title: 'Videojuegos', note: 'SpeedTree · No Man\'s Sky', accent: 'border-neon-cyan' },
-  { icon: <CityIcon />, title: 'Ciudades', note: 'Redes viales procedurales', accent: 'border-neon-emerald' },
-  { icon: <CropIcon />, title: 'Agronomía & Arte', note: 'Cultivos y música fractal', accent: 'border-neon-amber' },
+  { icon: <GameIcon />, title: 'Videojuegos', note: 'SpeedTree · No Man\'s Sky', headerBg: 'bg-[#38BDF8]' },
+  { icon: <CityIcon />, title: 'Ciudades', note: 'Redes viales procedurales', headerBg: 'bg-[#A3E635]' },
+  { icon: <CropIcon />, title: 'Agronomía & Arte', note: 'Cultivos y música fractal', headerBg: 'bg-[#FACC15]' },
 ]
 
 export default function Slide20Applications() {
@@ -47,14 +48,19 @@ export default function Slide20Applications() {
         {CARDS.map((c, i) => (
           <div
             key={c.title}
-            className={`pixel-bevel border-t-2 ${c.accent} bg-surface p-6 text-center animate-fade-up`}
+            className="pixel-bevel bg-white overflow-hidden text-center animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
-            <div className="flex justify-center animate-float-y" style={{ animationDelay: `${i * 0.4}s` }}>
-              {c.icon}
+            <div className={`border-b-2 border-[#0F172A] py-1 font-pixel text-[9px] font-bold text-[#0F172A] ${c.headerBg}`}>
+              STAGE 0{i + 1}
             </div>
-            <div className="mt-4 font-display text-lg font-semibold text-slate-100">{c.title}</div>
-            <div className="mt-1 font-display text-xs text-slate-300">{c.note}</div>
+            <div className="p-5">
+              <div className="flex justify-center animate-float-y" style={{ animationDelay: `${i * 0.4}s` }}>
+                {c.icon}
+              </div>
+              <div className="mt-3 font-display text-lg font-extrabold text-[#0F172A]">{c.title}</div>
+              <div className="mt-1 font-display text-xs font-semibold text-[#334155]">{c.note}</div>
+            </div>
           </div>
         ))}
       </div>

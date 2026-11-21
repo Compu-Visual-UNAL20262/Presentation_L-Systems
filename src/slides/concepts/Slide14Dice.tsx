@@ -1,15 +1,16 @@
 import { ConceptFrame } from './shared'
+import PixelMeme from '../../components/PixelMeme'
 
 /**
  * Slide 14 — El Bosque de los Dados.
- * 3 árboles clonados idénticos vs. 3 distintos, con un dado pixelado.
+ * 3 árboles clonados idénticos vs. 3 distintos, con un dado pixelado + Meme RNG.
  */
 
 function TreeGlyph({ d, color }: { d: string; color: string }) {
   return (
-    <svg viewBox="0 0 60 80" className="h-20">
-      <path d="M30 78 L30 50" stroke="#8C6239" strokeWidth="3" strokeLinecap="round" />
-      <path d={d} stroke={color} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+    <svg viewBox="0 0 60 80" className="h-16 sm:h-20">
+      <path d="M30 76 L30 48" stroke="#5C3A21" strokeWidth="4" strokeLinecap="round" />
+      <path d={d} stroke={color} strokeWidth="3.5" fill="none" strokeLinecap="round" />
     </svg>
   )
 }
@@ -17,7 +18,7 @@ function TreeGlyph({ d, color }: { d: string; color: string }) {
 function Die() {
   return (
     <svg viewBox="0 0 48 48" className="h-10 w-10 animate-spin-slow">
-      <rect x="6" y="6" width="36" height="36" rx="6" fill="#EC4899" />
+      <rect x="6" y="6" width="36" height="36" rx="6" fill="#FACC15" stroke="#0F172A" strokeWidth="3" />
       {[
         [15, 15],
         [33, 15],
@@ -25,7 +26,7 @@ function Die() {
         [15, 33],
         [33, 33],
       ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="3.2" fill="#162033" />
+        <circle key={i} cx={cx} cy={cy} r="3.2" fill="#0F172A" />
       ))}
     </svg>
   )
@@ -41,25 +42,34 @@ const VARIANTS = [
 export default function Slide14Dice() {
   return (
     <ConceptFrame badge="ACTO IV" accent="magenta" title="El Bosque de los Dados">
-      <div className="grid w-full max-w-4xl gap-4 sm:grid-cols-2">
-        <div className="pixel-bevel border-t-2 border-slate-400 bg-surface p-5 text-center">
-          <div className="flex justify-center gap-3">
-            {[0, 1, 2].map((i) => (
-              <TreeGlyph key={i} d={CLONE} color="#94A3B8" />
-            ))}
+      <div className="flex w-full max-w-4xl flex-col items-center gap-3.5 sm:gap-4">
+        <div className="grid w-full gap-3.5 sm:grid-cols-2 sm:gap-4">
+          <div className="pixel-bevel border-t-4 border-[#64748B] bg-white p-4 text-center sm:p-5">
+            <div className="flex justify-center gap-3">
+              {[0, 1, 2].map((i) => (
+                <TreeGlyph key={i} d={CLONE} color="#475569" />
+              ))}
+            </div>
+            <p className="mt-2 font-display text-sm font-bold text-[#0F172A]">
+              Determinista · clones idénticos
+            </p>
           </div>
-          <p className="mt-3 font-display text-sm text-slate-300">Determinista · clones idénticos</p>
+
+          <div className="pixel-bevel border-t-4 border-[#DB2777] bg-white p-4 text-center sm:p-5">
+            <div className="flex items-center justify-center gap-3">
+              {VARIANTS.map((d, i) => (
+                <TreeGlyph key={i} d={d} color="#16A34A" />
+              ))}
+              <Die />
+            </div>
+            <p className="mt-2 font-display text-sm font-bold text-[#0F172A]">
+              Estocástico · cada árbol único
+            </p>
+          </div>
         </div>
 
-        <div className="pixel-bevel border-t-2 border-neon-magenta bg-surface p-5 text-center">
-          <div className="flex items-center justify-center gap-3">
-            {VARIANTS.map((d, i) => (
-              <TreeGlyph key={i} d={d} color="#2ECC71" />
-            ))}
-            <Die />
-          </div>
-          <p className="mt-3 font-display text-sm text-slate-300">Estocástico · cada árbol único</p>
-        </div>
+        {/* Meme narrativo: clones Spider-Man vs RNG */}
+        <PixelMeme variant="clones" className="w-full max-w-md" />
       </div>
     </ConceptFrame>
   )

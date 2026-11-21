@@ -2,16 +2,16 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 05 — Los 3 Ingredientes.
- * 3 tarjetas pixel-tech con íconos SVG: Alfabeto, Axioma, Reglas.
+ * 3 tarjetas 16-bit de día con íconos SVG: Alfabeto, Axioma, Reglas.
  */
 
 function AlphabetIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <rect x="6" y="8" width="14" height="14" rx="2" fill="#F39C12" />
-      <rect x="28" y="8" width="14" height="14" rx="2" fill="#38BDF8" />
-      <rect x="6" y="26" width="14" height="14" rx="2" fill="#2ECC71" />
-      <rect x="28" y="26" width="14" height="14" rx="2" fill="#EC4899" />
+      <rect x="6" y="8" width="14" height="14" rx="2" fill="#FACC15" stroke="#0F172A" strokeWidth="2" />
+      <rect x="28" y="8" width="14" height="14" rx="2" fill="#38BDF8" stroke="#0F172A" strokeWidth="2" />
+      <rect x="6" y="26" width="14" height="14" rx="2" fill="#A3E635" stroke="#0F172A" strokeWidth="2" />
+      <rect x="28" y="26" width="14" height="14" rx="2" fill="#F472B6" stroke="#0F172A" strokeWidth="2" />
     </svg>
   )
 }
@@ -19,8 +19,8 @@ function AlphabetIcon() {
 function SeedIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <ellipse cx="24" cy="30" rx="9" ry="13" fill="#2ECC71" />
-      <path d="M24 17 q6 -8 2 -13 q-8 4 -2 13 Z" fill="#84CC16" />
+      <ellipse cx="24" cy="30" rx="9" ry="13" fill="#22C55E" stroke="#0F172A" strokeWidth="2" />
+      <path d="M24 17 q6 -8 2 -13 q-8 4 -2 13 Z" fill="#A3E635" stroke="#0F172A" strokeWidth="2" />
     </svg>
   )
 }
@@ -28,19 +28,19 @@ function SeedIcon() {
 function RulesIcon() {
   return (
     <svg viewBox="0 0 48 48" className="h-12 w-12">
-      <circle cx="13" cy="24" r="6" fill="#EC4899" />
-      <path d="M22 24 h12" stroke="#94A3B8" strokeWidth="2" />
-      <path d="M30 20 l4 4 l-4 4" fill="none" stroke="#94A3B8" strokeWidth="2" />
-      <circle cx="40" cy="16" r="4" fill="#38BDF8" />
-      <circle cx="40" cy="32" r="4" fill="#2ECC71" />
+      <circle cx="12" cy="24" r="6" fill="#F472B6" stroke="#0F172A" strokeWidth="2" />
+      <path d="M21 24 h11" stroke="#0F172A" strokeWidth="2.5" />
+      <path d="M28 19 l5 5 l-5 5" fill="none" stroke="#0F172A" strokeWidth="2.5" />
+      <circle cx="39" cy="15" r="5" fill="#38BDF8" stroke="#0F172A" strokeWidth="2" />
+      <circle cx="39" cy="33" r="5" fill="#A3E635" stroke="#0F172A" strokeWidth="2" />
     </svg>
   )
 }
 
 const CARDS = [
-  { sym: 'V', name: 'Alfabeto', note: 'Las piezas', icon: <AlphabetIcon />, accent: 'border-neon-amber' },
-  { sym: 'ω', name: 'Axioma', note: 'La semilla', icon: <SeedIcon />, accent: 'border-neon-emerald' },
-  { sym: 'P', name: 'Reglas', note: 'La evolución', icon: <RulesIcon />, accent: 'border-neon-magenta' },
+  { sym: 'V', name: 'Alfabeto', note: 'Las piezas', icon: <AlphabetIcon />, pill: 'bg-[#FACC15]' },
+  { sym: 'ω', name: 'Axioma', note: 'La semilla', icon: <SeedIcon />, pill: 'bg-[#A3E635]' },
+  { sym: 'P', name: 'Reglas', note: 'La evolución', icon: <RulesIcon />, pill: 'bg-[#F472B6]' },
 ]
 
 export default function Slide05Ingredients() {
@@ -50,15 +50,19 @@ export default function Slide05Ingredients() {
         {CARDS.map((c, i) => (
           <div
             key={c.name}
-            className={`pixel-bevel border-t-2 ${c.accent} bg-surface p-6 text-center animate-fade-up`}
+            className="pixel-bevel bg-white p-6 text-center animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
             <div className="flex justify-center animate-float-y" style={{ animationDelay: `${i * 0.4}s` }}>
               {c.icon}
             </div>
-            <div className="mt-4 font-pixel text-xs text-slate-300">{c.sym}</div>
-            <div className="mt-1 font-display text-xl font-semibold text-slate-100">{c.name}</div>
-            <div className="font-display text-sm text-slate-300">{c.note}</div>
+            <div className="mt-4">
+              <span className={`inline-block pixel-bevel-sm ${c.pill} px-2.5 py-0.5 font-pixel text-xs font-bold text-[#0F172A]`}>
+                {c.sym}
+              </span>
+            </div>
+            <div className="mt-2 font-display text-xl font-bold text-[#0F172A]">{c.name}</div>
+            <div className="font-display text-sm font-semibold text-[#334155]">{c.note}</div>
           </div>
         ))}
       </div>
