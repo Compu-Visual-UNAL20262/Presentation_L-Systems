@@ -3,34 +3,35 @@ import Sketch2Algae from '../sketches/Sketch2Algae'
 import Sketch3Koch from '../sketches/Sketch3Koch'
 import Sketch4Plant from '../sketches/Sketch4Plant'
 import Sketch5Forest from '../sketches/Sketch5Forest'
+import PixelMeme from '../components/PixelMeme'
+import { TEAM } from '../data/slidesConfig'
 
 /**
  * Envoltorios de los slides basados en sketch. Cada uno monta el componente de
  * sketch (que incluye su propio <P5Canvas> en Instance Mode y sus controles) y
- * añade un badge/overlay discreto cuando el guion lo pide.
+ * añade un badge/overlay discreto 16-bit de día cuando el guion lo pide.
  */
 
-/** Badge pixel pequeño y discreto para superponer sobre un sketch. */
+/** Badge pixel pequeño y nítido para superponer sobre un sketch. */
 function CornerBadge({ text, className = '' }: { text: string; className?: string }) {
   return (
     <span
-      className={`pointer-events-none font-pixel text-[9px] uppercase tracking-widest
-        text-slate-200 bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2 py-1
-        drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${className}`}
+      className={`pointer-events-none font-pixel text-[10px] font-bold uppercase tracking-wider
+        text-[#0F172A] bg-white pixel-bevel-sm px-2.5 py-1 ${className}`}
     >
       {text}
     </span>
   )
 }
 
-/** Slide 01 — Árbol inmersivo, sin título, con pista de interacción. */
+/** Slide 01 — Árbol inmersivo, sin título, con pista de interacción tipo START. */
 export function Slide01Hook() {
   return (
     <div className="relative h-full w-full">
       <Sketch1Tree initialForestMode={false} />
       <div className="pointer-events-none absolute bottom-16 left-1/2 -translate-x-1/2">
-        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2.5 py-1.5 animate-pulse-soft">
-          CLICK / ESPACIO PARA CRECER
+        <span className="font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A] bg-[#A3E635] pixel-bevel-sm px-3.5 py-1.5 animate-pulse-soft">
+          ▶ CLICK / ESPACIO PARA CRECER
         </span>
       </div>
     </div>
@@ -87,21 +88,37 @@ export function Slide18StressSketch() {
 }
 
 /**
- * Slide 21 — Cierre: bosque completo con título discreto superpuesto.
- * El botón de reinicio del propio Sketch1 (REPLAY) vuelve a lanzar la
- * animación del bosque; aquí añadimos un título de cierre arriba.
+ * Slide 21 — Cierre: bosque completo con tarjeta 16-bit de cierre y emblema
+ * final del equipo Gaymers.
  */
 export function Slide21Closing() {
   return (
     <div className="relative h-full w-full">
       <Sketch1Tree initialForestMode={true} />
-      <div className="pointer-events-none absolute inset-x-0 top-14 flex flex-col items-center px-6 text-center sm:top-20">
-        <span className="font-pixel text-[10px] uppercase tracking-widest text-neon-emerald bg-[#070A12]/85 backdrop-blur-sm border border-white/15 rounded px-2.5 py-1.5">
-          ACTO VI · CIERRE
-        </span>
-        <h2 className="mt-2 font-display text-2xl font-bold text-slate-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] sm:text-4xl">
-          Reglas Simples. Mundos Infinitos.
-        </h2>
+      <div className="pointer-events-none absolute inset-x-0 top-12 flex flex-col items-center px-4 text-center sm:top-14">
+        <div className="pixel-bevel bg-white/95 px-5 py-3 sm:px-7 sm:py-4">
+          <span className="inline-block pixel-bevel-sm bg-[#FACC15] px-2.5 py-0.5 font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">
+            ACTO VI · GAME CLEAR · GAYMERS
+          </span>
+          <h2 className="mt-2 font-display text-2xl font-bold text-[#0F172A] sm:text-4xl">
+            Reglas Simples. Mundos Infinitos.
+          </h2>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
+            {TEAM.map((member) => (
+              <span
+                key={member}
+                className="border border-[#0F172A] bg-[#ECFCCB] px-2 py-0.5 font-mono text-[10px] font-bold text-[#0F172A]"
+              >
+                {member}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Emblema / Meme final del Equipo Gaymers (esquina inferior izquierda sobre el HUD) */}
+      <div className="absolute bottom-16 left-4 z-20 hidden w-60 sm:block">
+        <PixelMeme variant="rocket" />
       </div>
     </div>
   )

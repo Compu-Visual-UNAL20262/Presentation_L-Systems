@@ -68,6 +68,11 @@ export const ACTS: Act[] = [
   { id: 6, label: 'VI', title: 'Impacto Real y Cierre', accent: 'emerald' },
 ]
 
+export const TEAM_NAME = 'GAYMERS'
+
+export const TEAM_MOTTO =
+  '¡Prepárense para los fractales! · ¡Y más vale que sean paralelos!'
+
 export const TEAM = [
   'Nicolas Bolaños',
   'Ariadna',

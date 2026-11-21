@@ -2,22 +2,22 @@ import type { ReactNode } from 'react'
 import type { Accent } from '../../data/slidesConfig'
 import { ACCENT } from '../../data/accent'
 
-/** Badge pixel de Acto, reutilizado por todas las slides conceptuales. */
+/** Badge pixel de Acto (16-bit de día, alto contraste). */
 export function ActBadge({ label, accent }: { label: string; accent: Accent }) {
   const a = ACCENT[accent]
   return (
     <span
-      className={`inline-block font-pixel text-[10px] tracking-widest uppercase
-        px-2.5 py-1.5 pixel-bevel bg-surface ${a.text} border-l-2 ${a.border}`}
+      className={`inline-block font-pixel text-[10px] font-bold tracking-widest uppercase
+        px-3 py-1.5 pixel-bevel-sm ${a.bg} text-[#0F172A]`}
     >
-      {label}
+      ★ {label}
     </span>
   )
 }
 
 /**
- * Marco común de una slide conceptual: badge de Acto arriba, título grande,
- * y debajo el apoyo visual (diagrama SVG). Centrado y responsivo.
+ * Marco común de una slide conceptual: badge de Acto arriba, título grande
+ * en tinta oscura de máximo contraste, y debajo el apoyo visual.
  */
 export function ConceptFrame({
   badge,
@@ -30,18 +30,17 @@ export function ConceptFrame({
   title: ReactNode
   children: ReactNode
 }) {
-  const a = ACCENT[accent]
   return (
     <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-14 sm:px-10">
       <div className="animate-fade-up flex min-h-0 w-full max-w-5xl flex-col items-center">
         <ActBadge label={badge} accent={accent} />
         <h2
-          className={`mt-4 text-center font-display text-xl font-bold leading-tight
-            sm:text-3xl lg:text-5xl ${a.text}`}
+          className="mt-3 text-center font-display text-2xl font-extrabold leading-tight
+            text-[#0F172A] drop-shadow-[0_2px_0_rgba(255,255,255,0.9)] sm:mt-4 sm:text-4xl lg:text-5xl"
         >
           {title}
         </h2>
-        <div className="mt-5 flex min-h-0 w-full flex-1 items-center justify-center sm:mt-8">
+        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center sm:mt-6">
           {children}
         </div>
       </div>
@@ -49,7 +48,7 @@ export function ConceptFrame({
   )
 }
 
-/** Tarjeta pixel-bevel reutilizable. */
+/** Tarjeta blanca pixel-bevel reutilizable con barra superior de color. */
 export function Card({
   accent,
   className = '',
@@ -59,8 +58,8 @@ export function Card({
   className?: string
   children: ReactNode
 }) {
-  const border = accent ? ACCENT[accent].border : 'border-white/10'
+  const border = accent ? ACCENT[accent].border : 'border-[#0F172A]'
   return (
-    <div className={`pixel-bevel bg-surface border-t-2 ${border} ${className}`}>{children}</div>
+    <div className={`pixel-bevel bg-white border-t-4 ${border} ${className}`}>{children}</div>
   )
 }

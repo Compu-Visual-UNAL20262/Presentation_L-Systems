@@ -4,15 +4,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base oscura tipo hackathon/tech (optimizado para proyector)
-        base: '#070A12',
-        surface: '#162033',
-        // Acentos neón
-        neon: {
+        // Estética 16-bit de día (alto contraste para proyector de salón)
+        base: '#C7ECFF',
+        sky: {
+          light: '#E6F7FF',
+          DEFAULT: '#C7ECFF',
+          deep: '#8CD7FF',
+        },
+        surface: '#FFFFFF',
+        cream: '#FFFBEB',
+        ink: {
+          DEFAULT: '#0F172A',
+          soft: '#1E293B',
+          muted: '#334155',
+        },
+        arcade: {
+          coin: '#FACC15',
+          lime: '#A3E635',
+          pink: '#F472B6',
           cyan: '#38BDF8',
-          emerald: '#2ECC71',
-          amber: '#F39C12',
-          magenta: '#EC4899',
+          grass: '#22C55E',
+          dirt: '#854D0E',
+        },
+        // Acentos calibrados para legibilidad sobre fondo claro
+        neon: {
+          cyan: '#0369A1',
+          emerald: '#15803D',
+          amber: '#B45309',
+          magenta: '#BE185D',
         },
       },
       fontFamily: {
@@ -24,9 +43,12 @@ export default {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
-        'neon-cyan': '0 0 18px -2px rgba(56, 189, 248, 0.55)',
-        'neon-emerald': '0 0 18px -2px rgba(46, 204, 113, 0.5)',
-        'neon-magenta': '0 0 18px -2px rgba(236, 72, 153, 0.5)',
+        'pixel': '4px 4px 0 0 #0F172A',
+        'pixel-sm': '2px 2px 0 0 #0F172A',
+        'pixel-lg': '6px 6px 0 0 #0F172A',
+        'neon-cyan': '4px 4px 0 0 #0369A1',
+        'neon-emerald': '4px 4px 0 0 #15803D',
+        'neon-magenta': '4px 4px 0 0 #BE185D',
       },
       keyframes: {
         'fade-up': {

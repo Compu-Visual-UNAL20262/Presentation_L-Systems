@@ -19,9 +19,9 @@ import { onSlideKey } from './keyboard'
 const AXIOM = 'F'
 const RULE = 'F[+F][-F]F[+F]'
 
-const BG = '#1E293B'
-const STEM = '#22C55E' // verde bosque
-const TIP = '#86EFAC' // verde lima (puntas)
+const BG = '#C7ECFF'
+const STEM = '#14532D' // verde bosque profundo de alto contraste
+const TIP = '#F472B6' // brote floral rosa arcade 16-bit
 
 const ANGLE_MIN = 5
 const ANGLE_MAX = 60
@@ -60,15 +60,28 @@ function makeSketch(paramsRef: { current: PlantParams }): SketchFn {
       const { angle, len, path, iterations } = paramsRef.current
       if (!path) return
 
+      const baseY = p.height - p.height * 0.08
+      const groundH = p.height - baseY
+      // Suelo 16-bit (pasto + tierra)
+      p.noStroke()
+      p.fill('#854D0E')
+      p.rect(0, baseY, p.width, groundH)
+      p.fill('#22C55E')
+      p.rect(0, baseY, p.width, Math.max(8, groundH * 0.34))
+      p.stroke('#0F172A')
+      p.strokeWeight(2.5)
+      p.line(0, baseY, p.width, baseY)
+
       // Escala la longitud a la altura del lienzo para que no se salga.
       const scaled = len * Math.pow(0.55, iterations - 1)
       // Normaliza respecto a una altura de referencia de 600 px.
       const effLen = scaled * (p.height / 600) * 6
 
+      const stemWeight = Math.max(1.4, 3.8 - iterations * 0.35)
+
       p.push()
-      p.translate(p.width / 2, p.height - p.height * 0.05)
-      // Grosor según iteraciones (tallos más finos a mayor n).
-      p.strokeWeight(Math.max(1, 3.4 - iterations * 0.35))
+      p.translate(p.width / 2, baseY)
+      p.strokeWeight(stemWeight)
       for (const c of path) {
         switch (c) {
           case 'F':
@@ -86,11 +99,13 @@ function makeSketch(paramsRef: { current: PlantParams }): SketchFn {
             p.push()
             break
           case ']':
-            // Punta: pequeño brote en verde lima.
-            p.noStroke()
+            // Punta: brote floral con borde oscuro nítido.
+            p.stroke('#0F172A')
+            p.strokeWeight(1.1)
             p.fill(TIP)
-            p.circle(0, 0, Math.max(2, effLen * 0.22))
+            p.circle(0, 0, Math.max(3.5, effLen * 0.28))
             p.stroke(STEM)
+            p.strokeWeight(stemWeight)
             p.pop()
             break
           default:
@@ -122,11 +137,13 @@ function Slider({
 }) {
   return (
     <label className="block select-none">
-      <div className="mb-1 flex items-baseline justify-between">
-        <span className="font-pixel text-[9px] uppercase tracking-widest text-slate-400">
+      <div className="mb-1.5 flex items-baseline justify-between">
+        <span className="font-pixel text-[10px] font-bold uppercase tracking-wider text-[#0F172A]">
           {label}
         </span>
-        <span className="font-mono text-xs text-neon-emerald">{display}</span>
+        <span className="pixel-bevel-sm bg-[#ECFCCB] px-1.5 py-0.5 font-mono text-xs font-bold text-[#15803D]">
+          {display}
+        </span>
       </div>
       <input
         type="range"
@@ -135,8 +152,7 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="plant-range h-1.5 w-full cursor-pointer appearance-none rounded-full
-          bg-white/10 accent-neon-emerald"
+        className="plant-range w-full cursor-pointer appearance-none rounded"
       />
     </label>
   )
@@ -184,12 +200,18 @@ export default function Sketch4Plant() {
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
 
-      {/* Panel de control (ignora swipe) */}
+      {/* Panel de control 16-bit de día (ignora swipe) */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 w-56 space-y-3 pixel-bevel
-          bg-surface/95 p-4 backdrop-blur-sm sm:top-16"
+        className="absolute right-3 top-14 z-20 w-60 space-y-3 pixel-bevel
+          bg-white p-4 sm:top-16"
       >
+        <div className="flex items-center justify-between border-b-2 border-[#0F172A] pb-1.5">
+          <span className="font-pixel text-[10px] font-bold text-[#0F172A]">
+            ★ LAB CORCHETES [ ]
+          </span>
+          <span className="font-mono text-[10px] font-bold text-[#BE185D]">LIVE</span>
+        </div>
         <Slider
           label="Ángulo δ"
           value={angle}
@@ -217,7 +239,7 @@ export default function Sketch4Plant() {
           step={1}
           onChange={setIterations}
         />
-        <div className="border-t border-white/10 pt-2 text-center font-mono text-[10px] text-slate-500">
+        <div className="border-t-2 border-[#0F172A] pt-2 text-center font-mono text-xs font-bold text-[#0F172A]">
           Segmentos: {segments.toLocaleString('es')}
         </div>
       </div>

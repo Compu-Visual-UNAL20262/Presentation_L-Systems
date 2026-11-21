@@ -19,14 +19,15 @@ import type { SketchFn } from '../components/P5Canvas'
 const AXIOM = 'X'
 const ANGLE_DEG = 22
 
-const BG = '#181C24'
-const GROUND = '#334155'
-const BRANCH = '#8D6E63'
-const BUD = '#4ADE80'
+const BG = '#C7ECFF'
+const GROUND_GRASS = '#22C55E'
+const GROUND_DIRT = '#854D0E'
+const BRANCH = '#4A2C11'
+const BUD = '#16A34A'
 
-const EMERALD = '#2ECC71'
-const YELLOW = '#F1C40F'
-const RED = '#EF4444'
+const EMERALD = '#15803D'
+const YELLOW = '#D97706'
+const RED = '#DC2626'
 
 const ITER_OPTIONS = [4, 5, 6, 7, 8] as const
 
@@ -74,11 +75,11 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
       p.createCanvas(p.width || 800, p.height || 600)
     }
 
-    const drawTree = (path: string, len: number) => {
+    const drawTree = (path: string, len: number, heavy: boolean) => {
       // Dibujo minimalista: solo líneas y brotes, sin alpha ni sombras, para
       // que el coste sea representativo del número de segmentos.
       p.stroke(BRANCH)
-      p.strokeWeight(1)
+      p.strokeWeight(heavy ? 1.1 : 1.7)
       for (const c of path) {
         switch (c) {
           case 'F':
@@ -105,7 +106,8 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
 
     // Brotes dibujados en una segunda pasada ligera (se omiten en n=8).
     const drawBuds = (path: string, len: number) => {
-      p.noStroke()
+      p.stroke('#0F172A')
+      p.strokeWeight(0.9)
       p.fill(BUD)
       for (const c of path) {
         switch (c) {
@@ -122,7 +124,7 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
             p.push()
             break
           case ']':
-            p.circle(0, 0, 3)
+            p.circle(0, 0, 4.4)
             p.pop()
             break
           default:
@@ -136,10 +138,16 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
       const { trees, iterations } = paramsRef.current
       const heavy = iterations >= 8 // safeguard: modo ligero sin extras
 
-      // Línea de suelo.
+      // Franja de suelo 16-bit (pasto + tierra).
       const groundY = p.height - p.height * 0.08
-      p.stroke(GROUND)
-      p.strokeWeight(2)
+      const groundH = p.height - groundY
+      p.noStroke()
+      p.fill(GROUND_DIRT)
+      p.rect(0, groundY, p.width, groundH)
+      p.fill(GROUND_GRASS)
+      p.rect(0, groundY, p.width, Math.max(8, groundH * 0.35))
+      p.stroke('#0F172A')
+      p.strokeWeight(2.5)
       p.line(0, groundY, p.width, groundY)
 
       // Longitud escalada por iteraciones y altura del lienzo.
@@ -151,7 +159,7 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
         const x = (p.width * (i + 0.5)) / n
         p.push()
         p.translate(x, groundY)
-        drawTree(trees[i], len)
+        drawTree(trees[i], len, heavy)
         p.pop()
         // Brotes solo cuando no estamos en el modo pesado (n < 8).
         if (!heavy) {
@@ -225,25 +233,25 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
 
-      {/* Telemetría HUD (esquina superior derecha) */}
+      {/* Telemetría HUD 16-bit de día (esquina superior derecha) */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 w-40 space-y-2 pixel-bevel
-          bg-surface/95 p-3 backdrop-blur-sm sm:top-16"
+        className="absolute right-3 top-14 z-20 w-44 space-y-2 pixel-bevel
+          bg-white p-3 sm:top-16"
       >
         <div>
-          <div className="font-pixel text-[9px] uppercase tracking-widest text-slate-400">
+          <div className="font-pixel text-[9px] font-bold uppercase tracking-widest text-[#334155]">
             Segmentos
           </div>
-          <div className="font-mono text-lg text-neon-amber">
+          <div className="font-mono text-lg font-bold text-[#B45309]">
             {telemetry.segments.toLocaleString('es')}
           </div>
         </div>
-        <div className="border-t border-white/10 pt-2">
-          <div className="font-pixel text-[9px] uppercase tracking-widest text-slate-400">
+        <div className="border-t-2 border-[#0F172A] pt-2">
+          <div className="font-pixel text-[9px] font-bold uppercase tracking-widest text-[#334155]">
             FPS
           </div>
-          <div className="font-mono text-lg" style={{ color: fpsColor }}>
+          <div className="font-mono text-lg font-bold" style={{ color: fpsColor }}>
             {telemetry.fps}
           </div>
         </div>
@@ -263,10 +271,10 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
               key={n}
               type="button"
               onClick={() => chooseIterations(n)}
-              className={`font-pixel text-[11px] h-8 w-8 pixel-bevel transition-colors ${
+              className={`font-pixel text-[11px] font-bold h-8 w-8 pixel-bevel-sm transition-colors ${
                 iterations === n
-                  ? 'bg-neon-emerald text-base'
-                  : 'bg-surface text-slate-400 hover:text-slate-100'
+                  ? 'bg-[#A3E635] text-[#0F172A]'
+                  : 'bg-white text-[#0F172A] hover:bg-[#FACC15]'
               }`}
             >
               {n}

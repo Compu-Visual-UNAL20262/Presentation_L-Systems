@@ -37,7 +37,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html,
@@ -48,8 +48,10 @@
 
   body {
     margin: 0;
-    background-color: #070A12;
-    color: #f1f5f9;
+    background-color: #C7ECFF;
+    background-image:
+      linear-gradient(180deg, #B3E5FF 0%, #D8F3FF 68%, #E6F8FF 100%);
+    color: #0F172A;
     font-family: 'Space Grotesk', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -66,80 +68,141 @@
 }
 
 @layer components {
-  /* Bordes nítidos estilo pixel-bevel (arcade retro), ahora con un borde
-     visible de 1.5px para destacar las tarjetas/superficies en proyector. */
+  /* Tarjetas y contenedores estilo 16-bit de día:
+     borde oscuro nítido de 2.5px + bisel interior luminoso + sombra dura pixel. */
   .pixel-bevel {
+    border: 2.5px solid #0F172A;
+    border-radius: 4px;
     box-shadow:
-      inset -2px -2px 0 0 rgba(0, 0, 0, 0.55),
-      inset 2px 2px 0 0 rgba(255, 255, 255, 0.08),
-      0 0 0 1.5px rgba(148, 163, 184, 0.35);
-    border-radius: 2px;
+      inset 2px 2px 0 0 rgba(255, 255, 255, 0.85),
+      inset -2px -2px 0 0 rgba(15, 23, 42, 0.12),
+      4px 4px 0 0 #0F172A;
+  }
+
+  .pixel-bevel-sm {
+    border: 2px solid #0F172A;
+    border-radius: 3px;
+    box-shadow:
+      inset 1.5px 1.5px 0 0 rgba(255, 255, 255, 0.85),
+      2.5px 2.5px 0 0 #0F172A;
   }
 
   .pixel-bevel-cyan {
+    border: 2.5px solid #0F172A;
+    border-radius: 4px;
     box-shadow:
-      inset -2px -2px 0 0 rgba(0, 0, 0, 0.5),
-      inset 2px 2px 0 0 rgba(56, 189, 248, 0.25),
-      0 0 0 1.5px rgba(56, 189, 248, 0.55);
-    border-radius: 2px;
+      inset 2px 2px 0 0 rgba(255, 255, 255, 0.7),
+      inset -2px -2px 0 0 rgba(3, 105, 161, 0.25),
+      4px 4px 0 0 #0F172A;
   }
 
-  /* Botón táctil arcade — alto contraste para legibilidad a distancia. */
+  /* Títulos pixel-art con contorno negro nítido estilo arcade 16-bit */
+  .pixel-title-shadow {
+    text-shadow:
+      2px 2px 0 #0F172A,
+      -1.5px -1.5px 0 #0F172A,
+      1.5px -1.5px 0 #0F172A,
+      -1.5px 1.5px 0 #0F172A,
+      0 3px 0 #0F172A;
+  }
+
+  /* Botón táctil arcade amarillo moneda — máximo contraste en proyector. */
   .arcade-btn {
     @apply font-pixel uppercase tracking-wider text-[11px] px-3 py-2
-      text-[#F8FAFC] transition-colors duration-150
-      active:translate-y-px select-none;
-    background-color: #1a253c;
-    border: 1.5px solid rgba(56, 189, 248, 0.55);
-    border-radius: 2px;
+      text-[#0F172A] font-bold transition-all duration-100
+      active:translate-x-[2px] active:translate-y-[2px] select-none;
+    background-color: #FACC15;
+    border: 2.5px solid #0F172A;
+    border-radius: 6px;
     box-shadow:
-      inset 1px 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset -2px -2px 0 0 rgba(0, 0, 0, 0.5),
-      0 2px 10px -2px rgba(0, 0, 0, 0.8),
-      0 0 10px -3px rgba(56, 189, 248, 0.4);
+      inset 2px 2px 0 0 #FEF08A,
+      inset -2px -2px 0 0 #CA8A04,
+      3px 3px 0 0 #0F172A;
   }
 
-  .arcade-btn:hover {
-    background-color: #38bdf8;
-    color: #070a12;
-    border-color: #38bdf8;
+  .arcade-btn:hover:not(:disabled) {
+    background-color: #A3E635;
     box-shadow:
-      inset 1px 1px 0 0 rgba(255, 255, 255, 0.35),
-      0 0 18px -1px rgba(56, 189, 248, 0.85);
+      inset 2px 2px 0 0 #ECFCCB,
+      inset -2px -2px 0 0 #65A30D,
+      3px 3px 0 0 #0F172A;
+  }
+
+  .arcade-btn:active:not(:disabled) {
+    box-shadow:
+      inset 1px 1px 0 0 rgba(255, 255, 255, 0.5),
+      1px 1px 0 0 #0F172A;
+  }
+
+  /* Variante verde lima tipo botón START */
+  .arcade-btn-lime {
+    @apply font-pixel uppercase tracking-wider text-xs px-4 py-2.5
+      text-[#0F172A] font-bold transition-all duration-100
+      active:translate-x-[2px] active:translate-y-[2px] select-none;
+    background-color: #A3E635;
+    border: 2.5px solid #0F172A;
+    border-radius: 9999px;
+    box-shadow:
+      inset 2px 2px 0 0 #ECFCCB,
+      inset -2px -2px 0 0 #65A30D,
+      4px 4px 0 0 #0F172A;
+  }
+
+  .arcade-btn-lime:hover:not(:disabled) {
+    background-color: #BEF264;
+  }
+
+  /* Franja decorativa de pasto/tierra pixel-art en la base */
+  .pixel-ground-strip {
+    background:
+      linear-gradient(
+        180deg,
+        #22C55E 0%,
+        #22C55E 38%,
+        #15803D 38%,
+        #15803D 55%,
+        #92400E 55%,
+        #78350F 100%
+      );
+    border-top: 2.5px solid #0F172A;
   }
 }
 
 /* Barra de scroll fina para menús desplegables */
 .thin-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.3);
+  background: #0F172A;
   border-radius: 3px;
 }
 .thin-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(15, 23, 42, 0.08);
 }
 
-/* Slider estilizado (pixel-arcade) para los controles de Sketch 4 */
+/* Slider estilizado (pixel-arcade claro) para los controles de Sketch 4 */
 .plant-range {
-  background: rgba(255, 255, 255, 0.1);
+  background: #E2E8F0;
+  border: 2px solid #0F172A;
+  height: 10px;
 }
 .plant-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #22c55e;
-  border: 2px solid #86efac;
+  width: 18px;
+  height: 18px;
+  background: #A3E635;
+  border: 2.5px solid #0F172A;
+  border-radius: 3px;
   cursor: pointer;
-  box-shadow: 0 0 8px -1px rgba(34, 197, 94, 0.7);
+  box-shadow: 2px 2px 0 0 #0F172A;
 }
 .plant-range::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: #22c55e;
-  border: 2px solid #86efac;
+  width: 18px;
+  height: 18px;
+  background: #A3E635;
+  border: 2.5px solid #0F172A;
+  border-radius: 3px;
   cursor: pointer;
-  box-shadow: 0 0 8px -1px rgba(34, 197, 94, 0.7);
+  box-shadow: 2px 2px 0 0 #0F172A;
 }

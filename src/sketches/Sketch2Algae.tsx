@@ -22,11 +22,13 @@ const AXIOM = 'A'
 const RULES: Record<string, string> = { A: 'AB', B: 'A' }
 const MAX_GEN = 7
 
-const BG = '#161920'
-const AMBER = '#F39C12' // A
-const CYAN = '#38BDF8' // B
-const EMERALD = '#2ECC71'
-const SLATE = '#94A3B8'
+const BG = '#D8F3FF'
+const INK = '#0F172A'
+const AMBER = '#FACC15' // A (amarillo moneda)
+const CYAN = '#38BDF8' // B (azul cielo intenso)
+const LIME = '#A3E635'
+const EMERALD = '#15803D'
+const SLATE = '#334155'
 
 /** Genera todas las generaciones una sola vez. */
 function buildGenerations(): string[] {
@@ -89,38 +91,58 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
         const str = generations[i]
         const isCurrent = i === gen
 
+        // ── Carril / tarjeta horizontal 16-bit por generación ──
+        p.rectMode(p.CORNER)
+        p.stroke(INK)
+        p.strokeWeight(isCurrent ? 2.2 : 1.5)
+        p.fill(isCurrent ? '#FFFFFF' : '#F0F9FF')
+        const cardH = Math.min(rowH * 0.84, 52)
+        p.rect(padX * 0.65, y - cardH / 2, p.width - padX * 1.3, cardH, 4)
+
         // ── Columna izquierda: n = X ──
         p.noStroke()
-        p.fill(isCurrent ? CYAN : SLATE)
+        p.fill(isCurrent ? '#BE185D' : SLATE)
+        p.textStyle(p.BOLD)
         p.textSize(Math.min(16, rowH * 0.42))
         p.textAlign(p.LEFT, p.CENTER)
         p.text(`n = ${i}`, padX, y)
 
-        // ── Columna central: cápsulas ──
+        // ── Columna central: cápsulas con borde oscuro nítido ──
         const totalW = str.length * capSize + (str.length - 1) * capGap
         let x = centerX + (centerW - totalW) / 2 // centradas en la columna
         for (const ch of str) {
           const col = ch === 'A' ? AMBER : CYAN
-          p.noStroke()
+          p.stroke(INK)
+          p.strokeWeight(Math.max(1.2, capSize * 0.08))
           p.fill(col)
-          // Cápsula redondeada.
           p.rectMode(p.CENTER)
-          p.rect(x + capSize / 2, y, capSize, capSize * 1.05, capSize * 0.3)
-          // Letra sobre la cápsula.
-          p.fill(BG)
+          p.rect(x + capSize / 2, y, capSize, capSize * 1.05, capSize * 0.25)
+          // Letra oscura sobre la cápsula luminosa
+          p.noStroke()
+          p.fill(INK)
           p.textAlign(p.CENTER, p.CENTER)
           p.textSize(capFont)
           p.textStyle(p.BOLD)
           p.text(ch, x + capSize / 2, y + 0.5)
-          p.textStyle(p.NORMAL)
           x += capSize + capGap
         }
 
         // ── Columna derecha: conteo (Fibonacci) ──
-        p.fill(EMERALD)
-        p.textAlign(p.RIGHT, p.CENTER)
-        p.textSize(Math.min(16, rowH * 0.42))
-        p.text(`Letras: ${str.length}`, p.width - padX, y)
+        p.fill(isCurrent ? LIME : '#DCFCE7')
+        p.stroke(INK)
+        p.strokeWeight(1.5)
+        p.rectMode(p.CORNER)
+        const badgeW = Math.min(118, colRight * 0.92)
+        const badgeH = Math.min(cardH * 0.72, 30)
+        p.rect(p.width - padX - badgeW, y - badgeH / 2, badgeW, badgeH, 4)
+
+        p.noStroke()
+        p.fill(isCurrent ? INK : EMERALD)
+        p.textStyle(p.BOLD)
+        p.textAlign(p.CENTER, p.CENTER)
+        p.textSize(Math.min(14, rowH * 0.38))
+        p.text(`Letras: ${str.length}`, p.width - padX - badgeW / 2, y)
+        p.textStyle(p.NORMAL)
       }
 
       p.rectMode(p.CORNER)

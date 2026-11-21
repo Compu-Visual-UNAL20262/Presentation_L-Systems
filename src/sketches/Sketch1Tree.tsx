@@ -27,9 +27,9 @@ const RULES: Record<string, string> = {
 const ITERATIONS = 5
 const ANGLE_DEG = 25
 
-const BARK = '#8C6239'
-const OLIVE = '#84CC16'
-const BG = '#0D1117'
+const BARK = '#5C3A21'
+const OLIVE = '#365314'
+const BG_SKY = '#C7ECFF'
 const GROW_FRAMES = 240 // ~4 s a 60 FPS
 
 /** Expande el axioma con double buffering (leer actual, escribir siguiente). */
@@ -131,11 +131,40 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
       }
     }
 
+    /** Dibuja nube pixel-art decorativa en el cielo de día. */
+    const drawPixelCloud = (cx: number, cy: number, s: number) => {
+      p.noStroke()
+      p.fill('#FFFFFF')
+      p.rect(cx - 28 * s, cy, 56 * s, 16 * s)
+      p.rect(cx - 16 * s, cy - 10 * s, 32 * s, 12 * s)
+      p.rect(cx - 36 * s, cy + 5 * s, 72 * s, 11 * s)
+      p.fill('#93C5FD')
+      p.rect(cx - 36 * s, cy + 14 * s, 72 * s, 3 * s)
+    }
+
+    /** Dibuja suelo 16-bit (pasto verde + tierra con bloques pixelados). */
+    const drawPixelGround = (baseY: number) => {
+      const groundH = p.height - baseY
+      // Tierra
+      p.noStroke()
+      p.fill('#854D0E')
+      p.rect(0, baseY, p.width, groundH)
+      // Franja de pasto
+      p.fill('#22C55E')
+      p.rect(0, baseY, p.width, Math.max(8, groundH * 0.34))
+      p.fill('#15803D')
+      p.rect(0, baseY + Math.max(8, groundH * 0.34), p.width, 4)
+      // Borde superior oscuro estilo 16-bit
+      p.stroke('#0F172A')
+      p.strokeWeight(2.5)
+      p.line(0, baseY, p.width, baseY)
+    }
+
     /** Dibuja un árbol completo hasta `charLimit` en el origen actual. */
     const drawTree = (len: number) => {
       // Factor relativo a la longitud de referencia para que grosor y hojas
       // escalen con el tamaño del árbol (coherente en desktop y móvil).
-      const k = p.constrain(len / 9, 0.45, 2.2)
+      const k = p.constrain(len / 9, 0.5, 2.2)
       let depth = 0
       for (let i = 0; i < charLimit; i++) {
         const c = finalString[i]
@@ -143,7 +172,7 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
           case 'F': {
             const t = Math.min(1, depth / 7)
             p.stroke(p.lerpColor(p.color(BARK), p.color(OLIVE), t))
-            p.strokeWeight(Math.max(1, (7.5 - depth * 1.1) * k))
+            p.strokeWeight(Math.max(1.6, (8.2 - depth * 1.05) * k))
             p.line(0, 0, 0, -len)
             p.translate(0, -len)
             break
@@ -159,11 +188,16 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
             depth++
             break
           case ']':
-            p.noStroke()
-            p.fill(52, 211, 153, 235) // #34D399, alpha 235
+            p.stroke('#0F172A')
+            p.strokeWeight(Math.max(1, 1.1 * k))
+            if (depth % 4 === 0) {
+              p.fill('#A3E635') // brote verde lima luminoso
+            } else {
+              p.fill('#16A34A') // hoja esmeralda intensa
+            }
             p.push()
-            p.rotate(p.radians(depth % 2 === 0 ? 20 : -20))
-            p.ellipse(0, 0, 6 * k, 11 * k) // hoja inclinada
+            p.rotate(p.radians(depth % 2 === 0 ? 22 : -22))
+            p.ellipse(0, 0, 7 * k, 12 * k) // hoja inclinada con borde oscuro nítido
             p.pop()
             p.pop()
             depth--
@@ -191,7 +225,9 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
         restart()
       }
 
-      p.background(BG)
+      p.background(BG_SKY)
+      drawPixelCloud(p.width * 0.16, p.height * 0.16, 1.15)
+      drawPixelCloud(p.width * 0.82, p.height * 0.2, 0.95)
 
       // Avance del crecimiento: duración constante ~4 s sin importar el largo.
       charLimit = Math.min(
@@ -200,7 +236,8 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
       )
 
       const forest = paramsRef.current.forest
-      const baseY = p.height - p.height * 0.06
+      const baseY = p.height - p.height * 0.08
+      drawPixelGround(baseY)
 
       // Escala para que el árbol ocupe ~78 % del alto del contenedor.
       // bounds.height está en unidades de paso=1; len = altura_objetivo / altura.

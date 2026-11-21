@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ACTS, SLIDES } from '../data/slidesConfig'
+import { ACTS, SLIDES, TEAM_NAME } from '../data/slidesConfig'
 import { ACCENT } from '../data/accent'
 
 interface ActMenuProps {
@@ -8,9 +8,8 @@ interface ActMenuProps {
 }
 
 /**
- * Menú desplegable discreto (botón "MENU" estilo pixel) para saltar directo a
- * cualquiera de los 6 Actos o 21 slides. Lleva data-no-swipe para no disparar
- * el gesto táctil. Se cierra con Escape o al hacer clic fuera.
+ * Menú desplegable estilo botón "MENU" amarillo moneda (16-bit de día) para
+ * saltar directo a cualquiera de los 6 Actos o 21 slides.
  */
 export default function ActMenu({ index, onJump }: ActMenuProps) {
   const [open, setOpen] = useState(false)
@@ -40,7 +39,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
   }
 
   return (
-    <div ref={ref} data-no-swipe="true" className="fixed top-3 left-4 z-40 select-none">
+    <div ref={ref} data-no-swipe="true" className="fixed top-3.5 left-4 z-40 select-none">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -53,22 +52,31 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
 
       {open && (
         <div
-          className="thin-scroll mt-2 max-h-[70vh] w-72 overflow-y-auto pixel-bevel
-            bg-surface/95 backdrop-blur-sm p-3 shadow-xl border border-white/15"
+          className="thin-scroll mt-2 max-h-[74vh] w-80 overflow-y-auto pixel-bevel
+            bg-white p-3.5"
         >
+          <div className="mb-3 flex items-center justify-between border-b-2 border-[#0F172A] pb-2">
+            <span className="font-pixel text-[10px] font-bold tracking-wider text-[#0F172A]">
+              ★ {TEAM_NAME} · SELECT STAGE
+            </span>
+            <span className="font-mono text-[10px] font-bold text-[#15803D]">
+              21 LVLS
+            </span>
+          </div>
+
           {ACTS.map((act) => {
             const accent = ACCENT[act.accent]
             const slidesOfAct = SLIDES.filter((s) => s.act === act.id)
             return (
-              <div key={act.id} className="mb-3 last:mb-0">
-                <div className="mb-1.5 flex items-baseline gap-2">
+              <div key={act.id} className="mb-3.5 last:mb-0">
+                <div className="mb-1.5 flex items-center gap-2">
                   <span
-                    className={`font-pixel text-[10px] tracking-widest uppercase px-1.5 py-1
-                      pixel-bevel bg-base ${accent.text} border-l-2 ${accent.border}`}
+                    className={`font-pixel text-[10px] font-bold tracking-widest uppercase px-2 py-0.5
+                      pixel-bevel-sm ${accent.bg} text-[#0F172A]`}
                   >
                     ACTO {act.label}
                   </span>
-                  <span className="font-display text-[11px] text-slate-300 truncate">
+                  <span className="font-display text-xs font-semibold text-[#0F172A] truncate">
                     {act.title}
                   </span>
                 </div>
@@ -82,11 +90,11 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
                         type="button"
                         onClick={() => jump(i)}
                         title={s.title ?? `Slide ${s.n}`}
-                        className={`font-pixel text-[11px] h-8 w-8 pixel-bevel transition-colors
+                        className={`font-pixel text-[11px] font-bold h-8 w-8 pixel-bevel-sm transition-colors
                           ${
                             active
-                              ? `${accent.bg} text-base`
-                              : 'bg-base text-slate-300 hover:text-slate-50'
+                              ? 'bg-[#A3E635] text-[#0F172A]'
+                              : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#FACC15]'
                           }`}
                       >
                         {String(s.n).padStart(2, '0')}

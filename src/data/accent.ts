@@ -1,36 +1,47 @@
 import type { Accent } from './slidesConfig'
 
-/** Mapea cada acento a sus clases y valores de color reutilizables. */
+/** Mapea cada acento a sus clases y valores de color para el tema 16-bit de día. */
 export const ACCENT: Record<
   Accent,
-  { text: string; border: string; bg: string; shadow: string; hex: string }
+  {
+    text: string
+    border: string
+    bg: string
+    pillBg: string
+    shadow: string
+    hex: string
+  }
 > = {
   cyan: {
-    text: 'text-neon-cyan',
-    border: 'border-neon-cyan',
-    bg: 'bg-neon-cyan',
-    shadow: 'shadow-neon-cyan',
-    hex: '#38BDF8',
+    text: 'text-[#0369A1]',
+    border: 'border-[#0284C7]',
+    bg: 'bg-[#38BDF8]',
+    pillBg: 'bg-[#E0F2FE]',
+    shadow: 'shadow-pixel',
+    hex: '#0284C7',
   },
   emerald: {
-    text: 'text-neon-emerald',
-    border: 'border-neon-emerald',
-    bg: 'bg-neon-emerald',
-    shadow: 'shadow-neon-emerald',
-    hex: '#2ECC71',
+    text: 'text-[#15803D]',
+    border: 'border-[#16A34A]',
+    bg: 'bg-[#A3E635]',
+    pillBg: 'bg-[#ECFCCB]',
+    shadow: 'shadow-pixel',
+    hex: '#16A34A',
   },
   amber: {
-    text: 'text-neon-amber',
-    border: 'border-neon-amber',
-    bg: 'bg-neon-amber',
-    shadow: 'shadow-neon-cyan',
-    hex: '#F39C12',
+    text: 'text-[#B45309]',
+    border: 'border-[#D97706]',
+    bg: 'bg-[#FACC15]',
+    pillBg: 'bg-[#FEF9C3]',
+    shadow: 'shadow-pixel',
+    hex: '#D97706',
   },
   magenta: {
-    text: 'text-neon-magenta',
-    border: 'border-neon-magenta',
-    bg: 'bg-neon-magenta',
-    shadow: 'shadow-neon-magenta',
-    hex: '#EC4899',
+    text: 'text-[#BE185D]',
+    border: 'border-[#DB2777]',
+    bg: 'bg-[#F472B6]',
+    pillBg: 'bg-[#FCE7F3]',
+    shadow: 'shadow-pixel',
+    hex: '#DB2777',
   },
 }

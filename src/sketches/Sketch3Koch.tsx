@@ -19,8 +19,10 @@ import { onSlideKey } from './keyboard'
 const AXIOM = 'F--F--F'
 const RULE = 'F+F--F+F'
 
-const BG = '#0F172A'
-const CYAN = '#38BDF8'
+const BG = '#E6F7FF'
+const GRID_COLOR = '#BAE6FD'
+const STROKE_MAIN = '#0F172A'
+const FILL_ICE = 'rgba(56, 189, 248, 0.28)'
 
 const MIN_ITER = 0
 const MAX_ITER = 5
@@ -109,11 +111,22 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
 
       p.background(BG)
 
+      // Cuadrícula técnica 16-bit sobre fondo claro
+      p.stroke(GRID_COLOR)
+      p.strokeWeight(1)
+      const step = 36
+      for (let gx = 0; gx < p.width; gx += step) {
+        p.line(gx, 0, gx, p.height)
+      }
+      for (let gy = 0; gy < p.height; gy += step) {
+        p.line(0, gy, p.width, gy)
+      }
+
       if (pts.length < 2) return
 
       const w = bbox.maxX - bbox.minX || 1
       const h = bbox.maxY - bbox.minY || 1
-      const margin = 0.82
+      const margin = 0.78
       const scale = Math.min((p.width * margin) / w, (p.height * margin) / h)
       const cx = (bbox.minX + bbox.maxX) / 2
       const cy = (bbox.minY + bbox.maxY) / 2
@@ -125,15 +138,35 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
       p.push()
       p.translate(p.width / 2, p.height / 2)
       p.scale(1, -1) // y hacia arriba
-      p.stroke(CYAN)
-      p.strokeWeight(Math.max(1, Math.min(2.2, scale * 0.04)))
-      p.noFill()
+
+      // Relleno cristalino suave cuando la figura está completa
+      if (shown >= pts.length) {
+        p.fill(FILL_ICE)
+      } else {
+        p.noFill()
+      }
+
+      p.stroke(STROKE_MAIN)
+      p.strokeWeight(Math.max(1.8, Math.min(3.2, scale * 0.045)))
       p.beginShape()
       for (let i = 0; i < shown; i++) {
         const pt = pts[i]
         p.vertex((pt.x - cx) * scale, (pt.y - cy) * scale)
       }
       p.endShape()
+
+      // Tortuga LOGO pixelada en el vértice activo
+      const tip = pts[shown - 1]
+      if (tip) {
+        const tx = (tip.x - cx) * scale
+        const ty = (tip.y - cy) * scale
+        p.stroke('#0F172A')
+        p.strokeWeight(2)
+        p.fill('#22C55E')
+        p.circle(tx, ty, 11)
+        p.fill('#FACC15')
+        p.circle(tx, ty, 5)
+      }
       p.pop()
     }
   }
@@ -157,36 +190,38 @@ function EditorRow({
 }) {
   const clamp = (v: number) => Math.max(min, Math.min(max, v))
   return (
-    <div className="flex items-center gap-1.5 font-mono text-[11px] sm:text-sm">
-      <span className="text-slate-500 whitespace-pre">{prefix}</span>
-      <button
-        type="button"
-        onClick={() => onChange(clamp(value - step))}
-        className="arcade-btn !px-2 !py-1 !text-[10px]"
-        aria-label="disminuir"
-      >
-        −
-      </button>
-      <input
-        type="number"
-        value={value}
-        min={min}
-        max={max}
-        onChange={(e) => {
-          const v = parseInt(e.target.value, 10)
-          if (!Number.isNaN(v)) onChange(clamp(v))
-        }}
-        className="w-14 bg-base text-center text-neon-cyan font-mono pixel-bevel
-          py-1 outline-none focus:ring-1 focus:ring-neon-cyan"
-      />
-      <button
-        type="button"
-        onClick={() => onChange(clamp(value + step))}
-        className="arcade-btn !px-2 !py-1 !text-[10px]"
-        aria-label="aumentar"
-      >
-        +
-      </button>
+    <div className="flex items-center justify-between gap-1.5 font-mono text-[11px] sm:text-sm">
+      <span className="font-bold text-[#0F172A] whitespace-pre">{prefix}</span>
+      <div className="flex items-center gap-1.5">
+        <button
+          type="button"
+          onClick={() => onChange(clamp(value - step))}
+          className="arcade-btn !px-2 !py-1 !text-[10px]"
+          aria-label="disminuir"
+        >
+          −
+        </button>
+        <input
+          type="number"
+          value={value}
+          min={min}
+          max={max}
+          onChange={(e) => {
+            const v = parseInt(e.target.value, 10)
+            if (!Number.isNaN(v)) onChange(clamp(v))
+          }}
+          className="w-14 bg-white text-center font-bold text-[#0369A1] font-mono pixel-bevel-sm
+            py-1 outline-none focus:bg-[#FEF9C3]"
+        />
+        <button
+          type="button"
+          onClick={() => onChange(clamp(value + step))}
+          className="arcade-btn !px-2 !py-1 !text-[10px]"
+          aria-label="aumentar"
+        >
+          +
+        </button>
+      </div>
     </div>
   )
 }
@@ -221,28 +256,30 @@ export default function Sketch3Koch() {
 
   return (
     <div className="flex h-full w-full flex-col lg:flex-row">
-      {/* ── Mini-Editor de código (IDE oscuro) ── */}
+      {/* ── Mini-Editor de código 16-bit de día ── */}
       <aside
         data-no-swipe="true"
-        className="order-2 flex shrink-0 flex-col gap-3 border-t border-white/10 bg-[#0b0e16]
-          p-4 lg:order-1 lg:w-[360px] lg:border-r lg:border-t-0 lg:p-6"
+        className="order-2 flex shrink-0 flex-col gap-3 border-t-[3px] border-[#0F172A] bg-white
+          p-4 lg:order-1 lg:w-[370px] lg:border-r-[3px] lg:border-t-0 lg:p-6 lg:pt-16"
       >
-        <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-          <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-          <span className="ml-2 font-pixel text-[10px] tracking-widest text-slate-500">
-            koch.js
-          </span>
+        <div className="flex items-center justify-between pixel-bevel-sm bg-[#F472B6] px-3 py-1.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-3 w-3 border-2 border-[#0F172A] bg-[#FACC15]" />
+            <span className="h-3 w-3 border-2 border-[#0F172A] bg-[#A3E635]" />
+            <span className="ml-1 font-pixel text-[10px] font-bold tracking-widest text-[#0F172A]">
+              KOCH_TURTLE.JS
+            </span>
+          </div>
+          <span className="font-pixel text-[9px] font-bold text-[#0F172A]">LOGO 16-BIT</span>
         </div>
 
-        <pre className="font-mono text-[11px] leading-relaxed text-slate-400 sm:text-sm">
+        <pre className="pixel-bevel-sm bg-[#FFFBEB] p-3 font-mono text-[11px] font-bold leading-relaxed text-[#0F172A] sm:text-xs">
 {`// Reglas del L-System
 axioma = "F--F--F";
 F  →  F+F--F+F`}
         </pre>
 
-        <div className="space-y-2.5 pixel-bevel bg-base/60 p-3">
+        <div className="space-y-2.5 pixel-bevel-sm bg-[#F0F9FF] p-3">
           <EditorRow
             prefix="let iteraciones ="
             value={iterations}
@@ -288,11 +325,9 @@ F  →  F+F--F+F`}
         <button
           type="button"
           onClick={run}
-          className="mt-1 font-pixel text-xs uppercase tracking-widest px-4 py-3
-            pixel-bevel-cyan bg-surface text-neon-cyan shadow-neon-cyan
-            transition-transform active:translate-y-px"
+          className="arcade-btn-lime mt-1 w-full text-center"
         >
-          ▶ EJECUTAR
+          ▶ START / EJECUTAR
         </button>
       </aside>
 
@@ -302,9 +337,9 @@ F  →  F+F--F+F`}
         {/* Indicador inferior */}
         <div
           data-no-swipe="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 p-3 text-center"
+          className="pointer-events-none absolute inset-x-0 bottom-14 sm:bottom-4 flex justify-center p-2"
         >
-          <span className="font-mono text-[11px] text-slate-400 sm:text-sm">
+          <span className="pixel-bevel-sm bg-white px-3 py-1 font-mono text-[11px] font-bold text-[#0F172A] sm:text-sm">
             Iteraciones: {iterations} | Ángulo: {angle}° | Segmentos: {segments}
           </span>
         </div>

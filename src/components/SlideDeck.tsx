@@ -109,6 +109,8 @@ export default function SlideDeck() {
   }
 
   const slide = SLIDES[index]
+  const isSketch =
+    slide.component.startsWith('sketch-') || slide.component === 'closing'
 
   return (
     <main
@@ -116,6 +118,37 @@ export default function SlideDeck() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
+      {/* Decoración ambiental 16-bit de día para las diapositivas conceptuales */}
+      {!isSketch && (
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+          {/* Nube pixel izquierda */}
+          <svg
+            viewBox="0 0 120 48"
+            className="absolute left-[6%] top-12 h-10 w-24 opacity-85 sm:h-14 sm:w-36 animate-float-y"
+          >
+            <rect x="24" y="20" width="72" height="20" fill="#FFFFFF" />
+            <rect x="36" y="10" width="44" height="14" fill="#FFFFFF" />
+            <rect x="16" y="26" width="88" height="14" fill="#FFFFFF" />
+            <rect x="16" y="36" width="88" height="4" fill="#BAE6FD" />
+          </svg>
+
+          {/* Nube pixel derecha */}
+          <svg
+            viewBox="0 0 120 48"
+            className="absolute right-[8%] top-16 h-9 w-20 opacity-80 sm:h-12 sm:w-32 animate-float-y"
+            style={{ animationDelay: '1.4s' }}
+          >
+            <rect x="24" y="20" width="72" height="20" fill="#FFFFFF" />
+            <rect x="40" y="10" width="40" height="14" fill="#FFFFFF" />
+            <rect x="16" y="26" width="88" height="14" fill="#FFFFFF" />
+            <rect x="16" y="36" width="88" height="4" fill="#BAE6FD" />
+          </svg>
+
+          {/* Franja de suelo 16-bit (pasto + tierra) en la base */}
+          <div className="pixel-ground-strip absolute inset-x-0 bottom-0 h-4 sm:h-5" />
+        </div>
+      )}
+
       <ActMenu index={index} onJump={goTo} />
 
       {/*
@@ -125,7 +158,7 @@ export default function SlideDeck() {
       */}
       <section
         key={slide.n}
-        className="h-full w-full"
+        className="relative z-10 h-full w-full"
         style={{
           animation: `slide-in-${dirRef.current === 1 ? 'right' : 'left'} 200ms cubic-bezier(0.22, 1, 0.36, 1) both`,
         }}
