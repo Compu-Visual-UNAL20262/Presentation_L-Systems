@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Transición entre diapositivas: fade + ligero desplazamiento (200ms).
+   El SlideDeck elige la dirección según avance/retroceso. Respeta la
+   preferencia de "reducir movimiento" del sistema. */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @layer base {
   :root {
     color-scheme: dark;

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:ghpages": "tsc -b && VITE_BASE=/Presentation_L-Systems/ vite build && cp dist/index.html dist/404.html && touch dist/.nojekyll",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
     "@types/p5": "^1.7.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

@@ -13,11 +13,28 @@ con demos interactivas en p5.js. Construida con React + Vite + Tailwind CSS.
 ## Scripts
 
 ```bash
-npm install     # instalar dependencias
-npm run dev     # servidor de desarrollo (http://localhost:5173)
-npm run build   # type-check + build de producción -> dist/
-npm run preview # previsualizar el build
+npm install        # instalar dependencias
+npm run dev        # servidor de desarrollo (http://localhost:5173)
+npm run build      # type-check + build de producción -> dist/  (base '/')
+npm run build:ghpages  # build para GitHub Pages (base /Presentation_L-Systems/)
+npm run preview    # previsualizar el build
 ```
+
+## Despliegue
+
+### Vercel
+Proyecto listo sin configuración extra. Vercel detecta Vite; `vercel.json`
+fija `buildCommand: npm run build`, `outputDirectory: dist` y un rewrite SPA.
+Base por defecto `/`.
+
+### GitHub Pages
+El workflow `.github/workflows/deploy-pages.yml` publica en cada push a `main`:
+ejecuta `npm run build:ghpages` (que fija la base a `/Presentation_L-Systems/`,
+copia `index.html` a `404.html` y añade `.nojekyll`) y sube `dist/`.
+Activa Pages en Settings → Pages → Source: GitHub Actions.
+Si el repositorio cambia de nombre, ajusta `VITE_BASE` en el script
+`build:ghpages`.
+
 
 ## Uso durante la charla
 

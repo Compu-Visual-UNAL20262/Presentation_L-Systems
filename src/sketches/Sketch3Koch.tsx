@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import { onSlideKey } from './keyboard'
 
 /**
  * Sketch 3 — Copo de nieve de Koch (tortuga LOGO).
@@ -208,18 +209,15 @@ export default function Sketch3Koch() {
 
   const segments = useMemo(() => countSegments(expand(iterations)), [iterations])
 
-  // Tecla 'R' reinicia parámetros a Koch estándar.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'r' || e.key === 'R') {
-        setIterations(1)
-        setAngle(60)
-        paramsRef.current.runToken += 1
-      }
+  // Tecla 'R' reinicia parámetros a Koch estándar. El guard de onSlideKey
+  // evita que se dispare mientras se escribe en los inputs del mini-editor.
+  useEffect(() => onSlideKey((e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      setIterations(1)
+      setAngle(60)
+      paramsRef.current.runToken += 1
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }), [])
 
   return (
     <div className="flex h-full w-full flex-col lg:flex-row">

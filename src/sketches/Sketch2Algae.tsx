@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import { onSlideKey } from './keyboard'
 
 /**
  * Sketch 2 — El alga que sabe contar (Fibonacci emergente).
@@ -148,15 +149,10 @@ export default function Sketch2Algae() {
     paramsRef.current.gen = 0
   }
 
-  // Tecla 'R' reinicia (atajo global mientras el slide está activo).
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'r' || e.key === 'R') reset()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // Tecla 'R' reinicia (atajo acotado al slide; ignora campos editables).
+  useEffect(() => onSlideKey((e) => {
+    if (e.key === 'r' || e.key === 'R') reset()
+  }), [])
 
   return (
     <div className="relative h-full w-full">

@@ -48,10 +48,16 @@ function isNoSwipeTarget(el: EventTarget | null): boolean {
 export default function SlideDeck() {
   const [index, setIndex] = useState(0)
 
+  // Dirección del último cambio (1 = avanzar, -1 = retroceder) para la
+  // transición: el nuevo slide entra desde el lado correspondiente.
+  const dirRef = useRef<1 | -1>(1)
+
   const goTo = useCallback((i: number) => {
     setIndex((prev) => {
-      const next = Math.max(0, Math.min(TOTAL - 1, i))
-      return next === prev ? prev : next
+      const clamped = Math.max(0, Math.min(TOTAL - 1, i))
+      if (clamped === prev) return prev
+      dirRef.current = clamped > prev ? 1 : -1
+      return clamped
     })
   }, [])
 
@@ -112,8 +118,18 @@ export default function SlideDeck() {
     >
       <ActMenu index={index} onJump={goTo} />
 
-      {/* Solo el slide activo está montado: key fuerza remount y limpieza p5. */}
-      <section key={slide.n} className="h-full w-full">
+      {/*
+        Solo el slide activo está montado: `key` fuerza el remount y la
+        limpieza de p5 (p.remove() cancela el loop/rAF). El remount replica la
+        animación de entrada (fade + desplazamiento, 200ms) según la dirección.
+      */}
+      <section
+        key={slide.n}
+        className="h-full w-full"
+        style={{
+          animation: `slide-in-${dirRef.current === 1 ? 'right' : 'left'} 200ms cubic-bezier(0.22, 1, 0.36, 1) both`,
+        }}
+      >
         <SlideView slide={slide} />
       </section>
 

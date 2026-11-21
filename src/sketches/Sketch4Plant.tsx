@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import { onSlideKey } from './keyboard'
 
 /**
  * Sketch 4 — Planta ramificada con corchetes [ ] y control en vivo.
@@ -171,17 +172,13 @@ export default function Sketch4Plant() {
   }, [path])
 
   // Preset rápido con tecla 'C' (ciprés) para volver al estado inicial.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'c' || e.key === 'C') {
-        setAngle(15)
-        setLen(16)
-        setIterations(4)
-      }
+  useEffect(() => onSlideKey((e) => {
+    if (e.key === 'c' || e.key === 'C') {
+      setAngle(15)
+      setLen(16)
+      setIterations(4)
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }), [])
 
   return (
     <div className="relative h-full w-full">
