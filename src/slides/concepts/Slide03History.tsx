@@ -16,8 +16,8 @@ export default function Slide03History() {
       title="1968 · Aristid Lindenmayer"
       subtitle="Se preguntó cómo crecen las algas filamentosas bajo el microscopio?"
     >
-      <Card accent="cyan" className="max-h-full w-full max-w-2xl overflow-hidden p-4 sm:p-6">
-        <div className="mb-3 flex items-center justify-between border-b-2 border-[#0F172A] pb-2">
+      <Card accent="cyan" className="flex h-full max-h-full w-full max-w-2xl flex-col overflow-hidden p-4 sm:p-6">
+        <div className="mb-3 flex shrink-0 items-center justify-between border-b-2 border-[#0F172A] pb-2">
           <span className="font-pixel text-[10px] font-bold text-[#0369A1]">
             ANABAENA CATENULA · LAB 1968
           </span>
@@ -26,20 +26,21 @@ export default function Slide03History() {
           </span>
         </div>
 
-        <div className="grid items-center gap-4 sm:grid-cols-2">
-          {/* Foto real al microscopio */}
+        <div className="grid min-h-0 flex-1 items-stretch gap-4 sm:grid-cols-2">
+          {/* Foto real al microscopio: en modo fill se adapta al alto
+              disponible (object-contain) para que la tarjeta nunca se corte. */}
           <PixelPhoto
             src={anabaenaPhoto}
             alt="Filamentos del alga Anabaena catenula al microscopio"
             caption="Anabaena catenula · microscopio"
             credit="Foto microscópica"
-            aspect="353 / 318"
-            mobileMaxH="max-h-36"
-            maxH="max-h-[34vh] sm:max-h-56"
+            fill
+            className="h-full min-h-0"
           />
 
           {/* Diagrama del filamento (células A que se dividen en B) */}
-          <svg viewBox="0 0 440 120" className="w-full" role="img" aria-label="Filamento de alga Anabaena">
+          <div className="flex min-h-0 items-center justify-center">
+            <svg viewBox="0 0 440 120" className="w-full" role="img" aria-label="Filamento de alga Anabaena">
             <rect x="4" y="12" width="432" height="96" rx="6" fill="#F0F9FF" stroke="#0F172A" strokeWidth="2" />
             {/* Filamento: cápsulas conectadas (células) */}
             <line x1="24" y1="60" x2="416" y2="60" stroke="#0F172A" strokeWidth="14" strokeLinecap="round" />
@@ -90,9 +91,10 @@ export default function Slide03History() {
               )
             })}
           </svg>
+          </div>
         </div>
 
-        <p className="mt-4 text-center font-display text-sm font-bold text-[#0F172A] sm:text-lg">
+        <p className="mt-3 shrink-0 text-center font-display text-sm font-bold text-[#0F172A] sm:text-lg">
           Un biólogo modelando algas inventó el lenguaje del crecimiento.
         </p>
       </Card>

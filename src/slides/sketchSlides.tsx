@@ -4,7 +4,6 @@ import Sketch3Koch from '../sketches/Sketch3Koch'
 import Sketch4Plant from '../sketches/Sketch4Plant'
 import Sketch5Forest from '../sketches/Sketch5Forest'
 import SketchClosing from '../sketches/SketchClosing'
-import PixelMeme from '../components/PixelMeme'
 import { TEAM } from '../data/slidesConfig'
 
 /**
@@ -126,11 +125,6 @@ export function Slide21Closing() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Emblema / Meme final del Equipo Gaymers (esquina inferior izquierda sobre el HUD) */}
-      <div className="absolute bottom-16 left-4 z-20 hidden w-60 sm:block">
-        <PixelMeme variant="rocket" />
       </div>
     </div>
   )
