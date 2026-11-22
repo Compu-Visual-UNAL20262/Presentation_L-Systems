@@ -20,6 +20,13 @@ interface PixelPhotoProps {
    * desktop se ignora y manda `aspect`. Ej.: 'max-h-36'.
    */
   mobileMaxH?: string
+  /**
+   * Modo "llenar altura": en lugar de imponer una relación de aspecto fija,
+   * la figura ocupa el alto disponible de su contenedor flex (min-h-0) y la
+   * imagen se ajusta con object-contain. Útil cuando el slide debe caber
+   * entero sin scroll y la foto es el elemento que cede altura.
+   */
+  fill?: boolean
   className?: string
 }
 
@@ -30,19 +37,24 @@ export default function PixelPhoto({
   credit,
   aspect = '16 / 9',
   mobileMaxH,
+  fill = false,
   className = '',
 }: PixelPhotoProps) {
   return (
-    <figure className={`pixel-bevel overflow-hidden bg-white ${className}`}>
+    <figure
+      className={`pixel-bevel overflow-hidden bg-white ${fill ? 'flex min-h-0 flex-col' : ''} ${className}`}
+    >
       <div
-        className={`w-full overflow-hidden ${mobileMaxH ? `${mobileMaxH} sm:max-h-none` : ''}`}
-        style={{ aspectRatio: aspect }}
+        className={`w-full overflow-hidden ${
+          fill ? 'min-h-0 flex-1' : mobileMaxH ? `${mobileMaxH} sm:max-h-none` : ''
+        }`}
+        style={fill ? undefined : { aspectRatio: aspect }}
       >
         <img
           src={src}
           alt={alt}
           loading="lazy"
-          className="h-full w-full object-cover"
+          className={`h-full w-full ${fill ? 'object-contain' : 'object-cover'}`}
           draggable={false}
         />
       </div>

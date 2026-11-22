@@ -20,11 +20,11 @@ function AxisChip({ label, pillBg }: { label: string; pillBg: string }) {
 export default function Slide19ThreeD() {
   return (
     <ConceptFrame badge="ACTO V" accent="cyan" title="Del Plano 2D al Mundo 3D">
-      <div className="flex w-full max-w-4xl flex-col items-center gap-4">
-        <div className="grid w-full gap-4 sm:grid-cols-2">
+      <div className="flex h-full w-full max-w-4xl flex-col items-center gap-3 sm:gap-4">
+        <div className="grid w-full shrink-0 gap-3 sm:grid-cols-2 sm:gap-4">
           {/* Avión/tortuga 3D con ejes */}
-          <div className="pixel-bevel bg-white p-5 text-center">
-            <svg viewBox="0 0 160 120" className="mx-auto h-28 animate-float-y sm:h-36">
+          <div className="pixel-bevel bg-white p-3 text-center sm:p-5">
+            <svg viewBox="0 0 160 120" className="mx-auto h-20 animate-float-y sm:h-32">
               {/* Ejes con trazos gruesos legibles */}
               <path d="M80 72 L80 16" stroke="#15803D" strokeWidth="2.5" strokeDasharray="4 3" />
               <path d="M80 72 L144 72" stroke="#D97706" strokeWidth="2.5" strokeDasharray="4 3" />
@@ -47,8 +47,8 @@ export default function Slide19ThreeD() {
           </div>
 
           {/* Línea 1D → cilindro con hojas */}
-          <div className="pixel-bevel bg-white p-5 text-center">
-            <svg viewBox="0 0 160 120" className="mx-auto h-28 sm:h-36">
+          <div className="pixel-bevel bg-white p-3 text-center sm:p-5">
+            <svg viewBox="0 0 160 120" className="mx-auto h-20 sm:h-32">
               {/* línea delgada */}
               <line x1="30" y1="100" x2="30" y2="24" stroke="#0F172A" strokeWidth="2.5" />
               {/* flecha */}
@@ -93,9 +93,8 @@ export default function Slide19ThreeD() {
           alt="Árbol 3D: del esqueleto wireframe a la malla con hojas instanciadas"
           caption="Del esqueleto (wireframe) al follaje volumétrico"
           credit="Render 3D · ericchadwick.com"
-          aspect="640 / 278"
-          mobileMaxH="max-h-28"
-          className="w-full max-w-2xl"
+          fill
+          className="min-h-0 w-full max-w-2xl flex-1"
         />
       </div>
     </ConceptFrame>

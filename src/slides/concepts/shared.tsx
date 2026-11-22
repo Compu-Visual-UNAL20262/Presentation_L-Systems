@@ -34,20 +34,20 @@ export function ConceptFrame({
 }) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-14 sm:px-10">
-      <div className="animate-fade-up flex min-h-0 w-full max-w-5xl flex-col items-center">
+      <div className="animate-fade-up flex h-full min-h-0 w-full max-w-5xl flex-col items-center">
         <ActBadge label={badge} accent={accent} />
         <h2
-          className="mt-3 text-center font-display text-2xl font-extrabold leading-tight
+          className="mt-3 shrink-0 text-center font-display text-2xl font-extrabold leading-tight
             text-[#0F172A] drop-shadow-[0_2px_0_rgba(255,255,255,0.9)] sm:mt-4 sm:text-4xl lg:text-5xl"
         >
           {title}
         </h2>
         {subtitle && (
-          <p className="mt-2 text-center font-display text-base font-bold text-[#0369A1] sm:text-xl">
+          <p className="mt-2 shrink-0 text-center font-display text-base font-bold text-[#0369A1] sm:text-xl">
             {subtitle}
           </p>
         )}
-        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center sm:mt-6">
+        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden sm:mt-6">
           {children}
         </div>
       </div>
