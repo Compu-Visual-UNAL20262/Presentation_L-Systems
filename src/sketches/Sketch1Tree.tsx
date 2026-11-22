@@ -104,34 +104,40 @@ interface TreeParams {
   forest: boolean
   /** Señal de reinicio: al incrementarse, el sketch reinicia la animación. */
   replayToken: number
+  /** Si es true, el árbol empieza a crecer solo al montar (cierre/Acto 6). */
+  autoStart: boolean
 }
 
 function makeSketch(finalString: string, paramsRef: { current: TreeParams }): SketchFn {
   const bounds = measureBounds(finalString)
   return (p: p5, size: { width: number; height: number }) => {
     let charLimit = 0
-    let started = false
+    // En modo autoStart la animación arranca sola; en el gancho inicial se
+    // dispara con un clic, la tecla ESPACIO o el botón REPLAY.
+    let started = paramsRef.current.autoStart
     let lastReplayToken = paramsRef.current.replayToken
 
-    const restart = () => {
+    /** Reinicia y arranca la animación de crecimiento desde cero. */
+    const grow = () => {
+      started = true
       charLimit = 0
     }
 
     p.setup = () => {
       p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
-      restart()
+      charLimit = 0
     }
 
-    // Clic y ESPACIO reinician la animación.
-    p.mousePressed = () => restart()
+    // Clic y ESPACIO arrancan/reinician la animación (coherente con la pista
+    // en pantalla "CLICK / ESPACIO PARA CRECER").
+    p.mousePressed = () => grow()
     p.keyPressed = () => {
       if (p.key === ' ') {
-        started = true
-        restart()
+        grow()
       }
       if (p.key === 'b' || p.key === 'B') {
         paramsRef.current.forest = !paramsRef.current.forest
-        restart()
+        grow()
       }
     }
 
@@ -223,10 +229,12 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
     }
 
     p.draw = () => {
-      // Reinicio solicitado desde React (botón REPLAY / toggle).
+      // Reinicio solicitado desde React (botón REPLAY / toggle BOSQUE): además
+      // de limpiar el lienzo, relanza el crecimiento (antes solo reiniciaba el
+      // contador pero no volvía a animar).
       if (paramsRef.current.replayToken !== lastReplayToken) {
         lastReplayToken = paramsRef.current.replayToken
-        restart()
+        grow()
       }
 
       p.background(BG_SKY)
@@ -272,15 +280,21 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
 
 interface Sketch1TreeProps {
   initialForestMode?: boolean
+  /** El árbol/bosque empieza a crecer solo al montar (usado en el cierre). */
+  autoStart?: boolean
 }
 
-export default function Sketch1Tree({ initialForestMode = false }: Sketch1TreeProps) {
+export default function Sketch1Tree({
+  initialForestMode = false,
+  autoStart = false,
+}: Sketch1TreeProps) {
   const finalString = useMemo(() => expandString(), [])
   const [forest, setForest] = useState(initialForestMode)
 
   const paramsRef = useRef<TreeParams>({
     forest: initialForestMode,
     replayToken: 0,
+    autoStart,
   })
 
   // El sketch se memoiza por la cadena (no por estado) → p5 no se remonta.

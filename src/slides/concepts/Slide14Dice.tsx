@@ -68,8 +68,9 @@ export default function Slide14Dice() {
           </div>
         </div>
 
-        {/* Meme narrativo: clones Spider-Man vs RNG */}
-        <PixelMeme variant="clones" className="w-full max-w-md" />
+        {/* Meme narrativo: clones Spider-Man vs RNG.
+            Oculto en móvil para no recortar el contenido en viewports cortos. */}
+        <PixelMeme variant="clones" className="hidden w-full max-w-md sm:block" />
       </div>
     </ConceptFrame>
   )

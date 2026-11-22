@@ -104,7 +104,7 @@ export function Slide18StressSketch() {
 export function Slide21Closing() {
   return (
     <div className="relative h-full w-full">
-      <Sketch1Tree initialForestMode={true} />
+      <Sketch1Tree initialForestMode={true} autoStart={true} />
       <div className="pointer-events-none absolute inset-x-0 top-12 flex flex-col items-center px-4 text-center sm:top-14">
         <div className="pixel-bevel bg-white/95 px-5 py-3 sm:px-7 sm:py-4">
           <span className="inline-block pixel-bevel-sm bg-[#FACC15] px-2.5 py-0.5 font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">

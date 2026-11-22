@@ -162,6 +162,11 @@ export default function Sketch4Plant() {
   const [angle, setAngle] = useState(35)
   const [len, setLen] = useState(16)
   const [iterations, setIterations] = useState(1)
+  // En móvil el panel arranca colapsado para no tapar la planta; en desktop
+  // (>= sm, 640px) arranca abierto. Se calcula una sola vez al montar.
+  const [panelOpen, setPanelOpen] = useState(
+    () => typeof window === 'undefined' || window.innerWidth >= 640,
+  )
 
   // La cadena se memoiza por iteraciones: solo se reexpande al cambiar n.
   const path = useMemo(() => expand(iterations), [iterations])
@@ -187,23 +192,42 @@ export default function Sketch4Plant() {
     return c
   }, [path])
 
-  // Preset rápido con tecla 'C' para mostrar el ciprés.
+  // Presets rápidos accesibles también por teclado: 'C' ciprés, 'B' arbusto.
+  const presetCypress = () => {
+    setAngle(15)
+    setLen(16)
+    setIterations(4)
+  }
+  const presetBush = () => {
+    setAngle(35)
+    setLen(16)
+    setIterations(4)
+  }
   useEffect(() => onSlideKey((e) => {
-    if (e.key === 'c' || e.key === 'C') {
-      setAngle(15)
-      setLen(16)
-      setIterations(4)
-    }
+    if (e.key === 'c' || e.key === 'C') presetCypress()
+    if (e.key === 'b' || e.key === 'B') presetBush()
   }), [])
 
   return (
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
 
-      {/* Panel de control 16-bit de día (ignora swipe) */}
+      {/* Botón para mostrar/ocultar el panel (solo móvil, evita tapar la planta) */}
+      <button
+        type="button"
+        data-no-swipe="true"
+        onClick={() => setPanelOpen((o) => !o)}
+        className="arcade-btn absolute right-3 top-14 z-30 sm:hidden"
+      >
+        {panelOpen ? '✕ CONTROLES' : '⚙ CONTROLES'}
+      </button>
+
+      {/* Panel de control 16-bit de día (ignora swipe). En móvil es más
+          estrecho y se puede colapsar; en desktop siempre visible. */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 flex w-60 flex-col gap-2 sm:top-16"
+        className={`absolute right-3 top-28 z-20 flex w-44 flex-col gap-2 sm:top-16 sm:w-60
+          ${panelOpen ? 'flex' : 'hidden'} sm:!flex`}
       >
         <div className="space-y-3 pixel-bevel bg-white p-4">
           <div className="flex items-center justify-between border-b-2 border-[#0F172A] pb-1.5">
@@ -241,6 +265,15 @@ export default function Sketch4Plant() {
           />
           <div className="border-t-2 border-[#0F172A] pt-2 text-center font-mono text-xs font-bold text-[#0F172A]">
             Segmentos: {segments.toLocaleString('es')}
+          </div>
+          {/* Presets visibles alineados con el guion (ciprés 15° → arbusto 35°) */}
+          <div className="flex gap-2 border-t-2 border-[#0F172A] pt-2">
+            <button type="button" onClick={presetCypress} className="arcade-btn flex-1 !text-[10px]">
+              CIPRÉS 15°
+            </button>
+            <button type="button" onClick={presetBush} className="arcade-btn flex-1 !text-[10px]">
+              ARBUSTO 35°
+            </button>
           </div>
         </div>
         <div className="pixel-bevel bg-white p-3">

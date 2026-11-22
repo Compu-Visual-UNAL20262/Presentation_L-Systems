@@ -1,4 +1,4 @@
-import { ConceptFrame } from './shared'
+import { ConceptFrame, RuleBadge } from './shared'
 
 /**
  * Slide 06 — El Alga que Sabe Contar.
@@ -31,6 +31,11 @@ export default function Slide06Algae() {
   return (
     <ConceptFrame badge="ACTO II" accent="emerald" title="El Alga que Sabe Contar">
       <div className="w-full max-w-2xl space-y-3">
+        {/* Reglas de producción visibles: generan la secuencia de abajo */}
+        <div className="flex items-center justify-center gap-2.5">
+          <RuleBadge>A → AB</RuleBadge>
+          <RuleBadge>B → A</RuleBadge>
+        </div>
         {ROWS.map((row, i) => (
           <div
             key={i}
