@@ -54,7 +54,7 @@ interface KochParams {
 }
 
 function makeSketch(paramsRef: { current: KochParams }): SketchFn {
-  return (p: p5) => {
+  return (p: p5, size: { width: number; height: number }) => {
     let path = ''
     let cachedKey = ''
     // Puntos precalculados (en unidades de paso=1) y su bounding box.
@@ -94,7 +94,7 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
     }
 
     p.setup = () => {
-      p.createCanvas(p.width || 800, p.height || 600)
+      p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
       rebuild()
     }
 
@@ -131,9 +131,9 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
       const cx = (bbox.minX + bbox.maxX) / 2
       const cy = (bbox.minY + bbox.maxY) / 2
 
-      anim = Math.min(1, anim + 0.06)
-      const eased = 1 - Math.pow(1 - anim, 3)
-      const shown = Math.max(2, Math.floor(pts.length * eased))
+      // Velocidad de trazado reducida (~3.3 s a 60 FPS) para que se aprecie la tortuga
+      anim = Math.min(1, anim + 0.005)
+      const shown = Math.max(2, Math.floor(pts.length * anim))
 
       p.push()
       p.translate(p.width / 2, p.height / 2)
@@ -327,8 +327,11 @@ F  →  F+F--F+F`}
           onClick={run}
           className="arcade-btn-lime mt-1 w-full text-center"
         >
-          ▶ START / EJECUTAR
+          ▶ REPETIR TRAZO ANIMADO
         </button>
+        <span className="text-center font-mono text-[9px] font-semibold text-[#475569]">
+          ⚡ Parámetros en tiempo real · Pulsa para ver el recorrido
+        </span>
       </aside>
 
       {/* ── Lienzo ── */}

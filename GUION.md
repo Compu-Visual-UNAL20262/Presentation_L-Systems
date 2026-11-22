@@ -9,9 +9,9 @@ Para evitar la monotonía de una exposición secuencial de 11 minutos por person
 | Integrante | Rol Principal en Escena | Intervenciones | Tiempo Total |
 | :---- | :---- | :---- | :---- |
 | Nicolas Bolaños | **Anfitrión y Operador de Demos Base:** Abre con el impacto visual, opera los sketches de crecimiento y conecta con videojuegos. | Actos 1, 2, 3, 4 y 6 (5 turnos) | 11:15 min |
-| Ariadna (I2) | **Narrador Histórico y Operador de Variación:** Explica el origen biológico, la tortuga de Koch, los bosques aleatorios y el cierre. | Actos 1, 3, 4, 5 y 6 (5 turnos) | 10:45 min |
+| Ariadna Rueda (I2) | **Narrador Histórico y Operador de Variación:** Explica el origen biológico, la tortuga de Koch, los bosques aleatorios y el cierre. | Actos 1, 3, 4, 5 y 6 (5 turnos) | 10:45 min |
 | Farid Ardila | **Especialista en Espacio y 3D:** Explica el paralelismo, la ramificación con memoria, la comunicación celular, el salto al 3D y ciudades. | Actos 1, 3, 4, 5 y 6 (5 turnos) | 12:00 min |
-| Angel Beltran (I4) | **Arquitecto de Reglas y Rendimiento:** Traduce el "ADN" (axioma/reglas), explica el azar, el double buffering y aplicaciones científicas. | Actos 2, 4, 5 y 6 (5 turnos) | 11:00 min |
+| Angel Beltrán (I4) | **Arquitecto de Reglas y Rendimiento:** Traduce el "ADN" (axioma/reglas), explica el azar, el double buffering y aplicaciones científicas. | Actos 2, 4, 5 y 6 (5 turnos) | 11:00 min |
 
 # **Sección 2: Estructura de las Diapositivas (15 Slides Minimalistas \+ Navegador)**
 

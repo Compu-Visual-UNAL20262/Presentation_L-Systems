@@ -1,16 +1,14 @@
 import { ActBadge } from './shared'
-import { TEAM, TEAM_MOTTO, TEAM_NAME } from '../../data/slidesConfig'
+import { TEAM_MEMBERS, TEAM_MOTTO, TEAM_NAME } from '../../data/slidesConfig'
 
-const PLAYER_COLORS = ['bg-[#38BDF8]', 'bg-[#F472B6]', 'bg-[#A3E635]', 'bg-[#FACC15]']
-
-/** Slide 02 — Portada 16-bit de día: identidad Team Gaymers + lema + 4 jugadores. */
+/** Slide 02 — Portada 16-bit de día: identidad Team Gaymers + frase conceptual + 4 integrantes. */
 export default function Slide02Cover() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center px-5 pb-16 pt-14 text-center">
+    <div className="flex h-full w-full flex-col items-center justify-center px-4 pb-14 pt-10 text-center sm:px-6">
       <div className="animate-fade-up flex max-w-4xl flex-col items-center">
         <div className="flex flex-wrap items-center justify-center gap-2">
           <ActBadge label="ACTO I" accent="cyan" />
-          <span className="pixel-bevel-sm bg-[#F472B6] px-3 py-1.5 font-pixel text-[10px] font-bold tracking-widest text-[#0F172A]">
+          <span className="pixel-bevel-sm bg-[#F472B6] px-3 py-1 font-pixel text-[10px] font-bold tracking-widest text-[#0F172A]">
             ♥ TEAM {TEAM_NAME}
           </span>
         </div>
@@ -26,25 +24,28 @@ export default function Slide02Cover() {
             Programar el crecimiento en lugar de esculpirlo.
           </p>
 
-          {/* Lema inspirado en el Equipo Rocket adaptado a L-Systems */}
-          <div className="mt-4 inline-block pixel-bevel-sm bg-[#FFFBEB] px-3.5 py-1.5 font-mono text-[11px] font-bold text-[#BE185D] sm:text-xs">
-            🚀 &ldquo;{TEAM_MOTTO}&rdquo;
+          {/* Frase / Gancho conceptual de inicio */}
+          <div className="mt-4 inline-block pixel-bevel-sm bg-[#FFFBEB] px-4 py-2 font-mono text-xs font-bold text-[#0369A1] sm:text-sm">
+            🌱 {TEAM_MOTTO}
           </div>
         </div>
 
-        {/* Selector de los 4 integrantes (P1 - P4) */}
+        {/* Los 4 integrantes con su rol técnico */}
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-7">
-          {TEAM.map((name, idx) => (
+          {TEAM_MEMBERS.map((member) => (
             <span
-              key={name}
-              className="pixel-bevel-sm flex items-center gap-1.5 bg-white px-3 py-1.5 font-mono text-xs font-bold text-[#0F172A] sm:text-sm"
+              key={member.player}
+              className="pixel-bevel-sm flex items-center gap-2 bg-white px-3 py-1.5 font-mono text-xs font-bold text-[#0F172A] sm:text-sm"
             >
               <span
-                className={`inline-block border border-[#0F172A] px-1.5 py-0.5 font-pixel text-[9px] text-[#0F172A] ${PLAYER_COLORS[idx % PLAYER_COLORS.length]}`}
+                className={`inline-block border border-[#0F172A] px-1.5 py-0.5 font-pixel text-[9px] font-bold text-[#0F172A] ${member.color}`}
               >
-                P{idx + 1}
+                {member.player}
               </span>
-              {name}
+              <span>{member.name}</span>
+              <span className="hidden rounded bg-[#F1F5F9] px-1.5 py-0.5 text-[10px] font-semibold text-[#64748B] sm:inline-block">
+                {member.role}
+              </span>
             </span>
           ))}
         </div>

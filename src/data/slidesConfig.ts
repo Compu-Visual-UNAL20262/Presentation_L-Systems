@@ -71,13 +71,47 @@ export const ACTS: Act[] = [
 export const TEAM_NAME = 'GAYMERS'
 
 export const TEAM_MOTTO =
-  '¡Prepárense para los fractales! · ¡Y más vale que sean paralelos!'
+  '«En computación visual no esculpimos formas: programamos su ADN y dejamos que el código crezca.»'
 
 export const TEAM = [
-  'Nicolas Bolaños',
-  'Ariadna',
+  'Nicolás Bolaños',
+  'Ariadna Rueda',
   'Farid Ardila',
-  'Angel Beltran',
+  'Angel Beltrán',
+]
+
+export interface TeamMember {
+  player: string
+  name: string
+  role: string
+  color: string
+}
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    player: 'P1',
+    name: 'Nicolás Bolaños',
+    role: 'Demos & Gameloop',
+    color: 'bg-[#38BDF8]',
+  },
+  {
+    player: 'P2',
+    name: 'Ariadna Rueda',
+    role: 'Bio-Origen & Variación',
+    color: 'bg-[#F472B6]',
+  },
+  {
+    player: 'P3',
+    name: 'Farid Ardila',
+    role: 'Paralelismo & 3D',
+    color: 'bg-[#A3E635]',
+  },
+  {
+    player: 'P4',
+    name: 'Angel Beltrán',
+    role: 'Reglas & Rendimiento',
+    color: 'bg-[#FACC15]',
+  },
 ]
 
 export const SLIDES: Slide[] = [

@@ -50,9 +50,9 @@ interface PlantParams {
 }
 
 function makeSketch(paramsRef: { current: PlantParams }): SketchFn {
-  return (p: p5) => {
+  return (p: p5, size: { width: number; height: number }) => {
     p.setup = () => {
-      p.createCanvas(p.width || 800, p.height || 600)
+      p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
     }
 
     p.draw = () => {

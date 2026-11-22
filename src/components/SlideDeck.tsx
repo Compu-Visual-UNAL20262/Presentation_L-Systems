@@ -114,7 +114,7 @@ export default function SlideDeck() {
 
   return (
     <main
-      className="relative h-[100dvh] w-screen overflow-hidden bg-base"
+      className="relative h-[100dvh] w-screen overflow-hidden bg-[#C7ECFF]"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >

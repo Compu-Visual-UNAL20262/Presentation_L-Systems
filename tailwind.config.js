@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         // Estética 16-bit de día (alto contraste para proyector de salón)
-        base: '#C7ECFF',
+        canvas: '#C7ECFF',
         sky: {
           light: '#E6F7FF',
           DEFAULT: '#C7ECFF',

@@ -68,11 +68,11 @@ interface ForestParams {
 }
 
 function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
-  return (p: p5) => {
+  return (p: p5, size: { width: number; height: number }) => {
     let telemetryTick = 0
 
     p.setup = () => {
-      p.createCanvas(p.width || 800, p.height || 600)
+      p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
     }
 
     const drawTree = (path: string, len: number, heavy: boolean) => {
@@ -236,9 +236,18 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
       {/* Telemetría HUD 16-bit de día (esquina superior derecha) */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 w-44 space-y-2 pixel-bevel
+        className="absolute right-3 top-14 z-20 w-48 space-y-2 pixel-bevel
           bg-white p-3 sm:top-16"
       >
+        {mode === 'stress' ? (
+          <div className="pixel-bevel-sm bg-[#FEE2E2] px-2 py-1 text-center font-pixel text-[9px] font-black text-[#DC2626] tracking-wider">
+            ⚠️ MODO ESTRÉS GPU
+          </div>
+        ) : (
+          <div className="pixel-bevel-sm bg-[#DCFCE7] px-2 py-0.5 text-center font-pixel text-[8px] font-bold text-[#15803D]">
+            🌱 S0L-SYSTEM
+          </div>
+        )}
         <div>
           <div className="font-pixel text-[9px] font-bold uppercase tracking-widest text-[#334155]">
             Segmentos

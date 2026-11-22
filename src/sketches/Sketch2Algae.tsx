@@ -51,9 +51,9 @@ interface AlgaeParams {
 function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }): SketchFn {
   const maxLen = generations[MAX_GEN].length // 34
 
-  return (p: p5) => {
+  return (p: p5, size: { width: number; height: number }) => {
     p.setup = () => {
-      p.createCanvas(p.width || 800, p.height || 600)
+      p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
       p.textFont('monospace')
     }
 
@@ -74,8 +74,8 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
       const centerX = padX + colLeft
       const centerW = p.width - padX * 2 - colLeft - colRight
 
-      const topY = p.height * 0.08
-      const availH = p.height * 0.84
+      const topY = Math.max(92, p.height * 0.13)
+      const availH = p.height - topY - p.height * 0.08
       const rowH = availH / (MAX_GEN + 1)
 
       // Tamaño de cápsula: cabe la fila más larga (34 letras) en centerW.
@@ -182,7 +182,7 @@ export default function Sketch2Algae() {
 
       <div
         data-no-swipe="true"
-        className="absolute right-4 top-14 z-20 flex flex-col items-end gap-2 sm:top-16"
+        className="absolute right-4 top-14 z-20 flex flex-row items-center gap-2 sm:top-16"
       >
         <button
           type="button"

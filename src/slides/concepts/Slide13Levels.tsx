@@ -2,7 +2,7 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 13 — Los 5 Niveles de Realismo.
- * Escalera ascendente de 5 peldaños 16-bit de alto contraste.
+ * Escalera ascendente de 5 peldaños 16-bit de máximo contraste para proyector.
  */
 
 const LEVELS = [
@@ -23,12 +23,21 @@ export default function Slide13Levels() {
             className="flex flex-1 flex-col items-center animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
-            <span className="mb-1 text-center font-display text-[11px] font-extrabold text-[#0F172A] sm:text-base">
+            {/* Nombre del nivel con contraste forzado */}
+            <span
+              className="mb-1 text-center font-display text-xs font-black text-[#0F172A] sm:text-base"
+              style={{ color: '#0F172A' }}
+            >
               {lvl.name}
             </span>
-            <span className="mb-2 hidden pixel-bevel-sm bg-white px-2 py-0.5 font-mono text-[10px] font-bold text-[#0F172A] sm:block">
+            {/* Tag técnico (D0L, S0L, etc.) en paleta daylight 16-bit: caja blanca con tinta oscura */}
+            <span
+              className="mb-2 pixel-bevel-sm bg-white px-2 py-0.5 font-mono text-[9px] font-black text-[#0F172A] sm:text-[10px]"
+              style={{ color: '#0F172A', backgroundColor: '#FFFFFF' }}
+            >
               {lvl.tag}
             </span>
+            {/* Peldaño 16-bit con número oscuro de alto contraste */}
             <div
               className="flex w-full items-center justify-center pixel-bevel"
               style={{
@@ -36,7 +45,10 @@ export default function Slide13Levels() {
                 backgroundColor: lvl.color,
               }}
             >
-              <span className="pixel-bevel-sm bg-white px-2.5 py-1 font-pixel text-base font-bold text-[#0F172A]">
+              <span
+                className="pixel-bevel-sm bg-white px-2.5 py-1 font-pixel text-sm font-black text-[#0F172A] sm:text-base"
+                style={{ color: '#0F172A', backgroundColor: '#FFFFFF' }}
+              >
                 0{lvl.n}
               </span>
             </div>

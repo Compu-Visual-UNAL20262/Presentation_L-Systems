@@ -2,7 +2,7 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 06 — El Alga que Sabe Contar.
- * 4 filas con cápsulas 16-bit de alto contraste (A moneda, B cian).
+ * 4 filas con cápsulas 16-bit de alto contraste (A moneda, B cian) y contador LED Fibonacci.
  */
 
 const AMBER = '#FACC15'
@@ -20,7 +20,7 @@ function Capsule({ letter }: { letter: string }) {
   return (
     <span
       className="flex h-8 w-8 items-center justify-center pixel-bevel-sm font-mono text-sm font-extrabold text-[#0F172A] sm:h-10 sm:w-10"
-      style={{ backgroundColor: bg }}
+      style={{ backgroundColor: bg, color: '#0F172A' }}
     >
       {letter}
     </span>
@@ -37,7 +37,7 @@ export default function Slide06Algae() {
             className="flex items-center gap-4 pixel-bevel bg-white px-4 py-2.5 animate-fade-up"
             style={{ animationDelay: `${0.1 + i * 0.12}s` }}
           >
-            <span className="w-12 shrink-0 font-mono text-xs font-extrabold text-[#0F172A]">
+            <span className="w-12 shrink-0 font-mono text-xs font-black text-[#0F172A]">
               n={i}
             </span>
             <div className="flex flex-1 flex-wrap gap-1.5">
@@ -45,12 +45,16 @@ export default function Slide06Algae() {
                 <Capsule key={j} letter={ch} />
               ))}
             </div>
-            <span className="pixel-bevel-sm bg-[#A3E635] px-2.5 py-0.5 text-right font-mono text-base font-extrabold text-[#0F172A]">
-              {row.count}
+            {/* Contador Fibonacci: paleta daylight 16-bit con verde lima y tinta oscura de alto contraste */}
+            <span
+              className="pixel-bevel-sm bg-[#A3E635] px-2.5 py-1 text-right font-mono text-sm font-black text-[#0F172A] sm:text-base"
+              style={{ color: '#0F172A', backgroundColor: '#A3E635' }}
+            >
+              #{row.count}
             </span>
           </div>
         ))}
-        <p className="pt-1 text-center font-mono text-xs font-bold text-[#0F172A]">
+        <p className="pt-1 text-center font-mono text-xs font-extrabold text-[#0F172A]">
           1, 2, 3, 5 … Fibonacci emergente
         </p>
       </div>

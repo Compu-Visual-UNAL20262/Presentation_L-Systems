@@ -71,6 +71,11 @@ export function Slide12PlantSketch() {
 export function Slide15ForestSketch() {
   return (
     <div className="relative h-full w-full">
+      <div className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4">
+        <span className="pixel-bevel-sm bg-white px-3.5 py-1 font-pixel text-[9px] font-bold text-[#0F172A] sm:text-[10px]">
+          🌲 ACTO IV · BIODIVERSIDAD CON REGLAS ESTOCÁSTICAS (S0L)
+        </span>
+      </div>
       <Sketch5Forest mode="stochastic" />
       <CornerBadge text="ACTO IV · Sketch 5" className="absolute bottom-16 right-4" />
     </div>
@@ -81,6 +86,11 @@ export function Slide15ForestSketch() {
 export function Slide18StressSketch() {
   return (
     <div className="relative h-full w-full">
+      <div className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4">
+        <span className="pixel-bevel-sm bg-[#FFF1F2] border-2 border-[#E11D48] px-3.5 py-1 font-pixel text-[9px] font-black text-[#E11D48] sm:text-[10px]">
+          ⚠️ ACTO V · PRUEBA DE ESTRÉS: EXPLOSIÓN DE SEGMENTOS Y CAÍDA DE FPS
+        </span>
+      </div>
       <Sketch5Forest mode="stress" />
       <CornerBadge text="ACTO V · Prueba de estrés" className="absolute bottom-16 right-4" />
     </div>
