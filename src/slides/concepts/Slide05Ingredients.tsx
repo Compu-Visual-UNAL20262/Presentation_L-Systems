@@ -1,8 +1,10 @@
-import { ConceptFrame } from './shared'
+import { ConceptFrame, RuleBadge } from './shared'
 
 /**
  * Slide 05 — Los 3 Ingredientes.
  * 3 tarjetas 16-bit de día con íconos SVG: Alfabeto, Axioma, Reglas.
+ * Cada tarjeta muestra además el valor concreto del ejemplo del alga, para
+ * que la gramática formal (V, ω, P) quede visible y no solo narrada.
  */
 
 function AlphabetIcon() {
@@ -38,9 +40,9 @@ function RulesIcon() {
 }
 
 const CARDS = [
-  { sym: 'V', name: 'Alfabeto', note: 'Las piezas', icon: <AlphabetIcon />, pill: 'bg-[#FACC15]' },
-  { sym: 'ω', name: 'Axioma', note: 'La semilla', icon: <SeedIcon />, pill: 'bg-[#A3E635]' },
-  { sym: 'P', name: 'Reglas', note: 'La evolución', icon: <RulesIcon />, pill: 'bg-[#F472B6]' },
+  { sym: 'V', name: 'Alfabeto', note: 'Las piezas', value: '{ A, B }', icon: <AlphabetIcon />, pill: 'bg-[#FACC15]' },
+  { sym: 'ω', name: 'Axioma', note: 'La semilla', value: 'A', icon: <SeedIcon />, pill: 'bg-[#A3E635]' },
+  { sym: 'P', name: 'Reglas', note: 'La evolución', value: 'A → AB · B → A', icon: <RulesIcon />, pill: 'bg-[#F472B6]' },
 ]
 
 export default function Slide05Ingredients() {
@@ -63,6 +65,9 @@ export default function Slide05Ingredients() {
             </div>
             <div className="mt-2 font-display text-xl font-bold text-[#0F172A]">{c.name}</div>
             <div className="font-display text-sm font-semibold text-[#334155]">{c.note}</div>
+            <div className="mt-3">
+              <RuleBadge className="!text-xs">{c.value}</RuleBadge>
+            </div>
           </div>
         ))}
       </div>

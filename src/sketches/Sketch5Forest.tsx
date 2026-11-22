@@ -296,10 +296,12 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
     setTrees(genForest(n))
   }
 
-  // En modo "stress" arranca ya con iteraciones altas (7) para ilustrar coste.
+  // En modo "stress" arranca en iteración 4 (igual que el estocástico) para
+  // que el expositor muestre la progresión completa 4 → 5 → 6 → 7 y la caída
+  // de FPS desde un punto fluido. Antes arrancaba en 7 y se perdía el "antes".
   useEffect(() => {
     if (mode === 'stress') {
-      chooseIterations(7)
+      chooseIterations(4)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode])
@@ -311,11 +313,12 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
 
-      {/* Telemetría HUD 16-bit de día (esquina superior derecha) */}
+      {/* Telemetría HUD 16-bit de día (esquina superior derecha). En móvil baja
+          a top-24 para no solaparse con el badge centrado del slide (top-14). */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 w-48 space-y-2 pixel-bevel
-          bg-white p-3 sm:top-16"
+        className="absolute right-3 top-24 z-20 w-40 space-y-2 pixel-bevel
+          bg-white p-2.5 sm:top-16 sm:w-48 sm:p-3"
       >
         {mode === 'stress' ? (
           <div className="pixel-bevel-sm bg-[#FEE2E2] px-2 py-1 text-center font-pixel text-[9px] font-black text-[#DC2626] tracking-wider">
@@ -344,10 +347,10 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
         </div>
       </div>
 
-      {/* Controles (esquina inferior izquierda, sobre el suelo) */}
+      {/* Controles (esquina inferior izquierda; por encima del HUD inferior) */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-4 z-20 flex flex-col gap-2 pixel-bevel bg-white/95 p-2"
+        className="absolute bottom-24 left-4 z-20 flex flex-col gap-2 pixel-bevel bg-white/95 p-2 sm:bottom-16"
       >
         <button type="button" onClick={regenerate} className="arcade-btn">
           ⟳ REGENERAR BOSQUE

@@ -20,13 +20,13 @@
 * **Alfabeto ($V$):**{ X, F, \+, \-, \[, \] }  
 * **Axioma ($\omega$):**"X"  
 * **Reglas de producción ($P$):**  
-  * X \-\> F+\[\[X\]-X\]-F\[-FX\]+X  
+  * X \-\> FF-\[+FFX-X\]+\[+FFX\]-\[-FFX+X\]  
   * F \-\> FF  
   * \+, \-, \[, \]$\rightarrow$ constantes (permanecen iguales en cada iteración).  
 * **Parámetros geométricos:**  
-  * **Iteraciones ($n$):** 5 (produce una estructura densa y orgánica sin afectar fluidez).  
-  * **Ángulo de giro ($\delta$):** 25° (radians(25)).  
-  * **Longitud de paso (len):** 145 \* pow(0.5, n) (en n \= 5 equivale a \~4.53 px por segmento F, garantizando que el árbol ocupe \~80 % de la altura del lienzo).  
+  * **Iteraciones ($n$):** 4 (estructura densa y orgánica sin afectar fluidez).  
+  * **Ángulo de giro ($\delta$):** 20° (radians(20)).  
+  * **Longitud de paso:** calculada para que el árbol ocupe ~78 % del alto del contenedor en cualquier relación de aspecto (medición del bounding box).  
 * **Diccionario de la tortuga:**  
   * **F**: dibuja un segmento hacia arriba de longitud len y traslada el origen al extremo final.  
   * **\+**: gira a la derecha $+\delta$ (rotate(radians(25))).  
@@ -44,8 +44,9 @@
   * En setup(), generar la cadena final completa (cadenaFinal) usando dos cadenas (double buffering: leer actual, construir siguiente y reemplazar).  
   * Mantener una variable limiteCaracteres \= 0\. En cada frame de draw(), incrementar limiteCaracteres \+= ceil(cadenaFinal.length / 240\) (a 60 FPS, 240 frames \= 4 segundos exactos) y recorrer cadenaFinal solo hasta limiteCaracteres.  
 * **Controles interactivos:**  
-  * **Clic en el lienzo o tecla ESPACIO:** Reinicia limiteCaracteres \= 0 para volver a animar el crecimiento desde cero (necesario para relanzar el bosque en el cierre del Acto 6).  
-  * **Tecla B:** Alterna entre 1 árbol central (para el Acto 1\) y 3 árboles simultáneos en x \= \[220, 450, 680\] (para mostrar el bosque completo en 43:45).
+  * **Clic en el lienzo o tecla ESPACIO:** Arranca (o reinicia) la animación de crecimiento desde cero. El botón ▶ REPLAY hace lo mismo desde la UI.  
+  * **Tecla B o botón de modo:** Alterna entre 1 árbol central y 3 árboles (bosque).  
+  * **autoStart:** en el Slide 21 (cierre) el bosque arranca solo al montar, sin pulsar nada.
 
 ## **3\. Qué se Planea Mostrar en Vivo**
 
@@ -213,4 +214,4 @@ let angulo = 60;
 
 * **En el Acto 4 (25:00):** Con las iteraciones en 4, el expositor pulsa *"Regenerar Bosque"* varias veces para mostrar cómo los 5 árboles cambian de forma orgánica en cada clic.
 
-**En el Acto 5 (31:30):** El expositor cambia el selector de iteraciones de 4 $\rightarrow$ 5 $\rightarrow$ 6 $\rightarrow$ 7 (y opcionalmente 8), señalando en pantalla cómo el contador de segmentos crece exponencialmente y cómo el indicador de FPS pasa de verde a rojo.
+**En el Acto 5 (31:30):** El modo estrés **arranca en iteración 4** (igual que el estocástico); el expositor sube el selector 4 $\rightarrow$ 5 $\rightarrow$ 6 $\rightarrow$ 7 (y opcionalmente 8), señalando en pantalla cómo el contador de segmentos crece exponencialmente y cómo el indicador de FPS pasa de verde a rojo.

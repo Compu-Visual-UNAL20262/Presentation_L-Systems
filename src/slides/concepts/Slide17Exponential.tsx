@@ -62,8 +62,9 @@ export default function Slide17Exponential() {
           </div>
         </div>
 
-        {/* Meme narrativo: cuando subes a n=10 iteraciones ("This is fine") */}
-        <PixelMeme variant="exponential" className="w-full max-w-md" />
+        {/* Meme narrativo: cuando subes a n=10 iteraciones ("This is fine").
+            Oculto en móvil para no recortar el contenido en viewports cortos. */}
+        <PixelMeme variant="exponential" className="hidden w-full max-w-md sm:block" />
       </div>
     </ConceptFrame>
   )

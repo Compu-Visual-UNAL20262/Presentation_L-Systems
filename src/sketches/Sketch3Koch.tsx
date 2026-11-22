@@ -259,8 +259,9 @@ export default function Sketch3Koch() {
       {/* ── Mini-Editor de código 16-bit de día ── */}
       <aside
         data-no-swipe="true"
-        className="order-2 flex shrink-0 flex-col gap-3 border-t-[3px] border-[#0F172A] bg-white
-          p-4 lg:order-1 lg:w-[370px] lg:border-r-[3px] lg:border-t-0 lg:p-6 lg:pt-16"
+        className="order-2 flex max-h-[42vh] shrink-0 flex-col gap-3 overflow-y-auto border-t-[3px]
+          border-[#0F172A] bg-white p-3 lg:order-1 lg:max-h-none lg:w-[370px] lg:overflow-visible
+          lg:border-r-[3px] lg:border-t-0 lg:p-6 lg:pt-16"
       >
         <div className="flex items-center justify-between pixel-bevel-sm bg-[#F472B6] px-3 py-1.5">
           <div className="flex items-center gap-1.5">
@@ -340,7 +341,7 @@ F  →  F+F--F+F`}
         {/* Indicador inferior */}
         <div
           data-no-swipe="true"
-          className="pointer-events-none absolute inset-x-0 bottom-14 sm:bottom-4 flex justify-center p-2"
+          className="pointer-events-none absolute inset-x-0 bottom-16 sm:bottom-4 flex justify-center p-2"
         >
           <span className="pixel-bevel-sm bg-white px-3 py-1 font-mono text-[11px] font-bold text-[#0F172A] sm:text-sm">
             Iteraciones: {iterations} | Ángulo: {angle}° | Segmentos: {segments}

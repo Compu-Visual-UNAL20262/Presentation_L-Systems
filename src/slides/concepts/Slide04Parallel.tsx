@@ -68,8 +68,9 @@ export default function Slide04Parallel() {
           </div>
         </div>
 
-        {/* Meme narrativo del choque secuencial vs paralelo */}
-        <PixelMeme variant="parallel" className="w-full max-w-md" />
+        {/* Meme narrativo del choque secuencial vs paralelo (oculto en móvil para
+            no empujar el contenido fuera del viewport corto) */}
+        <PixelMeme variant="parallel" className="hidden w-full max-w-md sm:block" />
       </div>
     </ConceptFrame>
   )

@@ -63,3 +63,24 @@ export function Card({
     <div className={`pixel-bevel bg-white border-t-4 ${border} ${className}`}>{children}</div>
   )
 }
+
+/**
+ * Píldora monoespaciada para mostrar una regla o fórmula del L-System con la
+ * notación uniforme de la charla (p. ej. `A → AB`). Fondo crema 16-bit.
+ */
+export function RuleBadge({
+  className = '',
+  children,
+}: {
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <code
+      className={`inline-block pixel-bevel-sm bg-[#FEF9C3] px-2.5 py-0.5 font-mono
+        text-sm font-bold text-[#0F172A] ${className}`}
+    >
+      {children}
+    </code>
+  )
+}
