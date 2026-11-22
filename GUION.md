@@ -40,7 +40,7 @@ Para evitar la monotonía de una exposición secuencial de 11 minutos por person
 | 17 | El Peligro Exponencial y el Doble Cuaderno | Curva exponencial + dos buffers (Sₙ → Sₙ₊₁). | Prepara la prueba de estrés. |
 | 18 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (**arranca en 4**). | Demo en vivo. |
 | 19 | Del Plano 2D al Mundo 3D | 3 ejes de rotación + línea→cilindro + **render real** (wireframe → malla con hojas). | Explica geometría 3D. |
-| 20 | Mundos Infinitos en Pocos Kilobytes | **Capturas reales**: flora de videojuego + ciudad procedural (Parish & Müller) + agronomía/arte. | Cierre e impacto real. |
+| 20 | Mundos Infinitos en Pocos Kilobytes | **Capturas reales**: flora de videojuego + ciudad procedural (Parish & Müller) + galería de fractales L-system (arte/ciencia). | Cierre e impacto real. |
 | 21 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. | Conclusión final. |
 
 # **Sección 3: Los 5 Sketches Interactivos (embebidos en la app)**
