@@ -32,7 +32,7 @@ function CommandCard({
 export default function Slide08Turtle() {
   return (
     <ConceptFrame badge="ACTO III" accent="amber" title="De Letras a Píxeles: La Tortuga">
-      <div className="flex w-full max-w-4xl flex-col items-center gap-6">
+      <div className="flex w-full max-w-4xl flex-col items-center gap-4 sm:gap-5">
         {/* Cursor vectorial (tortuga con lápiz en tarjeta clara) */}
         <div className="pixel-bevel-sm bg-white px-6 py-2">
           <svg viewBox="0 0 140 72" className="h-20 animate-float-y">
@@ -43,6 +43,19 @@ export default function Slide08Turtle() {
             <path d="M68 54 L108 22" stroke="#0284C7" strokeWidth="4" strokeLinecap="round" />
             <path d="M108 22 l-12 2 l5 10 Z" fill="#38BDF8" stroke="#0F172A" strokeWidth="1.5" />
           </svg>
+        </div>
+
+        {/* Crédito del autor: la interpretación de tortuga LOGO se debe a
+            Przemysław Prusinkiewicz (años 1980). Visible para mencionarlo o
+            mostrarlo sin necesidad de decirlo. */}
+        <div className="pixel-bevel-sm flex items-center gap-2 bg-[#FEF9C3] px-3 py-1.5">
+          <span className="font-pixel text-[10px] font-bold uppercase tracking-widest text-[#B45309]">
+            Idea de
+          </span>
+          <span className="font-display text-sm font-extrabold text-[#0F172A] sm:text-base">
+            Przemysław Prusinkiewicz
+          </span>
+          <span className="font-mono text-[11px] font-bold text-[#334155]">· años 1980</span>
         </div>
 
         <div className="grid w-full gap-4 sm:grid-cols-3">

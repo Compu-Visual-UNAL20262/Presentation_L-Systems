@@ -21,6 +21,12 @@ interface PixelPhotoProps {
    */
   mobileMaxH?: string
   /**
+   * Clase de altura máxima aplicada en TODOS los breakpoints (no solo móvil).
+   * Combinada con `aspect`, evita que una foto de aspecto alto crezca sin
+   * límite en desktop y empuje el slide fuera del viewport. Ej.: 'max-h-56'.
+   */
+  maxH?: string
+  /**
    * Modo "llenar altura": en lugar de imponer una relación de aspecto fija,
    * la figura ocupa el alto disponible de su contenedor flex (min-h-0) y la
    * imagen se ajusta con object-contain. Útil cuando el slide debe caber
@@ -37,6 +43,7 @@ export default function PixelPhoto({
   credit,
   aspect = '16 / 9',
   mobileMaxH,
+  maxH,
   fill = false,
   className = '',
 }: PixelPhotoProps) {
@@ -47,7 +54,7 @@ export default function PixelPhoto({
       <div
         className={`w-full overflow-hidden ${
           fill ? 'min-h-0 flex-1' : mobileMaxH ? `${mobileMaxH} sm:max-h-none` : ''
-        }`}
+        } ${maxH ?? ''}`}
         style={fill ? undefined : { aspectRatio: aspect }}
       >
         <img
