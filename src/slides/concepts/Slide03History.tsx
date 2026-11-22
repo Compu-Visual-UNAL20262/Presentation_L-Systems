@@ -16,7 +16,7 @@ export default function Slide03History() {
       title="1968 · Aristid Lindenmayer"
       subtitle="Se preguntó cómo crecen las algas filamentosas bajo el microscopio?"
     >
-      <Card accent="cyan" className="w-full max-w-2xl p-6 sm:p-8">
+      <Card accent="cyan" className="max-h-full w-full max-w-2xl overflow-hidden p-4 sm:p-6">
         <div className="mb-3 flex items-center justify-between border-b-2 border-[#0F172A] pb-2">
           <span className="font-pixel text-[10px] font-bold text-[#0369A1]">
             ANABAENA CATENULA · LAB 1968
@@ -35,6 +35,7 @@ export default function Slide03History() {
             credit="Foto microscópica"
             aspect="353 / 318"
             mobileMaxH="max-h-36"
+            maxH="max-h-[34vh] sm:max-h-56"
           />
 
           {/* Diagrama del filamento (células A que se dividen en B) */}
