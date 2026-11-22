@@ -3,6 +3,7 @@ import Sketch2Algae from '../sketches/Sketch2Algae'
 import Sketch3Koch from '../sketches/Sketch3Koch'
 import Sketch4Plant from '../sketches/Sketch4Plant'
 import Sketch5Forest from '../sketches/Sketch5Forest'
+import SketchClosing from '../sketches/SketchClosing'
 import PixelMeme from '../components/PixelMeme'
 import { TEAM } from '../data/slidesConfig'
 
@@ -98,13 +99,14 @@ export function Slide18StressSketch() {
 }
 
 /**
- * Slide 21 — Cierre: bosque completo con tarjeta 16-bit de cierre y emblema
- * final del equipo Gaymers.
+ * Slide 21 — Cierre: un bosque estocástico diverso que crece ante la audiencia
+ * (payoff de la charla: reglas simples → mundos infinitos). Tarjeta 16-bit de
+ * cierre y emblema del equipo Gaymers.
  */
 export function Slide21Closing() {
   return (
     <div className="relative h-full w-full">
-      <Sketch1Tree initialForestMode={true} autoStart={true} />
+      <SketchClosing />
       <div className="pointer-events-none absolute inset-x-0 top-12 flex flex-col items-center px-4 text-center sm:top-14">
         <div className="pixel-bevel bg-white/95 px-5 py-3 sm:px-7 sm:py-4">
           <span className="inline-block pixel-bevel-sm bg-[#FACC15] px-2.5 py-0.5 font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">

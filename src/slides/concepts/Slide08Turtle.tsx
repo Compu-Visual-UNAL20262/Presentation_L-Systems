@@ -2,7 +2,7 @@ import { ConceptFrame } from './shared'
 
 /**
  * Slide 08 — De Letras a Píxeles: La Tortuga.
- * Cursor vectorial SVG + 3 comandos: F (avanza), + (izquierda), - (derecha).
+ * Cursor vectorial SVG + 3 comandos: F (avanza), + (gira +δ), - (gira −δ).
  */
 
 function CommandCard({
@@ -52,13 +52,13 @@ export default function Slide08Turtle() {
               <path d="M24 10 l-6 8 M24 10 l6 8" stroke="#0F172A" strokeWidth="3.5" fill="none" />
             </svg>
           </CommandCard>
-          <CommandCard sym="+" label="izquierda" pillBg="bg-[#A3E635]">
+          <CommandCard sym="+" label="gira +δ" pillBg="bg-[#A3E635]">
             <svg viewBox="0 0 48 48" className="h-12 w-12">
               <path d="M34 34 A18 18 0 0 1 14 20" fill="none" stroke="#15803D" strokeWidth="3.5" />
               <path d="M14 20 l-2 9 l9 -2 Z" fill="#15803D" />
             </svg>
           </CommandCard>
-          <CommandCard sym="−" label="derecha" pillBg="bg-[#F472B6]">
+          <CommandCard sym="−" label="gira −δ" pillBg="bg-[#F472B6]">
             <svg viewBox="0 0 48 48" className="h-12 w-12">
               <path d="M14 34 A18 18 0 0 0 34 20" fill="none" stroke="#BE185D" strokeWidth="3.5" />
               <path d="M34 20 l2 9 l-9 -2 Z" fill="#BE185D" />

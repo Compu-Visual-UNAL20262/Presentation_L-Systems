@@ -28,7 +28,7 @@ Para evitar la monotonía de una exposición secuencial de 11 minutos por person
 | 05 | Los 3 Ingredientes | Alfabeto `{A,B}` · Axioma `A` · Reglas `A → AB · B → A` (valores visibles). | Presenta la receta básica. |
 | 06 | El Alga que Sabe Contar | Reglas `A → AB` / `B → A` arriba + filas A → AB → ABA → ABAAB (1,2,3,5). | Ancla la regla antes del Sketch 2. |
 | 07 | Sketch 2: Fibonacci emergente | Sketch interactivo: botón + GENERACIÓN (n=0..7) y contador Fibonacci. | Demo en vivo. |
-| 08 | De Letras a Píxeles: La Tortuga | Cursor + F (avanza), + (izquierda), − (derecha). | Introduce la tortuga. |
+| 08 | De Letras a Píxeles: La Tortuga | Cursor + F (avanza), + (gira +δ), − (gira −δ). | Introduce la tortuga. |
 | 09 | Sketch 3: Copo de Koch | Mini-editor (iteraciones/ángulo) + lienzo. **Arranca pequeño (iter 1, 60°).** | Demo en vivo. |
 | 10 | El Superpoder de Recordar: \[ y \] | Diagrama de pila LIFO con pin de ubicación. | Diagrama clave de ramificación. |
 | 11 | Crecer por Tallos vs. por Yemas | Aristas (F→…) vs. nodos (X→…), con reglas visibles. | Contraste de reescritura. |
@@ -41,13 +41,14 @@ Para evitar la monotonía de una exposición secuencial de 11 minutos por person
 | 18 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (**arranca en 4**). | Demo en vivo. |
 | 19 | Del Plano 2D al Mundo 3D | 3 ejes de rotación + línea→cilindro + **render real** (wireframe → malla con hojas). | Explica geometría 3D. |
 | 20 | Mundos Infinitos en Pocos Kilobytes | **Capturas reales**: flora de videojuego + ciudad procedural (Parish & Müller) + agronomía/arte. | Cierre e impacto real. |
-| 21 | Cierre: Reglas Simples, Mundos Infinitos | Sketch 1 en modo bosque (**auto-arranca**) + emblema Gaymers. | Conclusión final. |
+| 21 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. | Conclusión final. |
 
 # **Sección 3: Los 5 Sketches Interactivos (embebidos en la app)**
 
 Los 5 sketches ya están integrados como slides interactivos con controles en pantalla; **no hay que escribir código ni abrir pestañas**. Estados iniciales y controles:
 
-1. **Sketch 1 (Slide 01 / 21):** Árbol frondoso. En el Slide 01 crece al hacer **clic** o pulsar **ESPACIO**; botón ▶ REPLAY y toggle 1 ÁRBOL / BOSQUE (3). En el Slide 21 **auto-arranca** en modo bosque.
+1. **Sketch 1 (Slide 01):** Árbol frondoso. En el Slide 01 crece al hacer **clic** o pulsar **ESPACIO**; botón ▶ REPLAY y toggle 1 ÁRBOL / BOSQUE (3).
+6. **Sketch de Cierre (Slide 21):** Bosque estocástico **diverso** (cada árbol único) que **auto-arranca** y crece en ola de izquierda a derecha; botón ▶ REPLAY. La cantidad de árboles se adapta al ancho (4 en móvil, 6-8 en proyector).
 2. **Sketch 2 (Slide 07):** Alga y Fibonacci. Botón **+ GENERACIÓN** (n=0 a 7) y **REINICIAR**; contador de letras a la derecha.
 3. **Sketch 3 (Slide 09):** Copo de Koch. **Arranca pequeño y ligero** (`iteraciones=1`, `angulo=60`) para mostrar la evolución paso a paso; botones +/−, presets 60° KOCH / 85° MUTACIÓN y ▶ REPETIR TRAZO.
 4. **Sketch 4 (Slide 12):** Planta ramificada. Sliders de ángulo (δ), longitud e iteraciones + presets **CIPRÉS 15°** y **ARBUSTO 35°**. En móvil, botón ⚙ CONTROLES para colapsar el panel.
@@ -60,11 +61,11 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 ## **\[00:00 – 02:00 \| Nicolas Bolaños\] — \[EN VIVO: SKETCH 1 (SLIDE 01)\] → \[SLIDE 02\]**
 
 * **Acción en pantalla:** En el Slide 01 (árbol a pantalla completa) haz **clic en el lienzo** o pulsa **ESPACIO** antes de saludar. El árbol crece frente a todos en 4 segundos. (El botón ▶ REPLAY relanza la animación cuando quieras.)  
-* **Guion:** "Imaginen que tienen que entregar mañana un videojuego con un bosque de diez mil árboles. Si se sientan en Blender a modelar rama por rama y hoja por hoja, no duermen en seis meses y el archivo pesaría gigabytes. Lo que acaban de ver en pantalla no es un modelo 3D guardado ni una imagen: son literalmente cuatro líneas de texto ejecutándose en tiempo real. Hoy vamos a entender cómo funciona esa magia detrás de los L-Systems o Sistemas de Lindenmayer: el arte de programar el crecimiento en lugar de esculpir objetos."
+* **Guion:** "Imaginen que tienen que entregar mañana un videojuego con un bosque de diez mil árboles. Si se sientan en Blender a modelar rama por rama y hoja por hoja, no duermen en seis meses y el archivo pesaría gigabytes. Lo que acaban de ver en pantalla no es un modelo 3D guardado ni una imagen: son literalmente **dos reglas de reescritura** ejecutándose en tiempo real. Hoy vamos a entender cómo funciona esa magia detrás de los L-Systems o Sistemas de Lindenmayer: el arte de programar el crecimiento en lugar de esculpir objetos. Y esto no es solo para videojuegos: es cómo la biología, la arquitectura y el cine generan complejidad infinita a partir de reglas simples."
 
 ## **\[02:00 – 04:30 \| Ariadna\] — \[SLIDE 03\]**
 
-* **Guion:** "Lo curioso es que esta herramienta fundamental de la computación visual no nació en un laboratorio de gráficos por computadora, sino en un laboratorio de biología. En 1968, un biólogo húngaro llamado Aristid Lindenmayer estudiaba algo aparentemente sencillo: cómo crecen las algas filamentosas bajo el microscopio. Él notó que las plantas no se construyen como una casa donde pones un ladrillo encima de otro, sino siguiendo instrucciones celulares repetitivas. Lindenmayer inventó un lenguaje para escribir esas recetas biológicas, y décadas después los artistas digitales descubrieron que ese mismo lenguaje servía para cultivar mundos virtuales enteros."
+* **Guion:** "Lo curioso es que esta herramienta fundamental de la computación visual no nació en un laboratorio de gráficos por computadora, sino en un laboratorio de biología. En 1968, un biólogo húngaro llamado Aristid Lindenmayer estudiaba algo aparentemente sencillo: cómo crecen las algas filamentosas bajo el microscopio. Lo que ven en pantalla es precisamente eso: el alga real *Anabaena*, dividiéndose célula a célula, igual que la miraba Lindenmayer. Él notó que las plantas no se construyen como una casa donde pones un ladrillo encima de otro, sino siguiendo instrucciones celulares repetitivas. Lindenmayer inventó un lenguaje para escribir esas recetas biológicas, y décadas después los artistas digitales descubrieron que ese mismo lenguaje servía para cultivar mundos virtuales enteros."
 
 ## **\[04:30 – 07:00 \| Farid Ardila\] — \[SLIDE 04\]**
 
@@ -79,7 +80,7 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 ## **\[09:30 – 11:30 \| Nicolas Bolaños\] — \[EN VIVO: SKETCH 2 (SLIDE 07)\]**
 
 * **Acción en pantalla:** Navega al Slide 07 y pulsa el botón **+ GENERACIÓN** (o clic en el lienzo) para avanzar de n=0 hasta n=7. El botón **REINICIAR** vuelve a n=0. Nota: el Slide 05 ya muestra en pantalla el alfabeto `{A, B}`, el axioma `A` y las reglas `A → AB · B → A`, y el Slide 06 repite las reglas sobre la secuencia.  
-* **Guion:** "Veámoslo correr en vivo. Empezamos con A. En el primer paso, A se convierte en AB. En el segundo paso, recordemos que todo ocurre al tiempo: la A se vuelve AB y la B se vuelve A, así que obtenemos ABA. Si sigo advancing, miren los números de la derecha: 1, 2, 3, 5, 8, 13, 21... Nadie programó aquí la serie de Fibonacci, pero emerge sola de dos reglas diminutas. Esa es la esencia de la complejidad emergente en computación visual."
+* **Guion:** "Veámoslo correr en vivo. Empezamos con A. En el primer paso, A se convierte en AB. En el segundo paso, recordemos que todo ocurre al tiempo: la A se vuelve AB y la B se vuelve A, así que obtenemos ABA. Si sigo avanzando, miren los números de la derecha: 1, 2, 3, 5, 8, 13, 21, 34... Nadie programó aquí la serie de Fibonacci, pero emerge sola de dos reglas diminutas. Esa es la esencia de la complejidad emergente en computación visual."
 
 ## **\[11:30 – 14:00 \| Angel Beltran\] — \[SLIDE 08\]**
 
@@ -90,7 +91,7 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 ## **\[14:00 – 16:30 \| Ariadna\] — \[SLIDE 08\] → \[EN VIVO: SKETCH 3 (SLIDE 09)\]**
 
 * **Acción en pantalla:** El Slide 09 **arranca pequeño y ligero**: `iteraciones = 1`, `ángulo = 60` (un triángulo). Con los botones **+/−** sube iteraciones a 2, 3 y 4 para que la audiencia vea cómo evoluciona el copo paso a paso; luego pulsa el preset **85° MUTACIÓN**. El botón ▶ REPETIR TRAZO reanima el recorrido de la tortuga.  
-* **Guion:** "En los años ochenta, Przemyslaw Prusinkiewicz tuvo una idea brillante: conectar el texto del L-System a una tortuga virtual con un lápiz en la cola. Si la tortuga lee una F, camina hacia adelante dibujando una línea; si lee un \+, gira a la izquierda; si lee un \-, gira a la derecha. Miren lo que pasa en p5.js con una sola regla: avanza, gira izquierda, avanza, gira derecha, avanza. En una iteración es un pico; en cuatro iteraciones es el famoso copo de nieve de Koch. Y si aquí mismo cambio el ángulo de 60 a 85 grados, la geometría muta al instante."
+* **Guion:** "En los años ochenta, Przemyslaw Prusinkiewicz tuvo una idea brillante: adaptar la 'tortuga' del lenguaje LOGO a los L-Systems, conectando el texto a una tortuga virtual con un lápiz en la cola. Si la tortuga lee una F, camina hacia adelante dibujando una línea; si lee un \+, gira hacia un lado; si lee un \-, gira hacia el otro. Miren lo que pasa con una sola regla aplicada a un triángulo: en la iteración cero es un triángulo; con cada iteración cada lado se quiebra en un pico, y en cuatro iteraciones tenemos el famoso copo de nieve de Koch. Y si aquí mismo cambio el ángulo de 60 a 85 grados, la geometría muta al instante."
 
 ## **\[16:30 – 19:30 \| Farid Ardila\] — \[SLIDE 10\] → \[SLIDE 11\]**
 
@@ -99,7 +100,7 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 ## **\[19:30 – 22:30 \| Nicolas Bolaños\] — \[EN VIVO: SKETCH 4 (SLIDE 12)\]**
 
 * **Acción en pantalla:** El Slide 12 arranca en un estado simple (iteración baja) para mostrar la planta desde su forma más básica. Usa los **presets visibles**: pulsa **CIPRÉS 15°** (silueta alta y cerrada) y luego **ARBUSTO 35°** (frondoso). Después mueve el slider de **Iteraciones n** hacia arriba para que cada ramita hija repita la arquitectura de la madre. En móvil, el botón **⚙ CONTROLES** oculta/muestra el panel.  
-* **Guion:** "Probemos esos corchetes en vivo. Aquí tenemos una regla con tres pares de corchetes, o sea, tres bifurcaciones por ciclo. Miren qué ocurre cuando muevo el slider del ángulo de giro: con 15 grados tenemos un ciprés cerrado y alto; si lo abro a 35 grados, se transforma en un arbusto frondoso; y si subo las iteraciones, cada ramita hija repite exactamente la misma arquitectura de su madre."
+* **Guion:** "Probemos esos corchetes en vivo. Aquí la regla tiene tres pares de corchetes, es decir, tres ramas laterales que salen del tallo en cada ciclo. Miren qué ocurre cuando muevo el slider del ángulo de giro: con 15 grados tenemos un ciprés cerrado y alto; si lo abro a 35 grados, se transforma en un arbusto frondoso; y si subo las iteraciones, cada ramita hija repite exactamente la misma arquitectura de su madre."
 
 # **Acto 4: De Clones Perfectos a Naturaleza Viva — Los 5 Niveles (22:30 – 31:30)**
 
@@ -110,7 +111,7 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 ## **\[25:00 – 27:30 \| Ariadna\] — \[EN VIVO: SKETCH 5 (SLIDE 15)\]**
 
 * **Acción en pantalla:** El Slide 15 muestra 5 árboles en iteración 4. Pulsa **⟳ REGENERAR BOSQUE** varias veces para que las 5 siluetas cambien de forma orgánica en cada clic.  
-* **Guion:** "Aquí tenemos exactamente la misma especie de árbol, pero ahora la regla dice: 40 % de probabilidad de ramificar a la izquierda, 40 % a la derecha y 20 % de seguir recto. Cada vez que pulso regenerar, nace un bosque completamente natural donde ningún árbol repite la silueta del vecino."
+* **Guion:** "Aquí tenemos exactamente la misma especie de árbol, pero ahora la regla ya no es única: en cada punta lanzamos un dado. El 80 % de las veces la rama se bifurca en dos, y el 20 % restante crece más recto. Cada vez que pulso regenerar, nace un bosque completamente natural donde ningún árbol repite la silueta del vecino."
 
 ## **\[27:30 – 29:30 \| Farid Ardila\] — \[SLIDE 15\]**
 
@@ -149,8 +150,8 @@ Los 5 sketches ya están integrados como slides interactivos con controles en pa
 
 * **Guion:** "Incluso la ciencia pura los utiliza: en agronomía existen modelos virtuales de cultivos que combinan L-Systems con simulación de luz solar para predecir cuánto va a producir una cosecha antes de sembrar una sola semilla. Y en el arte generativo, los mismos símbolos de giro y avance se traducen a notas y duraciones para componer música algorítmica con estructura fractal."
 
-## **\[43:45 – 45:00 \| Ariadna\] — \[EN VIVO: SKETCH 1 BOSQUE (SLIDE 21)\]**
+## **\[43:45 – 45:00 \| Ariadna\] — \[EN VIVO: BOSQUE DE CIERRE (SLIDE 21)\]**
 
-* **Acción en pantalla:** El Slide 21 (cierre) **arranca solo**: lanza automáticamente la animación del bosque de 3 árboles. El botón ▶ REPLAY la relanza si quieres repetirla durante la conclusión.  
-* **Guion:** "Al final, la lección más poderosa de los L-Systems para la computación visual es un cambio de mentalidad: dejar de pensar en los objetos como formas estáticas que tenemos que dibujar píxel a píxel, y empezar a verlos como sistemas vivos gobernados por reglas simples. Con un alfabeto diminuto, una semilla y la capacidad de recordar de dónde venimos, podemos hacer que la computadora cultive mundos enteros. Muchas gracias."
+* **Acción en pantalla:** El Slide 21 (cierre) **arranca solo**: un **bosque estocástico diverso** crece ante la audiencia en una ola de izquierda a derecha, donde **cada árbol es único** (misma gramática + azar). Es el cierre visual de la charla: lo que empezó como un árbol ahora es un ecosistema entero. El botón ▶ REPLAY vuelve a hacer crecer el bosque si quieres repetirlo durante la conclusión.  
+* **Guion:** "Al final, la lección más poderosa de los L-Systems para la computación visual es un cambio de mentalidad: dejar de pensar en los objetos como formas estáticas que tenemos que dibujar píxel a píxel, y empezar a verlos como sistemas vivos gobernados por reglas simples. Miren la pantalla: empezamos esta charla con un solo árbol, y ahora, con el mismo puñado de reglas y una pizca de azar, nace un bosque entero donde ningún árbol se repite. Con un alfabeto diminuto, una semilla y la capacidad de recordar de dónde venimos, podemos hacer que la computadora cultive mundos enteros. Muchas gracias."
 

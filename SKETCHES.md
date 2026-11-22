@@ -4,16 +4,17 @@
 
 | Sketch | Tema y Propósito en la Charla | Responsable de Desarrollo | Quién lo Opera en Vivo |
 | :---- | :---- | :---- | :---- |
-| **Sketch 1** | Gancho inicial: árbol frondoso animado rama por rama | **Farid Ardila** | Nicolas Bolaños (Acto 1\) y Ariadna (Acto 6\) |
+| **Sketch 1** | Gancho inicial: árbol frondoso animado rama por rama | **Farid Ardila** | Nicolas Bolaños (Acto 1\) |
 | **Sketch 2** | Crecimiento del alga *Anabaena* y emergencia de Fibonacci | **Ariadna***(selección aleatoria)* | Nicolas Bolaños (Acto 2\) |
 | **Sketch 3** | Tortuga LOGO y mutación del copo de nieve de Koch | **Nicolas Bolaños** | Ariadna (Acto 3\) |
 | **Sketch 4** | Planta ramificada con corchetes \[ \] y *sliders* en vivo | **Ariadna** | Nicolas Bolaños (Acto 3\) |
 | **Sketch 5** | Bosque estocástico (probabilidades) \+ prueba de estrés FPS | **Angel Beltran** | Ariadna (Actos 4 y 5\) |
+| **Sketch Cierre** | Bosque estocástico **diverso** que crece en ola (payoff final) | **Equipo** | Ariadna (Acto 6\) |
 
-# **Sketch 1: Árbol Frondoso Animado (Gancho Inicial y Cierre)**
+# **Sketch 1: Árbol Frondoso Animado (Gancho Inicial)**
 
 * **Responsable de código:** Farid Ardila  
-* **Momento en el guion:** Acto 1 (00:00 – 02:00, antes de saludar, tras la pantalla negra de Slide 01\) y Acto 6 (43:45 – 45:00, cierre final).
+* **Momento en el guion:** Acto 1 (00:00 – 02:00, antes de saludar, sobre el Slide 01). Crece con **clic** o **ESPACIO**.
 
 ## **1\. Reglas del L-System (D0L-System con Reescritura de Nodos)**
 
@@ -215,3 +216,25 @@ let angulo = 60;
 * **En el Acto 4 (25:00):** Con las iteraciones en 4, el expositor pulsa *"Regenerar Bosque"* varias veces para mostrar cómo los 5 árboles cambian de forma orgánica en cada clic.
 
 **En el Acto 5 (31:30):** El modo estrés **arranca en iteración 4** (igual que el estocástico); el expositor sube el selector 4 $\rightarrow$ 5 $\rightarrow$ 6 $\rightarrow$ 7 (y opcionalmente 8), señalando en pantalla cómo el contador de segmentos crece exponencialmente y cómo el indicador de FPS pasa de verde a rojo.
+# **Sketch de Cierre: Bosque Estocástico Diverso (Payoff Final)**
+
+* **Responsable de código:** Equipo
+* **Momento en el guion:** Acto 6 (43:45 – 45:00, cierre final, sobre el Slide 21).
+
+## **1\. Reglas del L-System (S0L-System Estocástico)**
+
+* **Alfabeto ($V$):** { X, F, \+, \-, \[, \] }
+* **Axioma ($\omega$):** "X"
+* **Reglas estocásticas ($P$):** las mismas del Sketch 5 — F \-\> FF; y para X, 40 % `F[-X][+X]FX`, 40 % `F[+X][-X]FX`, 20 % `FF[+X]X`.
+* **Iteraciones ($n$):** 5. Cada árbol se expande con su propia semilla aleatoria, por lo que **todos son distintos**.
+
+## **2\. Diseño e Implementación en p5.js**
+
+* **Bosque diverso y responsivo:** la cantidad de árboles se adapta al ancho (4 en móvil < 520 px, 6 en tablets, 8 en proyector). Cada árbol tiene su propio ángulo (18–27°), inclinación y escala.
+* **Ola de crecimiento:** los árboles arrancan su crecimiento escalonados de izquierda a derecha (desfase por `waveOrder`), de modo que el bosque "cobra vida" durante la conclusión.
+* **Auto-arranque:** no requiere interacción; empieza a crecer solo al montar el slide. Botón ▶ REPLAY (y clic / ESPACIO) para relanzar la ola.
+* **Estética 16-bit coherente:** cielo celeste, nubes pixel, suelo de pasto + tierra, tronco marrón→oliva por profundidad y hojas verde esmeralda/lima.
+
+## **3\. Qué se Planea Mostrar en Vivo**
+
+* Es el cierre visual de la charla: lo que empezó como **un** árbol en el Acto 1 se convierte en un **ecosistema entero** generado por las mismas reglas simples + azar. Refuerza la tesis "reglas simples → mundos infinitos" justo mientras se da la conclusión final.
