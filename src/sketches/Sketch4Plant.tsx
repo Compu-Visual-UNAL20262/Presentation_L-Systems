@@ -159,18 +159,18 @@ function Slider({
 }
 
 export default function Sketch4Plant() {
-  const [angle, setAngle] = useState(15) // ciprés
+  const [angle, setAngle] = useState(35)
   const [len, setLen] = useState(16)
-  const [iterations, setIterations] = useState(4)
+  const [iterations, setIterations] = useState(1)
 
   // La cadena se memoiza por iteraciones: solo se reexpande al cambiar n.
   const path = useMemo(() => expand(iterations), [iterations])
 
   const paramsRef = useRef<PlantParams>({
-    angle: 15,
+    angle: 35,
     len: 16,
     path,
-    iterations: 4,
+    iterations: 1,
   })
 
   // Reflejar valores en el ref vivo cada render (sin remontar p5).
@@ -187,7 +187,7 @@ export default function Sketch4Plant() {
     return c
   }, [path])
 
-  // Preset rápido con tecla 'C' (ciprés) para volver al estado inicial.
+  // Preset rápido con tecla 'C' para mostrar el ciprés.
   useEffect(() => onSlideKey((e) => {
     if (e.key === 'c' || e.key === 'C') {
       setAngle(15)
@@ -203,44 +203,53 @@ export default function Sketch4Plant() {
       {/* Panel de control 16-bit de día (ignora swipe) */}
       <div
         data-no-swipe="true"
-        className="absolute right-3 top-14 z-20 w-60 space-y-3 pixel-bevel
-          bg-white p-4 sm:top-16"
+        className="absolute right-3 top-14 z-20 flex w-60 flex-col gap-2 sm:top-16"
       >
-        <div className="flex items-center justify-between border-b-2 border-[#0F172A] pb-1.5">
-          <span className="font-pixel text-[10px] font-bold text-[#0F172A]">
-            ★ LAB CORCHETES [ ]
-          </span>
-          <span className="font-mono text-[10px] font-bold text-[#BE185D]">LIVE</span>
+        <div className="space-y-3 pixel-bevel bg-white p-4">
+          <div className="flex items-center justify-between border-b-2 border-[#0F172A] pb-1.5">
+            <span className="font-pixel text-[10px] font-bold text-[#0F172A]">
+              ★ LAB CORCHETES [ ]
+            </span>
+            <span className="font-mono text-[10px] font-bold text-[#BE185D]">LIVE</span>
+          </div>
+          <Slider
+            label="Ángulo δ"
+            value={angle}
+            display={`${angle}°`}
+            min={ANGLE_MIN}
+            max={ANGLE_MAX}
+            step={1}
+            onChange={setAngle}
+          />
+          <Slider
+            label="Longitud de paso"
+            value={len}
+            display={`${len} px`}
+            min={LEN_MIN}
+            max={LEN_MAX}
+            step={1}
+            onChange={setLen}
+          />
+          <Slider
+            label="Iteraciones n"
+            value={iterations}
+            display={String(iterations)}
+            min={ITER_MIN}
+            max={ITER_MAX}
+            step={1}
+            onChange={setIterations}
+          />
+          <div className="border-t-2 border-[#0F172A] pt-2 text-center font-mono text-xs font-bold text-[#0F172A]">
+            Segmentos: {segments.toLocaleString('es')}
+          </div>
         </div>
-        <Slider
-          label="Ángulo δ"
-          value={angle}
-          display={`${angle}°`}
-          min={ANGLE_MIN}
-          max={ANGLE_MAX}
-          step={1}
-          onChange={setAngle}
-        />
-        <Slider
-          label="Longitud de paso"
-          value={len}
-          display={`${len} px`}
-          min={LEN_MIN}
-          max={LEN_MAX}
-          step={1}
-          onChange={setLen}
-        />
-        <Slider
-          label="Iteraciones n"
-          value={iterations}
-          display={String(iterations)}
-          min={ITER_MIN}
-          max={ITER_MAX}
-          step={1}
-          onChange={setIterations}
-        />
-        <div className="border-t-2 border-[#0F172A] pt-2 text-center font-mono text-xs font-bold text-[#0F172A]">
-          Segmentos: {segments.toLocaleString('es')}
+        <div className="pixel-bevel bg-white p-3">
+          <div className="mb-1.5 text-center font-pixel text-[10px] font-bold uppercase text-[#0F172A]">
+            Regla L-System
+          </div>
+          <code className="block text-center font-mono text-lg font-bold text-[#0369A1] sm:text-xl">
+            {RULE}
+          </code>
         </div>
       </div>
     </div>

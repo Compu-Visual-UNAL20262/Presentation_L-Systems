@@ -67,12 +67,14 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
       const gen = paramsRef.current.gen
       const rows = gen + 1
 
-      const padX = p.width * 0.04
+      const cardW = p.width * 0.72
+      const cardX = (p.width - cardW) / 2
+      const padX = Math.min(20, cardW * 0.04)
       // Anchos de columna: izquierda y derecha fijas, centro flexible.
-      const colLeft = Math.min(70, p.width * 0.16)
-      const colRight = Math.min(130, p.width * 0.26)
-      const centerX = padX + colLeft
-      const centerW = p.width - padX * 2 - colLeft - colRight
+      const colLeft = Math.min(70, cardW * 0.16)
+      const colRight = Math.min(130, cardW * 0.26)
+      const centerX = cardX + padX + colLeft
+      const centerW = cardW - padX * 2 - colLeft - colRight
 
       const topY = Math.max(92, p.height * 0.13)
       const availH = p.height - topY - p.height * 0.08
@@ -97,7 +99,7 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
         p.strokeWeight(isCurrent ? 2.2 : 1.5)
         p.fill(isCurrent ? '#FFFFFF' : '#F0F9FF')
         const cardH = Math.min(rowH * 0.84, 52)
-        p.rect(padX * 0.65, y - cardH / 2, p.width - padX * 1.3, cardH, 4)
+        p.rect(cardX, y - cardH / 2, cardW, cardH, 4)
 
         // ── Columna izquierda: n = X ──
         p.noStroke()
@@ -105,7 +107,7 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
         p.textStyle(p.BOLD)
         p.textSize(Math.min(16, rowH * 0.42))
         p.textAlign(p.LEFT, p.CENTER)
-        p.text(`n = ${i}`, padX, y)
+        p.text(`n = ${i}`, cardX + padX, y)
 
         // ── Columna central: cápsulas con borde oscuro nítido ──
         const totalW = str.length * capSize + (str.length - 1) * capGap
@@ -134,14 +136,14 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
         p.rectMode(p.CORNER)
         const badgeW = Math.min(118, colRight * 0.92)
         const badgeH = Math.min(cardH * 0.72, 30)
-        p.rect(p.width - padX - badgeW, y - badgeH / 2, badgeW, badgeH, 4)
+        p.rect(cardX + cardW - padX - badgeW, y - badgeH / 2, badgeW, badgeH, 4)
 
         p.noStroke()
         p.fill(isCurrent ? INK : EMERALD)
         p.textStyle(p.BOLD)
         p.textAlign(p.CENTER, p.CENTER)
         p.textSize(Math.min(14, rowH * 0.38))
-        p.text(`Letras: ${str.length}`, p.width - padX - badgeW / 2, y)
+        p.text(`Letras: ${str.length}`, cardX + cardW - padX - badgeW / 2, y)
         p.textStyle(p.NORMAL)
       }
 
@@ -179,10 +181,9 @@ export default function Sketch2Algae() {
   return (
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
-
       <div
         data-no-swipe="true"
-        className="absolute right-4 top-14 z-20 flex flex-row items-center gap-2 sm:top-16"
+        className="absolute right-4 top-14 z-20 flex flex-col items-end gap-2 sm:top-16"
       >
         <button
           type="button"
@@ -190,7 +191,7 @@ export default function Sketch2Algae() {
           disabled={gen >= MAX_GEN}
           className="arcade-btn disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          + GENERACIÓN
+          +     GENERACIÓN
         </button>
         <button type="button" onClick={reset} className="arcade-btn">
           REINICIAR

@@ -17,7 +17,9 @@ import type { SketchFn } from '../components/P5Canvas'
  */
 
 const AXIOM = 'X'
-const ANGLE_DEG = 22
+const TREE_SCALES = [0.78, 1.04, 0.88, 1.12, 0.82]
+const TREE_ANGLES = [19, 25, 21, 27, 20]
+const TREE_LEANS = [-5, 3, -2, 6, -4]
 
 const BG = '#C7ECFF'
 const GROUND_GRASS = '#22C55E'
@@ -60,6 +62,42 @@ function countF(s: string): number {
   return c
 }
 
+function measureTreeHeight(path: string, angle: number, lean: number): number {
+  let x = 0
+  let y = 0
+  let heading = -90 + lean
+  let minY = 0
+  const stack: { x: number; y: number; heading: number }[] = []
+
+  for (const c of path) {
+    switch (c) {
+      case 'F':
+        x += Math.cos((heading * Math.PI) / 180)
+        y += Math.sin((heading * Math.PI) / 180)
+        minY = Math.min(minY, y)
+        break
+      case '+':
+        heading += angle
+        break
+      case '-':
+        heading -= angle
+        break
+      case '[':
+        stack.push({ x, y, heading })
+        break
+      case ']': {
+        const state = stack.pop()
+        if (state) ({ x, y, heading } = state)
+        break
+      }
+      default:
+        break
+    }
+  }
+
+  return Math.max(1, -minY)
+}
+
 interface ForestParams {
   trees: string[]
   iterations: number
@@ -70,33 +108,39 @@ interface ForestParams {
 function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
   return (p: p5, size: { width: number; height: number }) => {
     let telemetryTick = 0
+    let measuredTrees: string[] | null = null
+    let measuredHeight = 0
+    let fittedStepLength = 0
 
     p.setup = () => {
       p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
     }
 
-    const drawTree = (path: string, len: number, heavy: boolean) => {
+    const drawTree = (path: string, len: number, heavy: boolean, angle: number) => {
       // Dibujo minimalista: solo líneas y brotes, sin alpha ni sombras, para
       // que el coste sea representativo del número de segmentos.
       p.stroke(BRANCH)
-      p.strokeWeight(heavy ? 1.1 : 1.7)
+      let depth = 0
       for (const c of path) {
         switch (c) {
           case 'F':
+            p.strokeWeight(Math.max(1.1, (heavy ? 2.1 : 2.8) - depth * 0.18))
             p.line(0, 0, 0, -len)
             p.translate(0, -len)
             break
           case '+':
-            p.rotate(p.radians(ANGLE_DEG))
+            p.rotate(p.radians(angle))
             break
           case '-':
-            p.rotate(p.radians(-ANGLE_DEG))
+            p.rotate(p.radians(-angle))
             break
           case '[':
             p.push()
+            depth++
             break
           case ']':
             p.pop()
+            depth--
             break
           default:
             break
@@ -105,26 +149,36 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
     }
 
     // Brotes dibujados en una segunda pasada ligera (se omiten en n=8).
-    const drawBuds = (path: string, len: number) => {
+    const drawBuds = (path: string, len: number, angle: number) => {
       p.stroke('#0F172A')
       p.strokeWeight(0.9)
       p.fill(BUD)
+      const leafSize = Math.max(4, Math.min(12, len * 0.5))
       for (const c of path) {
         switch (c) {
           case 'F':
             p.translate(0, -len)
             break
           case '+':
-            p.rotate(p.radians(ANGLE_DEG))
+            p.rotate(p.radians(angle))
             break
           case '-':
-            p.rotate(p.radians(-ANGLE_DEG))
+            p.rotate(p.radians(-angle))
             break
           case '[':
             p.push()
             break
           case ']':
-            p.circle(0, 0, 4.4)
+            p.noStroke()
+            p.rectMode(p.CORNER)
+            p.fill('#166534')
+            p.rect(-leafSize, -leafSize * 0.3, leafSize, leafSize)
+            p.rect(leafSize * 0.35, -leafSize * 1.1, leafSize, leafSize)
+            p.fill('#22C55E')
+            p.rect(-leafSize * 0.2, -leafSize * 1.15, leafSize, leafSize)
+            p.rect(leafSize * 0.8, -leafSize * 0.25, leafSize, leafSize)
+            p.fill('#A3E635')
+            p.rect(-leafSize * 0.7, -leafSize * 0.95, leafSize * 0.65, leafSize * 0.65)
             p.pop()
             break
           default:
@@ -150,22 +204,46 @@ function makeSketch(paramsRef: { current: ForestParams }): SketchFn {
       p.strokeWeight(2.5)
       p.line(0, groundY, p.width, groundY)
 
-      // Longitud escalada por iteraciones y altura del lienzo.
-      const len = Math.pow(0.5, iterations) * p.height * 0.9
+      if (trees !== measuredTrees || p.height !== measuredHeight) {
+        measuredTrees = trees
+        measuredHeight = p.height
+        let tallestTree = 1
+        for (let i = 0; i < trees.length; i++) {
+          const angle = TREE_ANGLES[i % TREE_ANGLES.length]
+          const lean = TREE_LEANS[i % TREE_LEANS.length]
+          const scale = TREE_SCALES[i % TREE_SCALES.length]
+          tallestTree = Math.max(
+            tallestTree,
+            measureTreeHeight(trees[i], angle, lean) * scale,
+          )
+        }
+        const topMargin = p.height * 0.18
+        const foliageMargin = 20
+        fittedStepLength = Math.max(0, (groundY - topMargin - foliageMargin) / tallestTree)
+      }
 
-      // 5 árboles distribuidos; el espaciado se adapta al ancho (móvil incl.).
+      // Reserva espacio para los controles y la insignia inferior derecha.
       const n = trees.length || 5
+      const leftInset = Math.min(240, p.width * 0.34)
+      const rightInset = Math.min(230, p.width * 0.33)
       for (let i = 0; i < n; i++) {
-        const x = (p.width * (i + 0.5)) / n
+        const x = n === 1
+          ? p.width / 2
+          : leftInset + ((p.width - leftInset - rightInset) * i) / (n - 1)
+        const treeLen = fittedStepLength * TREE_SCALES[i % TREE_SCALES.length]
+        const angle = TREE_ANGLES[i % TREE_ANGLES.length]
+        const lean = TREE_LEANS[i % TREE_LEANS.length]
         p.push()
         p.translate(x, groundY)
-        drawTree(trees[i], len, heavy)
+        p.rotate(p.radians(lean))
+        drawTree(trees[i], treeLen, heavy, angle)
         p.pop()
         // Brotes solo cuando no estamos en el modo pesado (n < 8).
         if (!heavy) {
           p.push()
           p.translate(x, groundY)
-          drawBuds(trees[i], len)
+          p.rotate(p.radians(lean))
+          drawBuds(trees[i], treeLen, angle)
           p.pop()
         }
       }
@@ -269,7 +347,7 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
       {/* Controles (esquina inferior izquierda, sobre el suelo) */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-4 z-20 flex flex-col gap-2"
+        className="absolute bottom-16 left-4 z-20 flex flex-col gap-2 pixel-bevel bg-white/95 p-2"
       >
         <button type="button" onClick={regenerate} className="arcade-btn">
           ⟳ REGENERAR BOSQUE

@@ -21,11 +21,11 @@ import type { SketchFn } from '../components/P5Canvas'
 
 const AXIOM = 'X'
 const RULES: Record<string, string> = {
-  X: 'F+[[X]-X]-F[-FX]+X',
+  X: 'FF-[+FFX-X]+[+FFX]-[-FFX+X]',
   F: 'FF',
-}
-const ITERATIONS = 5
-const ANGLE_DEG = 25
+};
+const ITERATIONS = 4
+const ANGLE_DEG = 20
 
 const BARK = '#5C3A21'
 const OLIVE = '#365314'
@@ -110,6 +110,7 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
   const bounds = measureBounds(finalString)
   return (p: p5, size: { width: number; height: number }) => {
     let charLimit = 0
+    let started = false
     let lastReplayToken = paramsRef.current.replayToken
 
     const restart = () => {
@@ -124,7 +125,10 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
     // Clic y ESPACIO reinician la animación.
     p.mousePressed = () => restart()
     p.keyPressed = () => {
-      if (p.key === ' ') restart()
+      if (p.key === ' ') {
+        started = true
+        restart()
+      }
       if (p.key === 'b' || p.key === 'B') {
         paramsRef.current.forest = !paramsRef.current.forest
         restart()
@@ -230,10 +234,12 @@ function makeSketch(finalString: string, paramsRef: { current: TreeParams }): Sk
       drawPixelCloud(p.width * 0.82, p.height * 0.2, 0.95)
 
       // Avance del crecimiento: duración constante ~4 s sin importar el largo.
-      charLimit = Math.min(
-        finalString.length,
-        charLimit + Math.ceil(finalString.length / GROW_FRAMES),
-      )
+      if (started) {
+        charLimit = Math.min(
+          finalString.length,
+          charLimit + Math.ceil(finalString.length / GROW_FRAMES),
+        )
+      }
 
       const forest = paramsRef.current.forest
       const baseY = p.height - p.height * 0.08
