@@ -1,4 +1,4 @@
-# Créditos de imágenes
+# Créditos de imágenes 
 
 Las imágenes raster usadas en la presentación (carpeta `src/assets/`) provienen de
 fuentes académicas abiertas o de dominio público / licencia libre. Atribución:
