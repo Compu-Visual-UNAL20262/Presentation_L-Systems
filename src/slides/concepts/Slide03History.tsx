@@ -7,7 +7,12 @@ import { ConceptFrame, Card } from './shared'
 export default function Slide03History() {
   const cells = Array.from({ length: 7 })
   return (
-    <ConceptFrame badge="ACTO I" accent="cyan" title="1968 · Aristid Lindenmayer">
+    <ConceptFrame
+      badge="ACTO I"
+      accent="cyan"
+      title="1968 · Aristid Lindenmayer"
+      subtitle="Se preguntó cómo crecen las algas filamentosas bajo el microscopio?"
+    >
       <Card accent="cyan" className="w-full max-w-2xl p-6 sm:p-8">
         <div className="mb-3 flex items-center justify-between border-b-2 border-[#0F172A] pb-2">
           <span className="font-pixel text-[10px] font-bold text-[#0369A1]">

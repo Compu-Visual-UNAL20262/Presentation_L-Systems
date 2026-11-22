@@ -23,11 +23,13 @@ export function ConceptFrame({
   badge,
   accent,
   title,
+  subtitle,
   children,
 }: {
   badge: string
   accent: Accent
   title: ReactNode
+  subtitle?: ReactNode
   children: ReactNode
 }) {
   return (
@@ -40,6 +42,11 @@ export function ConceptFrame({
         >
           {title}
         </h2>
+        {subtitle && (
+          <p className="mt-2 text-center font-display text-base font-bold text-[#0369A1] sm:text-xl">
+            {subtitle}
+          </p>
+        )}
         <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center sm:mt-6">
           {children}
         </div>
