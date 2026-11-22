@@ -68,80 +68,80 @@ Para garantizar la fluidez de la exposición, **no se debe escribir código desd
 
 * **Guion:** "Para crear uno de estos sistemas no necesitamos matemáticas intimidantes; solo necesitamos tres ingredientes, igual que en la genética. Primero, un Alfabeto: las piezas o fichas con las que jugamos, por ejemplo las letras A y B. Segundo, un Axioma: la semilla inicial con la que arranca todo en el segundo cero, digamos una sola letra A. Y tercero, las Reglas: qué le pasa a cada ficha en el siguiente turno. En el experimento original del alga, la regla dice: cada A se transforma en AB, y cada B madura y se vuelve A."
 
-## **\[09:30 – 11:30 \| Nicolas Bolaños\] — \[EN VIVO: P5.JS \- SKETCH 2\]**
+## **\[09:30 – 11:30 \| Nicolas Bolaños\] — \[EN VIVO: P5.JS \- SKETCH 2 / SLIDE 07\]**
 
 * **Acción en pantalla:** Cambia a p5.js y avanza generación por generación (n=0 hasta n=7) haciendo clic en el lienzo.  
 * **Guion:** "Veámoslo correr en vivo. Empezamos con A. En el primer paso, A se convierte en AB. En el segundo paso, recordemos que todo ocurre al tiempo: la A se vuelve AB y la B se vuelve A, así que obtenemos ABA. Si sigo advancing, miren los números de la derecha: 1, 2, 3, 5, 8, 13, 21... Nadie programó aquí la serie de Fibonacci, pero emerge sola de dos reglas diminutas. Esa es la esencia de la complejidad emergente en computación visual."
 
-## **\[11:30 – 14:00 \| Angel Beltran\] — \[SLIDE 06\]**
+## **\[11:30 – 14:00 \| Angel Beltran\] — \[SLIDE 08\]**
 
 * **Guion:** "Ahora, como estudiantes de computación visual tenemos un problema evidente: una fila infinita de letras A y B todavía no se parece a un árbol ni a un fractal. Es solo texto en una dimensión. Necesitábamos un traductor que convirtiera esas letras en trazos sobre un lienzo. Y ahí es donde entra uno de los conceptos más intuitivos de la historia de la programación."
 
 # **Acto 3: La Tortuga y el Poder de Recordar el Camino (14:00 – 22:30)**
 
-## **\[14:00 – 16:30 \| Ariadna\] — \[SLIDE 07\] → \[EN VIVO: P5.JS \- SKETCH 3\]**
+## **\[14:00 – 16:30 \| Ariadna\] — \[SLIDE 08\] → \[EN VIVO: P5.JS \- SKETCH 3 / SLIDE 09\]**
 
 * **Acción en pantalla:** Muestra el triángulo inicial en p5.js y sube iteraciones de 1 a 2, 3 y 4\. Luego cambia angulo de 60 a 85\.  
 * **Guion:** "En los años ochenta, Przemyslaw Prusinkiewicz tuvo una idea brillante: conectar el texto del L-System a una tortuga virtual con un lápiz en la cola. Si la tortuga lee una F, camina hacia adelante dibujando una línea; si lee un \+, gira a la izquierda; si lee un \-, gira a la derecha. Miren lo que pasa en p5.js con una sola regla: avanza, gira izquierda, avanza, gira derecha, avanza. En una iteración es un pico; en cuatro iteraciones es el famoso copo de nieve de Koch. Y si aquí mismo cambio el ángulo de 60 a 85 grados, la geometría muta al instante."
 
-## **\[16:30 – 19:30 \| Farid Ardila\] — \[SLIDE 08\] → \[SLIDE 09\]**
+## **\[16:30 – 19:30 \| Farid Ardila\] — \[SLIDE 10\] → \[SLIDE 11\]**
 
 * **Guion:** "La tortuga ya dibuja figuras continuas, pero un árbol no es una sola línea continua: un árbol tiene ramas que nacen del tronco y luego regresan al tronco para sacar otra rama. ¿Cómo hace la tortuga para no perderse? Usando dos símbolos mágicos: los corchetes \[ y \]. Piénsenlo como poner un pin en Google Maps. Cuando la tortuga lee abrir corchete \[, guarda en su memoria exactamente dónde está parada y hacia dónde mira. Luego se va a dibujar una rama lateral; y en cuanto lee cerrar corchete \], se teletransporta de vuelta al pin guardado para seguir subiendo por el tronco. Además, podemos diseñar reglas que alargan los tallos existentes o reglas con 'yemas' invisibles en las puntas para controlar cómo envejece cada rama."
 
-## **\[19:30 – 22:30 \| Nicolas Bolaños\] — \[EN VIVO: P5.JS \- SKETCH 4\]**
+## **\[19:30 – 22:30 \| Nicolas Bolaños\] — \[EN VIVO: P5.JS \- SKETCH 4 / SLIDE 12\]**
 
 * **Acción en pantalla:** Muestra la planta ramificada en p5.js y mueve suavemente los sliders de ángulo (\$\\delta\$) e iteraciones.  
 * **Guion:** "Probemos esos corchetes en vivo. Aquí tenemos una regla con tres pares de corchetes, o sea, tres bifurcaciones por ciclo. Miren qué ocurre cuando muevo el slider del ángulo de giro: con 15 grados tenemos un ciprés cerrado y alto; si lo abro a 35 grados, se transforma en un arbusto frondoso; y si subo las iteraciones, cada ramita hija repite exactamente la misma arquitectura de su madre."
 
 # **Acto 4: De Clones Perfectos a Naturaleza Viva — Los 5 Niveles (22:30 – 31:30)**
 
-## **\[22:30 – 25:00 \| Angel Beltran\] — \[SLIDE 10\] → \[SLIDE 11\]**
+## **\[22:30 – 25:00 \| Angel Beltran\] — \[SLIDE 13\] → \[SLIDE 14\]**
 
 * **Guion:** "Si ustedes ponen diez árboles generados con el código que acaba de mostrar mi compañero uno al lado del otro, van a notar algo raro de inmediato: parecen soldados de plástico. Todos son clones idénticos porque el sistema es determinista, siempre elige la misma regla. En la naturaleza, el viento, la genética y el azar hacen que dos semillas hermanas crezcan distinto. Para romper esa perfección artificial pasamos al segundo nivel: los L-Systems estocásticos, donde a cada letra le damos varias reglas posibles con un porcentaje de probabilidad, como lanzar un dado en cada rama."
 
-## **\[25:00 – 27:30 \| Ariadna\] — \[EN VIVO: P5.JS \- SKETCH 5\]**
+## **\[25:00 – 27:30 \| Ariadna\] — \[EN VIVO: P5.JS \- SKETCH 5 / SLIDE 15\]**
 
 * **Acción en pantalla:** Pulsa varias veces el botón "Regenerar Bosque" en p5.js para mostrar cinco árboles lado a lado cambiando de forma orgánica.  
 * **Guion:** "Aquí tenemos exactamente la misma especie de árbol, pero ahora la regla dice: 40 % de probabilidad de ramificar a la izquierda, 40 % a la derecha y 20 % de seguir recto. Cada vez que pulso regenerar, nace un bosque completamente natural donde ningún árbol repite la silueta del vecino."
 
-## **\[27:30 – 29:30 \| Farid Ardila\] — \[SLIDE 10\]**
+## **\[27:30 – 29:30 \| Farid Ardila\] — \[SLIDE 15\]**
 
 * **Guion:** "Pero la naturaleza va todavía más lejos, y por eso existen tres niveles más sofisticados. En el tercer nivel, los sistemas sensibles al contexto, las letras miran quién está a su izquierda y a su derecha antes de cambiar; así se simulan hormonas vegetales que viajan desde la raíz hasta la copa para avisar cuándo florecer. En el cuarto nivel, los paramétricos, cada letra carga una mochila con números —como grosor o edad—, lo que permite aplicar la famosa regla de Leonardo da Vinci: que el tronco se vaya adelgazando proporcionalmente cada vez que se divide en ramas más finas."
 
-## **\[29:30 – 31:30 \| Nicolas Bolaños\] — \[SLIDE 12\]**
+## **\[29:30 – 31:30 \| Nicolas Bolaños\] — \[SLIDE 16\]**
 
 * **Guion:** "Y el quinto nivel es el más inteligente: los L-Systems abiertos o sensibles al entorno. Aquí la planta deja de crecer a ciegas y empieza a hacerle preguntas al mundo 3D que la rodea: ¿Hay una pared enfrente? ¿De dónde viene la luz del sol? Si una rama detecta sombra o un obstáculo, detiene su crecimiento o curva su ángulo buscando claridad. Es literalmente simular el fototropismo vegetal dentro de un motor gráfico."
 
 # **Acto 5: Detrás de Cámaras en Computación Visual (31:30 – 38:00)**
 
-## **\[31:30 – 33:30 \| Ariadna\] — \[SLIDE 13\] → \[EN VIVO: P5.JS \- SKETCH 5\]**
-
-* **Acción en pantalla:** Sube el selector de iteraciones de 4 a 5, 6 y 7 (con precaución de no llegar al bloqueo total) señalando el contador de segmentos y FPS.  
-* **Guion:** "Como ingenieros y artistas visuales, hay una trampa en la que todos caemos la primera vez que programamos un L-System: entusiasmarse subiendo las iteraciones. Miren el contador de líneas arriba en p5.js. En la iteración 4 tenemos unos cientos de segmentos y vamos a 60 cuadros por segundo. En la 6 ya son decenas de miles. Si pongo iteración 10, pasamos a millones de líneas y congelamos el navegador. El crecimiento exponencial es el principal reto de rendimiento que debemos controlar."
-
-## **\[33:30 – 35:30 \| Angel Beltran\] — \[SLIDE 13\]**
+## **\[31:30 – 33:30 \| Angel Beltran\] — \[SLIDE 17\]**
 
 * **Guion:** "El segundo truco técnico detrás de cámaras es cómo evitamos hacer trampa al reescribir. Si intentamos modificar la cadena de texto sobre sí misma mientras la vamos leyendo de izquierda a derecha, las letras nuevas que acabamos de crear se volverían a transformar antes de tiempo, rompiendo el paralelismo biológico. Por eso siempre usamos la técnica del doble cuaderno: leemos el estado completo de hoy en una lista de solo lectura, escribimos el resultado de mañana en una lista limpia, y al terminar el ciclo intercambiamos los cuadernos."
 
-## **\[35:30 – 38:00 \| Farid Ardila\] — \[SLIDE 14\]**
+## **\[33:30 – 35:30 \| Ariadna\] — \[SLIDE 17\] → \[EN VIVO: P5.JS \- SKETCH 5 / SLIDE 18\]**
+
+* **Acción en pantalla:** Sube el selector de iteraciones de 4 a 5, 6 y 7 (con precaución de no llegar al bloqueo total) señalando el contador de segmentos y FPS.
+* **Guion:** "Como ingenieros y artistas visuales, hay una trampa en la que todos caemos la primera vez que programamos un L-System: entusiasmarse subiendo las iteraciones. Miren el contador de líneas arriba en p5.js. En la iteración 4 tenemos unos cientos de segmentos y vamos a 60 cuadros por segundo. En la 6 ya son decenas de miles. Si pongo iteración 10, pasamos a millones de líneas y congelamos el navegador. El crecimiento exponencial es el principal reto de rendimiento que debemos controlar."
+
+## **\[35:30 – 38:00 \| Farid Ardila\] — \[SLIDE 19\]**
 
 * **Guion:** "Finalmente, ¿cómo pasamos de estas líneas planas en p5.js a los árboles volumétricos de un videojuego? Primero, nuestra tortuga deja de moverse en una mesa 2D y pasa a pilotar como un avión en 3D: ahora puede girar izquierda-derecha, subir-bajar la nariz y rotar sobre su propio eje. Segundo, en lugar de pintar líneas delgadas sin grosor, envolvemos cada tramo con cilindros conectados que se estrechan hacia la punta, y en los extremos pegamos hojas reutilizando una sola geometría en la tarjeta gráfica miles de veces."
 
 # **Acto 6: Impacto Real y Cierre (38:00 – 45:00)**
 
-## **\[38:00 – 40:15 \| Nicolas Bolaños\] — \[SLIDE 15\]**
+## **\[38:00 – 40:15 \| Nicolas Bolaños\] — \[SLIDE 20\]**
 
 * **Guion:** "¿Dónde vemos todo esto fuera del aula? En prácticamente toda la industria del entretenimiento. Herramientas estándar de cine y videojuegos como SpeedTree —usada desde Avatar hasta The Witcher— se basan en L-Systems paramétricos. Y en juegos de exploración espacial como No Man's Sky, donde existen trillones de planetas, sería imposible guardar los árboles en el disco duro; en cambio, el juego guarda una pequeña semilla numérica y un L-System cultiva la flora de cada planeta en tiempo real frente al jugador."
 
-## **\[40:15 – 42:15 \| Farid Ardila\] — \[SLIDE 15\]**
+## **\[40:15 – 42:15 \| Farid Ardila\] — \[SLIDE 20\]**
 
 * **Guion:** "Pero los L-Systems no solo sirven para plantas. En 2001, investigadores de gráficos por computadora demostraron que una ciudad crece igual que una raíz buscando agua. Extendieron los L-Systems para trazar redes viales completas: las avenidas principales avanzan buscando conectar centros poblados, mientras las calles secundarias se ramifican en cuadrículas y se detienen automáticamente si chocan contra un río o una montaña. Hoy este enfoque se usa en planificación urbana y entornos virtuales masivos."
 
-## **\[42:15 – 43:45 \| Angel Beltran\] — \[SLIDE 15\]**
+## **\[42:15 – 43:45 \| Angel Beltran\] — \[SLIDE 20\]**
 
 * **Guion:** "Incluso la ciencia pura los utiliza: en agronomía existen modelos virtuales de cultivos que combinan L-Systems con simulación de luz solar para predecir cuánto va a producir una cosecha antes de sembrar una sola semilla. Y en el arte generativo, los mismos símbolos de giro y avance se traducen a notas y duraciones para componer música algorítmica con estructura fractal."
 
-## **\[43:45 – 45:00 \| Ariadna\] — \[EN VIVO: P5.JS \- SKETCH 1\]**
+## **\[43:45 – 45:00 \| Ariadna\] — \[EN VIVO: P5.JS \- SKETCH 1 / SLIDE 21\]**
 
 * **Acción en pantalla:** Vuelve a la primera pestaña de p5.js, limpia el lienzo y lanza una última generación del bosque completo.  
 * **Guion:** "Al final, la lección más poderosa de los L-Systems para la computación visual es un cambio de mentalidad: dejar de pensar en los objetos como formas estáticas que tenemos que dibujar píxel a píxel, y empezar a verlos como sistemas vivos gobernados por reglas simples. Con un alfabeto diminuto, una semilla y la capacidad de recordar de dónde venimos, podemos hacer que la computadora cultive mundos enteros. Muchas gracias."
