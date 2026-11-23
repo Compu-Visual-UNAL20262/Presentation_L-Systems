@@ -16,15 +16,21 @@ export function ConceptFrame({
   title,
   subtitle,
   children,
+  scrollable = false,
 }: {
-  badge: string
+  badge?: string
   accent: Accent
   title: ReactNode
   subtitle?: ReactNode
   children: ReactNode
+  scrollable?: boolean
 }) {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-14 sm:px-10">
+    <div
+      className={`flex h-full w-full flex-col items-center px-4 pb-16 pt-10 sm:px-8 sm:pt-12 ${
+        scrollable ? 'overflow-hidden justify-start' : 'overflow-hidden justify-center'
+      }`}
+    >
       <div className="animate-fade-up flex h-full min-h-0 w-full max-w-5xl flex-col items-center">
         <h2
           className="shrink-0 text-center font-display text-2xl font-extrabold leading-tight
@@ -40,9 +46,16 @@ export function ConceptFrame({
         {/*
           Holgura (p-1.5) para que la sombra dura de 4px y el borde de las
           tarjetas pixel-bevel interiores no queden al ras del recorte
-          (overflow-hidden) y se vean completos en todos los lados.
+          y se vean completos en todos los lados.
         */}
-        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden p-1.5 sm:mt-6">
+        <div
+          {...(scrollable ? { 'data-no-swipe': 'true' } : {})}
+          className={`mt-3 flex w-full p-1.5 sm:mt-4 ${
+            scrollable
+              ? 'flex-1 min-h-0 flex-col items-center justify-start overflow-y-auto overflow-x-hidden thin-scroll pr-1 pb-16 scroll-smooth'
+              : 'min-h-0 flex-1 items-center justify-center overflow-hidden'
+          }`}
+        >
           {children}
         </div>
       </div>

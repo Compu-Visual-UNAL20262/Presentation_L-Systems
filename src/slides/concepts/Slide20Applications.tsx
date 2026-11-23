@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ConceptFrame } from './shared'
 import PixelPhoto from '../../components/PixelPhoto'
 import YouTubeEmbed from '../../components/YouTubeEmbed'
@@ -18,10 +18,25 @@ import qrMusicalator from '../../assets/qr-musicalator.svg'
 
 export default function Slide20Applications() {
   const [musicOpen, setMusicOpen] = useState(false)
+  const musicRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (musicOpen && musicRef.current) {
+      const timer = setTimeout(() => {
+        musicRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 120)
+      return () => clearTimeout(timer)
+    }
+  }, [musicOpen])
 
   return (
-    <ConceptFrame badge="IMPACTO REAL" accent="emerald" title="Mundos Infinitos en Pocos Kilobytes">
-      <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-3 overflow-y-auto sm:overflow-visible">
+    <ConceptFrame
+      badge="IMPACTO REAL"
+      accent="emerald"
+      title="Mundos Infinitos en Pocos Kilobytes"
+      scrollable
+    >
+      <div data-no-swipe="true" className="mx-auto flex w-full max-w-5xl flex-col items-center gap-4">
         <div className="grid w-full place-items-center gap-3 sm:grid-cols-5 sm:items-center sm:gap-4">
         {/* Pieza central: trailer de No Man's Sky en bucle desde 0:18 */}
         <div className="w-full sm:col-span-3">
@@ -120,7 +135,7 @@ export default function Slide20Applications() {
 
         {/* Panel desplegable: generador de música fractal (Musicalator). */}
         {musicOpen && (
-          <div className="w-full max-w-3xl animate-fade-up">
+          <div ref={musicRef} className="w-full max-w-3xl animate-fade-up">
             <WebEmbed
               url="https://icefractal.com/musicalator/"
               title="MUSICALATOR · ICE FRACTAL"

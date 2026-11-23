@@ -114,10 +114,10 @@ function RefRow({ item }: { item: RefItem }) {
 
 export default function Slide22Bibliography() {
   return (
-    <ConceptFrame badge="IMPACTO REAL" accent="emerald" title="Bibliografía y Créditos">
+    <ConceptFrame badge="IMPACTO REAL" accent="emerald" title="Bibliografía y Créditos" scrollable>
       <div
         data-no-swipe="true"
-        className="grid w-full max-w-5xl gap-4 overflow-y-auto pb-2 sm:grid-cols-2 sm:overflow-visible"
+        className="grid w-full max-w-5xl gap-4 pb-2 sm:grid-cols-2"
       >
         {/* Columna 1 — Fuentes académicas / libros */}
         <section className="flex flex-col gap-2">
