@@ -21,7 +21,7 @@ Para evitar la monotonía de una exposición secuencial, la presentación se div
 | Nicolas Bolaños | **Anfitrión y Operador de Demos Base:** Abre con el impacto visual, opera los sketches de crecimiento, el laboratorio abierto y conecta con videojuegos. | Secciones 1, 2, 3, 4 y 6 | ~16 min |
 | Ariadna Rueda | **Narrador Histórico y Operador de Variación:** Explica el origen biológico, los fractales y su dimensión, los bosques aleatorios y el cierre. | Secciones 1, 3, 4, 5 y 6 | ~15 min |
 | Farid Ardila | **Especialista en Espacio y 3D:** Explica el paralelismo, la ramificación con memoria, la comunicación celular, el grosor paramétrico, el salto al 3D y ciudades. | Secciones 1, 3, 4, 5 y 6 | ~12 min |
-| Angel Beltrán | **Arquitecto de Reglas y Rendimiento:** Traduce el "ADN" (axioma/reglas), explica el azar, el doble cuaderno en vivo y aplicaciones científicas. | Secciones 2, 3, 4, 5 y 6 | ~13 min |
+| Angel Beltrán | **Arquitecto de Reglas y Rendimiento:** Traduce el "ADN" (axioma/reglas), explica el azar, el doble cuaderno en vivo, aplicaciones científicas y demo de música fractal. | Secciones 2, 3, 4, 5 y 6 | ~14 min |
 
 *(Tiempos con la interacción incluida. La línea de tiempo llega a ~56:00, pero el último tramo es Q&A/cierre elástico: el contenido obligatorio cierra alrededor del minuto 45.)*
 
@@ -56,7 +56,7 @@ Para evitar la monotonía de una exposición secuencial, la presentación se div
 | 23 | Sketch: El doble cuaderno en vivo | **Reescritura paralela paso a paso** (A→AB, B→A): cabeza lectora en HOY (Sₙ), escritura en MAÑANA (Sₙ₊₁) y swap. Controles ⏸/⏩/⟳. | Visualiza el double buffering. |
 | 24 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (arranca en 4). | Demo en vivo. |
 | 25 | Del Plano 2D al Mundo 3D | Tortuga 3D **en movimiento** (ejes H/L/U, yaw/pitch/roll) + línea→cilindro + **render real**. | Explica geometría 3D. |
-| 26 | Mundos Infinitos en Pocos Kilobytes | **Trailer de No Man's Sky** (bucle desde 0:18, en silencio) + 3 tarjetas: flora de videojuego, ciudad procedural (Parish & Müller) y Arte & Ciencia (abre el generador de **música fractal Musicalator** o su QR). | Cierre e impacto real. |
+| 26 | Mundos Infinitos en Pocos Kilobytes | **Trailer de No Man's Sky** (bucle desde 0:18, en silencio) + 3 tarjetas: flora de videojuego, ciudad procedural (Parish & Müller) y Arte & Ciencia (demo en vivo de música fractal con **Musicalator**: a=-x, b=x+4 a 260 BPM). | Cierre e impacto real. |
 | 27 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. Botón **VER REEL FRACTAL** (reel de @mathlenss + QR al canal @lensmath). | Conclusión final. |
 | 28 | Bibliografía y Créditos | Dos columnas: fuentes académicas (Lindenmayer, ABOP, Parish & Müller, Barnsley) y videos/recursos con crédito a sus canales (Mathlens, Wild Math, Hello Games, Wikimedia). Enlaces ↗. | Cierre con atribución. |
 
@@ -227,13 +227,32 @@ Los tiempos son una guía de ritmo; conviene cronometrar en el ensayo. Para ajus
 
 * **Guion:** "Pero los L-Systems no solo sirven para plantas. En 2001, Parish y Müller demostraron que una ciudad crece igual que una raíz buscando agua. Extendieron los L-Systems para trazar redes viales completas: las avenidas principales avanzan buscando conectar centros poblados, mientras las calles secundarias se ramifican en cuadrículas y se detienen automáticamente si chocan contra un río o una montaña. La imagen de la ciudad procedural muestra el mismo principio adaptado a calles, manzanas y restricciones del terreno. Las reglas eligen dirección según la densidad urbana, y las restricciones del entorno impiden que las calles crucen obstáculos naturales."
 
-## **\[53:50 – 54:40 \| Angel Beltran\] — \[SLIDE 26\]** *(no avanzar: el video sigue en bucle)*
+## **[53:50 – 55:20 | Angel Beltran] — [SLIDE 26: DEMO EN VIVO MUSICALATOR]** *(no avanzar: el trailer de No Man's Sky sigue en bucle)*
 
-* **Acción en pantalla (opcional):** en la tarjeta **Arte & Ciencia** hay un botón **▸ música fractal en vivo**. Al pulsarlo se despliega el generador **Musicalator** (icefractal.com) o su **QR** como recomendación. Si hay tiempo e internet, pulsa **ABRIR EN VIVO** y haz clic dentro para que suene (el audio necesita un clic por política del navegador); si no, deja el QR a la vista para que el público lo explore luego.
-* **\[+ INTERACCIÓN\]** Si lo abres en vivo, carga un preset y pregunta: "¿Reconocen el patrón? Se repite a distintas escalas, igual que el helecho, pero en sonido." Si no hay tiempo, recomiéndalo: "Les dejo el QR: música generada por fractales, para que jueguen en casa."
-* **Guion:** "Incluso la ciencia pura los utiliza: en agronomía existen modelos virtuales de cultivos que combinan L-Systems paramétricos con simulación de luz solar para predecir cuánto va a producir una cosecha antes de sembrar una sola semilla. Y en el arte generativo, los mismos símbolos de giro y avance se traducen a notas y duraciones para componer música algorítmica con estructura fractal —de hecho hay herramientas, como esta que ven aquí, que generan melodías autosimilares a partir del triángulo de Pascal—. La aplicación científica anticipa resultados y reduce costos; la artística convierte un proceso geométrico en otra forma de expresión."
+* **Contexto inicial de voz:** "Incluso la ciencia pura los utiliza: en agronomía existen modelos virtuales de cultivos (FSPM) que combinan L-Systems paramétricos con simulación de luz solar para predecir cosechas antes de sembrar una sola semilla. Pero donde la computación visual se vuelve verdaderamente fascinante es cuando cruzamos la frontera hacia el arte generativo y la música fractal. Los mismos símbolos de avance, giro y ramificación pueden traducirse a tonos, duraciones e intervalos musicales."
+* **Dinámica en vivo (Paso a paso sincronizado entre Ángel y el Operador):**
+  A continuación, Ángel va narrando mientras el operador ejecuta en pantalla cada paso en el generador **Musicalator** embebido:
 
-## **\[54:40 – 56:00+ \| Ariadna\] — \[EN VIVO: BOSQUE DE CIERRE (SLIDE 27)\]**
+  1. **Paso 1 · Desplegar Musicalator:**
+     * **[Operador]:** Pulsa la tarjeta **Arte & Ciencia** (botón `▸ música fractal en vivo`) y luego hace clic en **▶ ABRIR EN VIVO** dentro del cartucho 16-bit. *(Nota: dar un clic dentro del marco para activar el contexto de audio del navegador).*
+     * **[Ángel]:** "Miren la pantalla: abrimos en vivo *Musicalator*, una herramienta que convierte ecuaciones matemáticas y autómatas fractales en sonido en tiempo real."
+  2. **Paso 2 · Primera Voz ($a = -x$ en Chime):**
+     * **[Operador]:** En la fila azul `a =`, escribe `-x` en el campo de texto y selecciona en el desplegable de instrumentos **Chime**.
+     * **[Ángel]:** "En nuestra primera voz escribimos la ecuación $a = -x$ y le asignamos el timbre cristalino de *Chime*. Al ser una función decreciente con el tiempo $x$, va a trazar una melodía en cascada descendente."
+  3. **Paso 3 · Segunda Voz ($b = x+4$ en Piano):**
+     * **[Operador]:** En la fila roja `b =` (o pulsando `+ / Add Instruments` si hiciera falta), escribe `x+4` y selecciona en el desplegable de instrumentos **Piano**.
+     * **[Ángel]:** "Para crear contrapunto polifónico, agregamos una segunda voz: $b = x+4$ interpretada por un *Piano*. Esta melodía sube en sentido opuesto cuatro semitonos por encima, generando una simetría armónica que se entrelaza con las campanas."
+  4. **Paso 4 · Ajustar el Tempo a 260 BPM:**
+     * **[Operador]:** En el selector numérico `Tempo:`, ajusta o escribe el valor **`260`**.
+     * **[Ángel]:** "Subimos el tempo a 260 BPM: a esta velocidad el oído humano deja de escuchar notas aisladas y empieza a percibir los patrones rítmicos y la autosimilitud global del fractal."
+  5. **Paso 5 · ¡Play en vivo y escucha!:**
+     * **[Operador]:** Pulsa el botón **Play**. Deja que la música corra durante 10–15 segundos mientras el cursor avanza por la cuadrícula fractal.
+     * **[Ángel]:** *(Pausa de 4 segundos para que la sala escuche)* **[+ INTERACCIÓN]** "¿Escuchan eso? Nadie compuso esta melodía compás por compás. Dos funciones algebraicas elementales interactúan a través de un fractal binario, y lo que emerge es ritmo, textura y contrapunto autosimilar: exactamente el mismo principio que vimos en el helecho y en el árbol, pero convertido en música."
+  6. **Paso 6 · Detener y transición al Cierre:**
+     * **[Operador]:** Pulsa el botón **Stop**.
+     * **[Ángel]:** "Detenemos la música. La aplicación científica anticipa resultados y reduce costos; la artística convierte una regla formal en pura emoción sonora. Ahora le paso la palabra a Ariadna para cultivar nuestro bosque final."
+
+## **[55:20 – 57:00+ | Ariadna] — [EN VIVO: BOSQUE DE CIERRE (SLIDE 27)]**
 
 * **Acción en pantalla:** `⟫` (avanza al Slide 27) El cierre **arranca solo**: un **bosque estocástico diverso** crece ante la audiencia en una ola de izquierda a derecha, donde **cada árbol es único** (misma gramática + azar). El botón ▶ REPLAY vuelve a hacer crecer el bosque durante la conclusión.
 * **Acción (reel + QR):** a la derecha hay un botón **VER REEL FRACTAL**. Al pulsarlo se muestra un **reel de Instagram de @mathlenss** (ramificar una rama en dos → 2¹⁰ = 1.024 puntas; árboles, pulmones, ríos y venas se ramifican igual), que resume la tesis de la charla, más un **código QR al canal de YouTube @lensmath** (clases animadas de análisis numérico, cálculo y más). Ábrelo durante el cierre; el crédito al autor y a todas las fuentes está en la **diapositiva final de Bibliografía (Slide 28)**.
