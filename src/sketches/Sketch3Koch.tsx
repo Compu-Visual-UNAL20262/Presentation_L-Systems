@@ -19,34 +19,99 @@ import { onSlideKey } from './keyboard'
 const AXIOM = 'F--F--F'
 const RULE = 'F+F--F+F'
 
+/**
+ * Presets de curvas fractales que comparten el mismo motor de tortuga.
+ * Cada preset define su axioma, sus reglas y el ángulo canónico. El motor
+ * trata como "avance con trazo" cualquier símbolo dibujable (F o G o A o B).
+ *
+ * Dimensión fractal D (autosimilitud): D = ln(N) / ln(1/r), con N = nº de
+ * copias y r = factor de escala de cada copia.
+ *   Koch:       N = 4, r = 1/3  → D = ln4/ln3 ≈ 1.262
+ *   Sierpinski: N = 3, r = 1/2  → D = ln3/ln2 ≈ 1.585
+ *   Dragón:     curva que llena el plano → D = 2 (teórico)
+ */
+interface CurvePreset {
+  id: string
+  label: string
+  axiom: string
+  /** Reglas por símbolo; los símbolos sin regla son constantes. */
+  rules: Record<string, string>
+  /** Símbolos que dibujan un segmento al interpretarse. */
+  drawSymbols: string[]
+  angle: number
+  name: string
+  /** Dimensión fractal teórica, ya calculada, para el indicador. */
+  dimension: number
+  /** Rango razonable de iteraciones para que no se dispare el conteo. */
+  maxIter: number
+}
+
+const PRESETS: Record<string, CurvePreset> = {
+  koch: {
+    id: 'koch',
+    label: '60° KOCH',
+    axiom: AXIOM,
+    rules: { F: RULE },
+    drawSymbols: ['F'],
+    angle: 60,
+    name: 'Koch',
+    dimension: Math.log(4) / Math.log(3), // ≈ 1.262
+    maxIter: 5,
+  },
+  sierpinski: {
+    id: 'sierpinski',
+    label: 'SIERPINSKI',
+    // Flecha de Sierpinski: A y B son ambos segmentos dibujables.
+    axiom: 'A',
+    rules: { A: 'B-A-B', B: 'A+B+A' },
+    drawSymbols: ['A', 'B'],
+    angle: 60,
+    name: 'Sierpinski',
+    dimension: Math.log(3) / Math.log(2), // ≈ 1.585
+    maxIter: 7,
+  },
+  dragon: {
+    id: 'dragon',
+    label: 'DRAGÓN',
+    axiom: 'F',
+    rules: { F: 'F+G', G: 'F-G' },
+    drawSymbols: ['F', 'G'],
+    angle: 90,
+    name: 'Dragón',
+    dimension: 2, // llena el plano
+    maxIter: 12,
+  },
+}
+
 const BG = '#E6F7FF'
 const GRID_COLOR = '#BAE6FD'
 const STROKE_MAIN = '#0F172A'
 const FILL_ICE = 'rgba(56, 189, 248, 0.28)'
 
 const MIN_ITER = 0
-const MAX_ITER = 5
 const MIN_ANGLE = 15
 const MAX_ANGLE = 120
 
-function expand(iterations: number): string {
-  let current = AXIOM
+function expand(preset: CurvePreset, iterations: number): string {
+  let current = preset.axiom
   for (let i = 0; i < iterations; i++) {
     let next = ''
-    for (const ch of current) next += ch === 'F' ? RULE : ch
+    for (const ch of current) next += preset.rules[ch] ?? ch
     current = next
   }
   return current
 }
 
-/** Cuenta los segmentos dibujables (símbolos F). */
-function countSegments(path: string): number {
+/** Cuenta los segmentos dibujables según los símbolos de trazo del preset. */
+function countSegments(preset: CurvePreset, path: string): number {
+  const draw = new Set(preset.drawSymbols)
   let c = 0
-  for (const ch of path) if (ch === 'F') c++
+  for (const ch of path) if (draw.has(ch)) c++
   return c
 }
 
 interface KochParams {
+  preset: CurvePreset
   iterations: number
   angle: number
   /** Token de ejecución: al cambiar, dispara la animación de entrada. */
@@ -64,8 +129,9 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
     let lastRunToken = paramsRef.current.runToken
 
     const rebuild = () => {
-      const { iterations, angle } = paramsRef.current
-      path = expand(iterations)
+      const { preset, iterations, angle } = paramsRef.current
+      path = expand(preset, iterations)
+      const draw = new Set(preset.drawSymbols)
 
       // Simula la tortuga con paso=1 para obtener geometría normalizada.
       pts = []
@@ -74,7 +140,7 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
       let heading = 0 // grados
       pts.push({ x, y })
       for (const c of path) {
-        if (c === 'F') {
+        if (draw.has(c)) {
           x += Math.cos((heading * Math.PI) / 180)
           y += Math.sin((heading * Math.PI) / 180)
           pts.push({ x, y })
@@ -90,7 +156,7 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
         minY: Math.min(...pts.map((pt) => pt.y)),
         maxY: Math.max(...pts.map((pt) => pt.y)),
       }
-      cachedKey = `${iterations}:${angle}`
+      cachedKey = `${preset.id}:${iterations}:${angle}`
     }
 
     p.setup = () => {
@@ -105,8 +171,8 @@ function makeSketch(paramsRef: { current: KochParams }): SketchFn {
         rebuild()
         anim = 0
       }
-      // ¿Cambió iter/ángulo sin pulsar ejecutar? Reconstruye sin animar.
-      const key = `${paramsRef.current.iterations}:${paramsRef.current.angle}`
+      // ¿Cambió iter/ángulo/preset sin pulsar ejecutar? Reconstruye sin animar.
+      const key = `${paramsRef.current.preset.id}:${paramsRef.current.iterations}:${paramsRef.current.angle}`
       if (key !== cachedKey) rebuild()
 
       p.background(BG)
@@ -227,12 +293,21 @@ function EditorRow({
 }
 
 export default function Sketch3Koch() {
+  const [presetId, setPresetId] = useState<string>('koch')
   const [iterations, setIterations] = useState(1)
   const [angle, setAngle] = useState(60)
 
-  const paramsRef = useRef<KochParams>({ iterations: 1, angle: 60, runToken: 0 })
+  const preset = PRESETS[presetId]
+
+  const paramsRef = useRef<KochParams>({
+    preset: PRESETS.koch,
+    iterations: 1,
+    angle: 60,
+    runToken: 0,
+  })
 
   // Reflejar estado en el ref vivo (sin remontar p5).
+  paramsRef.current.preset = preset
   paramsRef.current.iterations = iterations
   paramsRef.current.angle = angle
 
@@ -242,12 +317,25 @@ export default function Sketch3Koch() {
     paramsRef.current.runToken += 1
   }
 
-  const segments = useMemo(() => countSegments(expand(iterations)), [iterations])
+  /** Carga un preset: fija su axioma, ángulo canónico y una iteración suave. */
+  const loadPreset = (id: string) => {
+    const pr = PRESETS[id]
+    setPresetId(id)
+    setAngle(pr.angle)
+    setIterations((prev) => Math.min(prev, pr.maxIter))
+    paramsRef.current.runToken += 1
+  }
+
+  const segments = useMemo(
+    () => countSegments(preset, expand(preset, iterations)),
+    [preset, iterations],
+  )
 
   // Tecla 'R' reinicia parámetros a Koch estándar. El guard de onSlideKey
   // evita que se dispare mientras se escribe en los inputs del mini-editor.
   useEffect(() => onSlideKey((e) => {
     if (e.key === 'r' || e.key === 'R') {
+      setPresetId('koch')
       setIterations(1)
       setAngle(60)
       paramsRef.current.runToken += 1
@@ -275,18 +363,45 @@ export default function Sketch3Koch() {
         </div>
 
         <pre className="pixel-bevel-sm bg-[#FFFBEB] p-3 font-mono text-[11px] font-bold leading-relaxed text-[#0F172A] sm:text-xs">
-{`// Reglas del L-System
-axioma = "F--F--F";
-F  →  F+F--F+F`}
+{`// ${preset.name} · L-System
+axioma = "${preset.axiom}";
+${Object.entries(preset.rules)
+  .map(([k, v]) => `${k}  →  ${v}`)
+  .join('\n')}`}
         </pre>
+
+        {/* Selector de curva fractal: el mismo motor de tortuga, 3 familias */}
+        <div className="pixel-bevel-sm bg-[#FEF3F8] p-2.5">
+          <div className="mb-1.5 font-pixel text-[9px] font-bold uppercase tracking-wider text-[#0F172A]">
+            ★ Familia fractal
+          </div>
+          <div className="grid grid-cols-3 gap-1.5">
+            {Object.values(PRESETS).map((pr) => (
+              <button
+                key={pr.id}
+                type="button"
+                onClick={() => loadPreset(pr.id)}
+                aria-pressed={pr.id === presetId}
+                className={`pixel-bevel-sm px-1.5 py-1.5 font-pixel text-[9px] font-bold uppercase tracking-wider transition-colors
+                  ${
+                    pr.id === presetId
+                      ? 'bg-[#A3E635] text-[#0F172A]'
+                      : 'bg-white text-[#0F172A] hover:bg-[#FACC15]'
+                  }`}
+              >
+                {pr.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div className="space-y-2.5 pixel-bevel-sm bg-[#F0F9FF] p-3">
           <EditorRow
             prefix="let iteraciones ="
             value={iterations}
-            onChange={setIterations}
+            onChange={(v) => setIterations(Math.min(v, preset.maxIter))}
             min={MIN_ITER}
-            max={MAX_ITER}
+            max={preset.maxIter}
             step={1}
           />
           <EditorRow
@@ -299,29 +414,31 @@ F  →  F+F--F+F`}
           />
         </div>
 
-        {/* Presets rápidos */}
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setAngle(60)
-              paramsRef.current.runToken += 1
-            }}
-            className="arcade-btn !text-[10px]"
-          >
-            60° KOCH
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAngle(85)
-              paramsRef.current.runToken += 1
-            }}
-            className="arcade-btn !text-[10px]"
-          >
-            85° MUTACIÓN
-          </button>
-        </div>
+        {/* Mutación angular: solo tiene sentido sobre el copo de Koch */}
+        {presetId === 'koch' && (
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setAngle(60)
+                paramsRef.current.runToken += 1
+              }}
+              className="arcade-btn !text-[10px]"
+            >
+              60° KOCH
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setAngle(85)
+                paramsRef.current.runToken += 1
+              }}
+              className="arcade-btn !text-[10px]"
+            >
+              85° MUTACIÓN
+            </button>
+          </div>
+        )}
 
         <button
           type="button"
@@ -344,7 +461,10 @@ F  →  F+F--F+F`}
           className="pointer-events-none absolute inset-x-0 bottom-16 sm:bottom-4 flex justify-center p-2"
         >
           <span className="pixel-bevel-sm bg-white px-3 py-1 font-mono text-[11px] font-bold text-[#0F172A] sm:text-sm">
-            Iteraciones: {iterations} | Ángulo: {angle}° | Segmentos: {segments}
+            Iteraciones: {iterations} | Ángulo: {angle}° | Segmentos: {segments.toLocaleString('es')} |{' '}
+            <span className="text-[#7C3AED]">
+              Dimensión D ≈ {preset.dimension.toFixed(3)}
+            </span>
           </span>
         </div>
       </div>

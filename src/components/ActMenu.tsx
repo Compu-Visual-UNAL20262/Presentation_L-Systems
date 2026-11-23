@@ -9,7 +9,7 @@ interface ActMenuProps {
 
 /**
  * Menú desplegable estilo botón "MENU" amarillo moneda (16-bit de día) para
- * saltar directo a cualquiera de los 6 Actos o 21 slides.
+ * saltar directo a cualquiera de los 6 Actos o las slides de la charla.
  */
 export default function ActMenu({ index, onJump }: ActMenuProps) {
   const [open, setOpen] = useState(false)
@@ -60,7 +60,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
               ★ {TEAM_NAME} · SELECT STAGE
             </span>
             <span className="font-mono text-[10px] font-bold text-[#15803D]">
-              21 LVLS
+              {SLIDES.length} LVLS
             </span>
           </div>
 

@@ -32,12 +32,14 @@ export type SlideComponentId =
   | 'levels' // 13
   | 'dice' // 14
   | 'sketch-forest' // 15 Sketch5 stochastic
-  | 'phototropism' // 16
-  | 'exponential' // 17
-  | 'sketch-stress' // 18 Sketch5 stress
-  | 'three-d' // 19
-  | 'applications' // 20
-  | 'closing' // 21 Sketch1 bosque
+  | 'sketch-context' // 16 Sketch6 IL (sensible a contexto)
+  | 'sketch-parametric' // 17 Sketch7 paramétrico (da Vinci)
+  | 'phototropism' // 18
+  | 'exponential' // 19
+  | 'sketch-stress' // 20 Sketch5 stress
+  | 'three-d' // 21
+  | 'applications' // 22
+  | 'closing' // 23 Sketch1 bosque
 
 export interface Act {
   id: number
@@ -137,16 +139,18 @@ export const SLIDES: Slide[] = [
   { n: 13, act: 4, accent: 'magenta', title: 'Los 5 Niveles de Realismo', component: 'levels' },
   { n: 14, act: 4, accent: 'magenta', title: 'El Bosque de los Dados', component: 'dice' },
   { n: 15, act: 4, accent: 'magenta', title: 'Sketch: bosque estocástico', component: 'sketch-forest' },
-  { n: 16, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
+  { n: 16, act: 4, accent: 'magenta', title: 'Sketch: señal sensible a contexto', component: 'sketch-context' },
+  { n: 17, act: 4, accent: 'magenta', title: 'Sketch: grosor paramétrico (da Vinci)', component: 'sketch-parametric' },
+  { n: 18, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
 
   // ── Acto V ──
-  { n: 17, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
-  { n: 18, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
-  { n: 19, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
+  { n: 19, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
+  { n: 20, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
+  { n: 21, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
 
   // ── Acto VI ──
-  { n: 20, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
-  { n: 21, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
+  { n: 22, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
+  { n: 23, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
 ]
 
 /** Devuelve el Acto al que pertenece un slide. */

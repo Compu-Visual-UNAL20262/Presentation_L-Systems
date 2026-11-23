@@ -80,6 +80,13 @@ export default {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        // Tortuga 3D: recorre yaw → pitch → roll para ilustrar los 3 ejes.
+        'turtle-3d': {
+          '0%, 100%': { transform: 'rotateY(0deg) rotateX(0deg) rotateZ(0deg)' },
+          '25%': { transform: 'rotateY(50deg) rotateX(0deg) rotateZ(0deg)' },
+          '50%': { transform: 'rotateY(0deg) rotateX(45deg) rotateZ(0deg)' },
+          '75%': { transform: 'rotateY(0deg) rotateX(0deg) rotateZ(55deg)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
@@ -89,6 +96,7 @@ export default {
         'draw': 'draw 2s ease-out forwards',
         'slide-right': 'slide-right 1.8s ease-in-out infinite',
         'spin-slow': 'spin-slow 14s linear infinite',
+        'turtle-3d': 'turtle-3d 8s ease-in-out infinite',
       },
     },
   },

@@ -16,6 +16,8 @@ import { onSlideKey } from './keyboard'
  *   centro     → letras como cápsulas (A=#F39C12, B=#38BDF8), tamaño dinámico
  *                para que las 34 letras de n=7 no se desborden ni en móvil
  *   derecha    → "Letras: N" (#2ECC71), que sigue a Fibonacci (1,2,3,5,…,34)
+ *   extremo d. → "A:B = r" (#C084FC), el cociente #A / #B que converge al
+ *                número áureo φ ≈ 1.618 a medida que crece la generación.
  */
 
 const AXIOM = 'A'
@@ -29,6 +31,19 @@ const CYAN = '#38BDF8' // B (azul cielo intenso)
 const LIME = '#A3E635'
 const EMERALD = '#15803D'
 const SLATE = '#334155'
+const VIOLET = '#C084FC' // cociente A:B (converge a φ)
+const PHI = 1.618
+
+/** Cuenta cuántas 'A' y 'B' hay en una cadena. */
+function countAB(str: string): { a: number; b: number } {
+  let a = 0
+  let b = 0
+  for (const ch of str) {
+    if (ch === 'A') a++
+    else if (ch === 'B') b++
+  }
+  return { a, b }
+}
 
 /** Genera todas las generaciones una sola vez. */
 function buildGenerations(): string[] {
@@ -72,7 +87,7 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
       const padX = Math.min(20, cardW * 0.04)
       // Anchos de columna: izquierda y derecha fijas, centro flexible.
       const colLeft = Math.min(70, cardW * 0.16)
-      const colRight = Math.min(130, cardW * 0.26)
+      const colRight = Math.min(150, cardW * 0.3)
       const centerX = cardX + padX + colLeft
       const centerW = cardW - padX * 2 - colLeft - colRight
 
@@ -129,21 +144,45 @@ function makeSketch(generations: string[], paramsRef: { current: AlgaeParams }):
           x += capSize + capGap
         }
 
-        // ── Columna derecha: conteo (Fibonacci) ──
+        // ── Columna derecha: conteo (Fibonacci) + cociente A:B → φ ──
+        const { a: countA, b: countB } = countAB(str)
+        const ratio = countB > 0 ? countA / countB : null
+        const badgeW = Math.min(136, colRight * 0.94)
+        const rightX = cardX + cardW - padX - badgeW
+        // Si hay espacio vertical, apilamos dos píldoras; si no, solo Fibonacci.
+        const twoRows = cardH >= 40
+        const badgeH = twoRows ? Math.min(cardH * 0.42, 22) : Math.min(cardH * 0.72, 30)
+        const gapY = twoRows ? Math.min(6, cardH * 0.12) : 0
+        const yTop = twoRows ? y - badgeH - gapY / 2 : y - badgeH / 2
+        const yBot = y + gapY / 2
+
+        // Píldora 1: conteo total (Fibonacci)
         p.fill(isCurrent ? LIME : '#DCFCE7')
         p.stroke(INK)
         p.strokeWeight(1.5)
         p.rectMode(p.CORNER)
-        const badgeW = Math.min(118, colRight * 0.92)
-        const badgeH = Math.min(cardH * 0.72, 30)
-        p.rect(cardX + cardW - padX - badgeW, y - badgeH / 2, badgeW, badgeH, 4)
-
+        p.rect(rightX, yTop, badgeW, badgeH, 4)
         p.noStroke()
         p.fill(isCurrent ? INK : EMERALD)
         p.textStyle(p.BOLD)
         p.textAlign(p.CENTER, p.CENTER)
-        p.textSize(Math.min(14, rowH * 0.38))
-        p.text(`Letras: ${str.length}`, cardX + cardW - padX - badgeW / 2, y)
+        p.textSize(Math.min(13, badgeH * 0.62))
+        p.text(`Letras: ${str.length}`, rightX + badgeW / 2, yTop + badgeH / 2)
+
+        // Píldora 2: cociente A:B → φ (solo si hay dos filas y existe el cociente)
+        if (twoRows && ratio !== null) {
+          p.fill(isCurrent ? VIOLET : '#F3E8FF')
+          p.stroke(INK)
+          p.strokeWeight(1.5)
+          p.rectMode(p.CORNER)
+          p.rect(rightX, yBot, badgeW, badgeH, 4)
+          p.noStroke()
+          p.fill(isCurrent ? INK : '#7C3AED')
+          p.textStyle(p.BOLD)
+          p.textAlign(p.CENTER, p.CENTER)
+          p.textSize(Math.min(12, badgeH * 0.58))
+          p.text(`A:B = ${ratio.toFixed(3)}`, rightX + badgeW / 2, yBot + badgeH / 2)
+        }
         p.textStyle(p.NORMAL)
       }
 
@@ -181,6 +220,16 @@ export default function Sketch2Algae() {
   return (
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
+      {/* Pista del número áureo: el cociente A:B converge a φ ≈ 1.618 */}
+      <div
+        data-no-swipe="true"
+        className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-4"
+      >
+        <span className="pixel-bevel-sm bg-white px-3 py-1 font-mono text-[10px] font-bold text-[#0F172A] sm:text-xs">
+          Longitud → <span className="text-[#15803D]">Fibonacci</span> · cociente{' '}
+          <span className="text-[#7C3AED]">A:B → φ ≈ {PHI}</span> (número áureo)
+        </span>
+      </div>
       <div
         data-no-swipe="true"
         className="absolute right-4 top-14 z-20 flex flex-col items-end gap-2 sm:top-16"

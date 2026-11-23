@@ -3,6 +3,8 @@ import Sketch2Algae from '../sketches/Sketch2Algae'
 import Sketch3Koch from '../sketches/Sketch3Koch'
 import Sketch4Plant from '../sketches/Sketch4Plant'
 import Sketch5Forest from '../sketches/Sketch5Forest'
+import Sketch6Context from '../sketches/Sketch6Context'
+import Sketch7Parametric from '../sketches/Sketch7Parametric'
 import SketchClosing from '../sketches/SketchClosing'
 import { TEAM } from '../data/slidesConfig'
 
@@ -63,6 +65,26 @@ export function Slide12PlantSketch() {
     <div className="relative h-full w-full">
       <Sketch4Plant />
       <CornerBadge text="ACTO III · Sketch 4" className="absolute bottom-16 left-4" />
+    </div>
+  )
+}
+
+/** Slide — L-System sensible al contexto (señal hormonal). */
+export function SlideContextSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch6Context />
+      <CornerBadge text="ACTO IV · Sensible a contexto (IL)" className="absolute bottom-16 right-4" />
+    </div>
+  )
+}
+
+/** Slide — L-System paramétrico (grosor de da Vinci). */
+export function SlideParametricSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch7Parametric />
+      <CornerBadge text="ACTO IV · Paramétrico (da Vinci)" className="absolute bottom-16 left-4" />
     </div>
   )
 }

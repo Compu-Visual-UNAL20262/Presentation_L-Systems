@@ -22,6 +22,8 @@ import {
   Slide09KochSketch,
   Slide12PlantSketch,
   Slide15ForestSketch,
+  SlideContextSketch,
+  SlideParametricSketch,
   Slide18StressSketch,
   Slide21Closing,
 } from './sketchSlides'
@@ -47,6 +49,8 @@ const REGISTRY: Record<SlideComponentId, ComponentType> = {
   levels: Slide13Levels,
   dice: Slide14Dice,
   'sketch-forest': Slide15ForestSketch,
+  'sketch-context': SlideContextSketch,
+  'sketch-parametric': SlideParametricSketch,
   phototropism: Slide16Phototropism,
   exponential: Slide17Exponential,
   'sketch-stress': Slide18StressSketch,

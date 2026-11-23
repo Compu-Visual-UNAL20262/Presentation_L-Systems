@@ -5,10 +5,12 @@
 | Sketch | Tema y Propósito en la Charla | Responsable de Desarrollo | Quién lo Opera en Vivo |
 | :---- | :---- | :---- | :---- |
 | **Sketch 1** | Gancho inicial: árbol frondoso animado rama por rama | **Farid Ardila** | Nicolas Bolaños (Acto 1\) |
-| **Sketch 2** | Crecimiento del alga *Anabaena* y emergencia de Fibonacci | **Ariadna***(selección aleatoria)* | Nicolas Bolaños (Acto 2\) |
-| **Sketch 3** | Tortuga LOGO y mutación del copo de nieve de Koch | **Nicolas Bolaños** | Ariadna (Acto 3\) |
+| **Sketch 2** | Crecimiento del alga *Anabaena*, Fibonacci **y cociente áureo A:B → φ** | **Ariadna***(selección aleatoria)* | Nicolas Bolaños (Acto 2\) |
+| **Sketch 3** | Tortuga LOGO, copo de Koch, **dimensión fractal y familias Sierpinski/Dragón** | **Nicolas Bolaños** | Ariadna (Acto 3\) |
 | **Sketch 4** | Planta ramificada con corchetes \[ \] y *sliders* en vivo | **Ariadna** | Nicolas Bolaños (Acto 3\) |
 | **Sketch 5** | Bosque estocástico (probabilidades) \+ prueba de estrés FPS | **Angel Beltran** | Ariadna (Actos 4 y 5\) |
+| **Sketch 6** | **L-System sensible a contexto: señal hormonal que viaja célula a célula** | **Equipo** | Farid Ardila (Acto 4\) |
+| **Sketch 7** | **L-System paramétrico: grosor de ramas con la regla de da Vinci** | **Equipo** | Farid / Angel (Acto 4\) |
 | **Sketch Cierre** | Bosque estocástico **diverso** que crece en ola (payoff final) | **Equipo** | Ariadna (Acto 6\) |
 
 # **Sketch 1: Árbol Frondoso Animado (Gancho Inicial)**
@@ -97,6 +99,7 @@
 
 * Al abrir la pestaña solo aparece la fila n \= 0 : A con contador 1\.  
 * Con cada clic del expositor se revela una fila nueva, permitiendo señalar cómo todas las letras cambian simultáneamente y cómo en la columna derecha emerge la sucesión de Fibonacci sin haberla programado.
+* **Cociente áureo (añadido v2):** junto al contador de letras (píldora verde) se muestra una segunda píldora violeta con el cociente **#A / #B**. A medida que avanza la generación, ese cociente (1, 2, 1.5, 1.66, 1.6, 1.625…) converge al número áureo **φ ≈ 1.618**. Una franja inferior lo recuerda explícitamente. Permite un segundo "¡ajá!" matemático emergente de las mismas dos reglas.
 
 # **Sketch 3: La Tortuga y el Copo de Nieve de Koch**
 
@@ -139,6 +142,11 @@ let angulo = 60;
 * Arranca ejecutando el triángulo inicial con iteraciones \= 1 y angulo \= 60\.  
 * El expositor cambia en el código iteraciones a 2, 3 y 4 pulsando *Play* en cada cambio para revelar el copo de nieve de Koch.  
 * Luego cambia angulo \= 60 por angulo \= 85 (con iteraciones \= 3 o 4\) para demostrar cómo una ligera modificación angular transforma al instante toda la geometría.
+* **Dimensión fractal (añadido v2):** el indicador inferior muestra, además de iteraciones/ángulo/segmentos, la **dimensión fractal D** de la curva activa (Koch ≈ 1.262 = ln4/ln3). Se usa para explicar que un fractal "vive entre dimensiones" (ni 1D ni 2D).
+* **Familias fractales (añadido v2):** un selector **KOCH / SIERPINSKI / DRAGÓN** carga otras gramáticas en el *mismo* motor de tortuga, demostrando que una sola implementación genera familias distintas de fractales con dimensiones distintas (Sierpinski ≈ 1.585, Dragón = 2). Reglas usadas:
+  * **Koch:** ω = `F--F--F`, `F → F+F--F+F`, δ = 60°.
+  * **Sierpinski (flecha):** ω = `A`, `A → B-A-B`, `B → A+B+A`, δ = 60° (A y B ambos dibujan).
+  * **Dragón:** ω = `F`, `F → F+G`, `G → F-G`, δ = 90° (F y G ambos dibujan).
 
 # **Sketch 4: Planta Ramificada con Corchetes y Sliders en Vivo**
 
@@ -238,3 +246,58 @@ let angulo = 60;
 ## **3\. Qué se Planea Mostrar en Vivo**
 
 * Es el cierre visual de la charla: lo que empezó como **un** árbol en el Acto 1 se convierte en un **ecosistema entero** generado por las mismas reglas simples + azar. Refuerza la tesis "reglas simples → mundos infinitos" justo mientras se da la conclusión final.
+
+# **Sketch 6: Señal Sensible al Contexto (IL-System)**
+
+* **Responsable de código:** Equipo
+* **Momento en el guion:** Acto 4 (29:00 – 31:30, Slide 16), operado por Farid Ardila.
+
+## **1\. Concepto (Nivel 3 de realismo)**
+
+Modela un **L-System sensible al contexto**: una regla se aplica según los vecinos del símbolo, no solo según el símbolo mismo. Se visualiza como una **señal hormonal acrópeta** (que sube de la raíz a la punta) viajando célula a célula por un tallo. Producción de contexto en notación de Prusinkiewicz:
+
+```
+S < a  →  S     (una célula 'a' recibe la señal S solo si su vecino inferior ya la tiene)
+```
+
+Es el contraste directo con los niveles anteriores, donde cada símbolo decidía a ciegas sin mirar a sus vecinos.
+
+## **2\. Diseño e Implementación en p5.js**
+
+* Tallo vertical de **9 células** centrado, con geometría y tamaño de célula calculados a partir del alto/ancho del lienzo (responsivo; en móvil las células se encogen).
+* Estados por célula: **reposo** (lila `#DDD6FE`), **señal pasando** (amarillo `#FACC15` con halo pulsante), **floreció** (rosa `#F472B6` con una hoja verde lateral).
+* La señal avanza una célula cada ~0.4 s (24 frames a 60 FPS) de la base hacia la punta; al pasar, la célula queda floreciente de forma permanente.
+* Control único: botón **▶ LANZAR SEÑAL HORMONAL** (también ESPACIO / R). Un overlay nítido muestra la regla `S < a → S`.
+
+## **3\. Qué se Planea Mostrar en Vivo**
+
+* El expositor lanza la señal y la audiencia ve cómo la floración recorre el tallo **en orden estricto**: ninguna célula se adelanta porque cada una espera a que su vecina reciba el mensaje primero. Aterriza la idea de comunicación interna (hormonas, floración coordinada) que de otro modo quedaría solo narrada.
+
+# **Sketch 7: Grosor Paramétrico — Regla de Leonardo da Vinci**
+
+* **Responsable de código:** Equipo
+* **Momento en el guion:** Acto 4 (31:30 – 33:00, Slide 17), operado por Farid / Angel.
+
+## **1\. Concepto (Nivel 4 de realismo)**
+
+Modela un **L-System paramétrico**: cada símbolo transporta parámetros numéricos. El parámetro estrella es el **grosor de las ramas**, que sigue la observación de da Vinci sobre la conservación del área al ramificarse:
+
+```
+r_padre ^ e  =  r_hija1 ^ e  +  r_hija2 ^ e        (e = 2 en la ley clásica)
+```
+
+Para dos hijas iguales: `r_hija = r_padre · (1/2)^(1/e)`. El exponente `e` es editable en vivo:
+
+* **e = 2** → ley de área clásica (tronco realista).
+* **e < 2** → las ramas se afilan más rápido (aspecto frágil).
+* **e > 2** → las ramas conservan más grosor (aspecto grueso/suculento).
+
+## **2\. Diseño e Implementación en p5.js**
+
+* Árbol generado **recursivamente** (profundidad 7, apertura ±26°) para centrar el foco en el grosor, no en la cadena. Longitud del tronco y grosor base escalados al alto del lienzo (responsivo).
+* Color de rama interpolado de corteza (marrón) a hoja (verde) según la profundidad; hoja verde en cada punta.
+* Controles: slider **Exponente e** (1.2–3), slider **Grosor del tronco** (6–24 px) y presets **FRÁGIL / CLÁSICO e=2 / GRUESO**. En móvil, botón **⚙ CONTROLES** colapsa el panel. Un overlay muestra la fórmula con el exponente actual.
+
+## **3\. Qué se Planea Mostrar en Vivo**
+
+* El expositor parte de **e = 2** (tronco creíble), baja el exponente para ver cómo las ramas se vuelven frágiles y sube para engordarlas. El mensaje: un solo número cargado en cada símbolo controla toda la credibilidad del árbol, y es la razón por la que la vegetación de los videojuegos modernos se ve real.

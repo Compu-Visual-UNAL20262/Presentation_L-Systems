@@ -22,27 +22,45 @@ export default function Slide19ThreeD() {
     <ConceptFrame badge="ACTO V" accent="cyan" title="Del Plano 2D al Mundo 3D">
       <div className="flex h-full w-full max-w-4xl flex-col items-center gap-3 sm:gap-4">
         <div className="grid w-full shrink-0 gap-3 sm:grid-cols-2 sm:gap-4">
-          {/* Avión/tortuga 3D con ejes */}
+          {/* Avión/tortuga 3D con base ortonormal H, L, U que rota en vivo */}
           <div className="pixel-bevel bg-white p-3 text-center sm:p-5">
-            <svg viewBox="0 0 160 120" className="mx-auto h-20 animate-float-y sm:h-32">
-              {/* Ejes con trazos gruesos legibles */}
-              <path d="M80 72 L80 16" stroke="#15803D" strokeWidth="2.5" strokeDasharray="4 3" />
-              <path d="M80 72 L144 72" stroke="#D97706" strokeWidth="2.5" strokeDasharray="4 3" />
-              <path d="M80 72 L26 102" stroke="#DB2777" strokeWidth="2.5" strokeDasharray="4 3" />
-              {/* Avión de papel con borde oscuro */}
-              <path
-                d="M80 28 L122 90 L80 72 L38 90 Z"
-                fill="#38BDF8"
-                stroke="#0F172A"
-                strokeWidth="2.5"
-                strokeLinejoin="round"
-              />
-              <path d="M80 28 L80 72" stroke="#0F172A" strokeWidth="2" />
-            </svg>
+            <div
+              className="mx-auto flex h-20 items-center justify-center sm:h-32"
+              style={{ perspective: '320px' }}
+            >
+              <svg
+                viewBox="0 0 160 120"
+                className="h-full animate-turtle-3d"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                {/* Base ortonormal: Heading (frontal), Left, Up */}
+                {/* U (arriba) — verde */}
+                <path d="M80 72 L80 14" stroke="#15803D" strokeWidth="3" />
+                <path d="M80 14 l-4 7 l8 0 z" fill="#15803D" />
+                <text x="86" y="18" fill="#15803D" fontSize="12" fontWeight="bold">U</text>
+                {/* H (frontal) — cian */}
+                <path d="M80 72 L146 72" stroke="#0284C7" strokeWidth="3" />
+                <path d="M146 72 l-7 -4 l0 8 z" fill="#0284C7" />
+                <text x="138" y="88" fill="#0284C7" fontSize="12" fontWeight="bold">H</text>
+                {/* L (izquierda) — magenta */}
+                <path d="M80 72 L22 100" stroke="#DB2777" strokeWidth="3" />
+                <path d="M22 100 l8 1 l-3 -7 z" fill="#DB2777" />
+                <text x="12" y="100" fill="#DB2777" fontSize="12" fontWeight="bold">L</text>
+                {/* Avión de papel (la tortuga 3D) */}
+                <path
+                  d="M80 30 L120 88 L80 72 L40 88 Z"
+                  fill="#38BDF8"
+                  stroke="#0F172A"
+                  strokeWidth="2.5"
+                  strokeLinejoin="round"
+                />
+                <path d="M80 30 L80 72" stroke="#0F172A" strokeWidth="2" />
+              </svg>
+            </div>
             <div className="mt-2 flex flex-wrap justify-center gap-2">
-              <AxisChip label="Yaw (+/−)" pillBg="bg-[#A3E635]" />
-              <AxisChip label="Pitch (&/^)" pillBg="bg-[#FACC15]" />
-              <AxisChip label="Roll (\\/)" pillBg="bg-[#F472B6]" />
+              <AxisChip label="Yaw (+/−) → U" pillBg="bg-[#A3E635]" />
+              <AxisChip label="Pitch (&/^) → L" pillBg="bg-[#FACC15]" />
+              <AxisChip label="Roll (\\//) → H" pillBg="bg-[#F472B6]" />
             </div>
           </div>
 
