@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
@@ -235,16 +236,19 @@ export default function Sketch11Rewrite() {
       {/* Controles */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-6"
+        className="absolute bottom-14 left-1/2 z-20 flex max-w-[92vw] -translate-x-1/2 flex-wrap
+          items-center justify-center gap-2 sm:bottom-6"
       >
-        <button type="button" onClick={() => setPlaying((v) => !v)} className="arcade-btn">
-          {playing ? '⏸ PAUSA' : '▶ SEGUIR'}
+        <button type="button" onClick={() => setPlaying((v) => !v)} className="arcade-btn inline-flex items-center gap-1.5">
+          <PixelGlyph name={playing ? 'pause' : 'play'} />
+          {playing ? 'PAUSA' : 'SEGUIR'}
         </button>
-        <button type="button" onClick={() => setFast((v) => !v)} className="arcade-btn">
-          {fast ? '🐢 LENTO' : '⏩ RÁPIDO'}
+        <button type="button" onClick={() => setFast((v) => !v)} className="arcade-btn inline-flex items-center gap-1.5">
+          {fast ? <>🐢 LENTO</> : <><PixelGlyph name="fast" /> RÁPIDO</>}
         </button>
-        <button type="button" onClick={restart} className="arcade-btn-lime">
-          ⟳ REINICIAR
+        <button type="button" onClick={restart} className="arcade-btn-lime inline-flex items-center gap-1.5">
+          <PixelGlyph name="replay" />
+          REINICIAR
         </button>
       </div>
     </div>

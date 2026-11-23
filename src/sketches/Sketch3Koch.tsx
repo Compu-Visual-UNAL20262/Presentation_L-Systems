@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
@@ -443,9 +444,10 @@ ${Object.entries(preset.rules)
         <button
           type="button"
           onClick={run}
-          className="arcade-btn-lime mt-1 w-full text-center"
+          className="arcade-btn-lime mt-1 inline-flex w-full items-center justify-center gap-1.5 text-center"
         >
-          ▶ REPETIR TRAZO ANIMADO
+          <PixelGlyph name="replay" />
+          REPETIR TRAZO ANIMADO
         </button>
         <span className="text-center font-mono text-[9px] font-semibold text-[#475569]">
           ⚡ Parámetros en tiempo real · Pulsa para ver el recorrido

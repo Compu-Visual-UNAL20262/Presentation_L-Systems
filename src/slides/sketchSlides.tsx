@@ -11,6 +11,7 @@ import Sketch10Compare from '../sketches/Sketch10Compare'
 import Sketch11Rewrite from '../sketches/Sketch11Rewrite'
 import Sketch12Fern from '../sketches/Sketch12Fern'
 import SketchClosing from '../sketches/SketchClosing'
+import PixelGlyph from '../components/PixelGlyph'
 import { TEAM } from '../data/slidesConfig'
 
 /**
@@ -36,9 +37,10 @@ export function Slide01Hook() {
   return (
     <div className="relative h-full w-full">
       <Sketch1Tree initialForestMode={false} />
-      <div className="pointer-events-none absolute bottom-16 left-1/2 -translate-x-1/2">
-        <span className="font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A] bg-[#A3E635] pixel-bevel-sm px-3.5 py-1.5 animate-pulse-soft">
-          ▶ CLICK / ESPACIO PARA CRECER
+      <div className="pointer-events-none absolute bottom-16 left-1/2 max-w-[92vw] -translate-x-1/2 px-3">
+        <span className="inline-flex items-center gap-1.5 font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A] bg-[#A3E635] pixel-bevel-sm px-3.5 py-1.5 animate-pulse-soft">
+          <PixelGlyph name="play" />
+          CLICK / ESPACIO PARA CRECER
         </span>
       </div>
     </div>
@@ -137,7 +139,13 @@ export function SlideFractalZoomSketch() {
 /** Slide — Fractales en la naturaleza (helecho de Barnsley). */
 export function SlideFernSketch() {
   return (
-    <div className="relative h-full w-full">
+    // Cielo 16-bit de día detrás del helecho. El canvas es transparente, así
+    // que este gradiente es el fondo real: constante, sin "flash" ni cambio de
+    // color al pulsar «volver a crecer».
+    <div
+      className="relative h-full w-full"
+      style={{ background: 'linear-gradient(180deg, #BAE6FD 0%, #D8F3FF 60%, #E6F8FF 100%)' }}
+    >
       <Sketch12Fern />
       <CornerBadge text="Demo · Fractales en la naturaleza" className="absolute bottom-16 left-4" />
     </div>

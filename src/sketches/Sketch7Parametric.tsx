@@ -234,10 +234,11 @@ export default function Sketch7Parametric() {
         {panelOpen ? '✕ CONTROLES' : '⚙ CONTROLES'}
       </button>
 
-      {/* Panel de control */}
+      {/* Panel de control. En pantallas bajas se desplaza en vez de
+          desbordar sobre el HUD. */}
       <div
         data-no-swipe="true"
-        className={`absolute right-3 top-40 z-20 flex w-48 flex-col gap-2 sm:top-32 sm:w-64
+        className={`thin-scroll absolute right-3 top-40 z-20 flex max-h-[calc(100dvh-11rem)] w-48 flex-col gap-2 overflow-y-auto overscroll-contain sm:top-32 sm:max-h-[calc(100dvh-9rem)] sm:w-64
           ${panelOpen ? 'flex' : 'hidden'} sm:!flex`}
       >
         <div className="space-y-3 pixel-bevel bg-white p-4">

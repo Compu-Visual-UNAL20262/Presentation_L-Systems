@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
@@ -17,9 +18,10 @@ import { onSlideKey } from './keyboard'
  * audiencia vea cómo "emerge" el helecho de puro azar guiado por reglas.
  */
 
-const BG = '#E6F7FF'
 const FERN = '#15803D'
-const FERN_LIGHT = '#4ADE80'
+// Verde de las puntas: solo un matiz más claro que la base (no un color
+// aparte), para dar profundidad sin que parezca "otra zona".
+const FERN_LIGHT = '#22A54A'
 
 interface FernParams {
   runToken: number
@@ -41,7 +43,9 @@ function makeSketch(paramsRef: { current: FernParams }): SketchFn {
 
     p.setup = () => {
       p.createCanvas(size?.width || window.innerWidth, size?.height || window.innerHeight)
-      p.background(BG)
+      // Lienzo transparente: se ve el gradiente real del slide, sin un celeste
+      // plano que no encaja. El helecho se acumula punto a punto encima.
+      p.clear()
       reset()
     }
 
@@ -69,7 +73,8 @@ function makeSketch(paramsRef: { current: FernParams }): SketchFn {
     p.draw = () => {
       if (paramsRef.current.runToken !== lastToken) {
         lastToken = paramsRef.current.runToken
-        p.background(BG)
+        // Borra a transparente (no a un color plano) al "volver a crecer".
+        p.clear()
         reset()
       }
 
@@ -85,8 +90,8 @@ function makeSketch(paramsRef: { current: FernParams }): SketchFn {
         nextPoint()
         const px = originX + x * scaleX
         const py = originY - y * scaleY
-        // Puntas más claras que la base para dar profundidad.
-        p.fill(y > 7 ? FERN_LIGHT : FERN)
+        // Puntas (parte alta) un matiz más claras para dar profundidad.
+        p.fill(y > 8.2 ? FERN_LIGHT : FERN)
         p.circle(px, py, 1.6)
         drawn++
       }
@@ -94,12 +99,114 @@ function makeSketch(paramsRef: { current: FernParams }): SketchFn {
   }
 }
 
-/** Ejemplo real de fractal: ícono SVG pixel + etiqueta. */
-function RealChip({ label, children }: { label: string; children: React.ReactNode }) {
+/**
+ * Iconos pixel-art (grilla 16×16) dibujados con <rect> de 1px sobre
+ * `shapeRendering="crispEdges"`, en línea con las nubes y el HUD 16-bit del
+ * resto de la presentación. Nada de curvas suaves ni bordes redondeados.
+ */
+const PX = 1 // tamaño de "pixel" en el viewBox 16×16
+
+function PixelIcon({
+  cells,
+  title,
+}: {
+  cells: Array<[number, number, string]> // [x, y, color]
+  title: string
+}) {
   return (
-    <div className="pixel-bevel-sm flex items-center gap-2 bg-white px-2.5 py-1.5">
-      <span className="flex h-7 w-7 items-center justify-center">{children}</span>
-      <span className="font-display text-[11px] font-bold text-[#0F172A] sm:text-xs">{label}</span>
+    <svg viewBox="0 0 16 16" className="h-5 w-5 sm:h-6 sm:w-6" shapeRendering="crispEdges" role="img" aria-label={title}>
+      {cells.map(([x, y, fill], i) => (
+        <rect key={i} x={x} y={y} width={PX} height={PX} fill={fill} />
+      ))}
+    </svg>
+  )
+}
+
+// Paleta pixel coherente con tailwind.config.js
+const C = {
+  ink: '#0F172A',
+  lime: '#A3E635',
+  limeDk: '#65A30D',
+  cyan: '#0284C7',
+  cyanDk: '#075985',
+  amber: '#FACC15',
+  amberDk: '#B45309',
+  pink: '#DB2777',
+  pinkDk: '#9D174D',
+}
+
+/** Brócoli romanesco: cono de floretes escalonados (pirámide bumpy verde). */
+const BROCCOLI: Array<[number, number, string]> = [
+  // Punta
+  [7, 2, C.lime], [8, 2, C.lime],
+  [7, 3, C.limeDk], [8, 3, C.lime],
+  // Nivel 2
+  [6, 4, C.lime], [7, 4, C.lime], [8, 4, C.lime], [9, 4, C.lime],
+  [6, 5, C.limeDk], [7, 5, C.lime], [8, 5, C.lime], [9, 5, C.limeDk],
+  // Nivel 3 (floretes salientes)
+  [5, 6, C.lime], [6, 6, C.lime], [7, 6, C.lime], [8, 6, C.lime], [9, 6, C.lime], [10, 6, C.lime],
+  [5, 7, C.lime], [6, 7, C.limeDk], [7, 7, C.lime], [8, 7, C.lime], [9, 7, C.limeDk], [10, 7, C.lime],
+  // Nivel 4 (base ancha con protuberancias)
+  [4, 8, C.lime], [5, 8, C.lime], [6, 8, C.lime], [7, 8, C.lime], [8, 8, C.lime], [9, 8, C.lime], [10, 8, C.lime], [11, 8, C.lime],
+  [4, 9, C.limeDk], [5, 9, C.lime], [6, 9, C.lime], [9, 9, C.lime], [10, 9, C.lime], [11, 9, C.limeDk],
+  // Tallo
+  [7, 10, C.limeDk], [8, 10, C.limeDk],
+  [7, 11, C.limeDk], [8, 11, C.limeDk],
+]
+
+/** Costas y ríos: línea de costa dentada que se ramifica (fractal de litoral). */
+const COAST: Array<[number, number, string]> = [
+  [2, 3, C.cyan], [3, 3, C.cyan],
+  [3, 4, C.cyan], [4, 4, C.cyan],
+  [4, 5, C.cyan], [5, 5, C.cyanDk],
+  [5, 6, C.cyan], [6, 6, C.cyan], [8, 6, C.cyan], [9, 6, C.cyan],
+  [6, 7, C.cyan], [7, 7, C.cyanDk], [9, 7, C.cyan],
+  [7, 8, C.cyan], [8, 8, C.cyan], [9, 8, C.cyanDk], [10, 8, C.cyan],
+  [8, 9, C.cyan], [10, 9, C.cyan], [11, 9, C.cyan],
+  [8, 10, C.cyanDk], [11, 10, C.cyan], [12, 10, C.cyan],
+  [8, 11, C.cyan], [12, 11, C.cyan], [13, 11, C.cyan],
+]
+
+/** Rayo / relámpago: zigzag ramificado pixelado. */
+const BOLT: Array<[number, number, string]> = [
+  [8, 1, C.amber], [9, 1, C.amber],
+  [7, 2, C.amber], [8, 2, C.amberDk],
+  [7, 3, C.amber], [8, 3, C.amber],
+  [6, 4, C.amber], [7, 4, C.amberDk],
+  [6, 5, C.amber], [7, 5, C.amber], [8, 5, C.amber], [9, 5, C.amber],
+  [8, 6, C.amberDk], [9, 6, C.amber], [10, 6, C.amber],
+  [8, 7, C.amber], [9, 7, C.amberDk],
+  [7, 8, C.amber], [8, 8, C.amber],
+  [6, 9, C.amber], [7, 9, C.amberDk],
+  [6, 10, C.amber], [7, 10, C.amber],
+  [5, 11, C.amber], [6, 11, C.amberDk],
+  [5, 12, C.amber],
+]
+
+/** Vasos y pulmones: árbol bronquial que se bifurca (autosimilitud biológica). */
+const LUNGS: Array<[number, number, string]> = [
+  [7, 2, C.pink], [8, 2, C.pink],
+  [7, 3, C.pinkDk], [8, 3, C.pink],
+  [7, 4, C.pink], [8, 4, C.pink],
+  [5, 5, C.pink], [7, 5, C.pink], [8, 5, C.pink], [10, 5, C.pink],
+  [4, 6, C.pink], [6, 6, C.pink], [9, 6, C.pink], [11, 6, C.pink],
+  [3, 7, C.pink], [4, 7, C.pinkDk], [11, 7, C.pinkDk], [12, 7, C.pink],
+  [2, 8, C.pink], [5, 8, C.pink], [10, 8, C.pink], [13, 8, C.pink],
+  [2, 9, C.pinkDk], [5, 9, C.pinkDk], [10, 9, C.pinkDk], [13, 9, C.pinkDk],
+  [3, 10, C.pink], [6, 10, C.pink], [9, 10, C.pink], [12, 10, C.pink],
+  [3, 11, C.pink], [12, 11, C.pink],
+]
+
+/** Ejemplo real de fractal: ícono pixel-art + etiqueta. */
+function RealChip({ label, cells }: { label: string; cells: Array<[number, number, string]> }) {
+  return (
+    <div className="pixel-bevel-sm flex items-center gap-2 bg-white px-2 py-1.5 sm:px-2.5">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center">
+        <PixelIcon cells={cells} title={label} />
+      </span>
+      <span className="font-display text-[10px] font-bold leading-tight text-[#0F172A] sm:text-xs">
+        {label}
+      </span>
     </div>
   )
 }
@@ -132,50 +239,35 @@ export default function Sketch12Fern() {
       {/* Título */}
       <div
         data-no-swipe="true"
-        className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4 sm:top-16"
+        className="pointer-events-none absolute inset-x-0 top-14 z-10 flex justify-center px-4 sm:top-16"
       >
-        <span className="pixel-bevel-sm max-w-[94vw] bg-white px-3 py-1.5 text-center font-mono text-[11px] font-bold text-[#0F172A] sm:text-sm">
+        <span className="pixel-bevel-sm max-w-[52vw] bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold text-[#0F172A] sm:max-w-[70vw] sm:text-sm">
           Helecho de Barnsley · cada hoja es una{' '}
           <span className="text-[#15803D]">copia del helecho entero</span>
         </span>
       </div>
 
-      {/* Ejemplos reales de fractales (columna derecha) */}
+      {/* Ejemplos reales de fractales. En móvil: fila compacta de iconos
+          abajo del título; en ≥sm: columna a la derecha. Nunca pisa el HUD. */}
       <div
         data-no-swipe="true"
-        className="pointer-events-none absolute right-3 top-28 z-20 flex w-40 flex-col gap-2 sm:top-20 sm:w-48"
+        className="pointer-events-none absolute right-2 top-[6.5rem] z-20 flex max-w-[44vw] flex-col gap-1.5
+          sm:right-3 sm:top-24 sm:max-w-[13rem]"
       >
-        <RealChip label="Brócoli romanesco">
-          <svg viewBox="0 0 24 24" className="h-6 w-6">
-            {[[12, 7, 5], [7, 13, 3.5], [17, 13, 3.5], [12, 16, 3]].map(([cx, cy, r], i) => (
-              <circle key={i} cx={cx} cy={cy} r={r} fill="#A3E635" stroke="#0F172A" strokeWidth="1.2" />
-            ))}
-          </svg>
-        </RealChip>
-        <RealChip label="Costas y ríos">
-          <svg viewBox="0 0 24 24" className="h-6 w-6">
-            <path d="M3 6 q3 4 1 7 q-2 3 2 5 q3 2 1 0" fill="none" stroke="#0284C7" strokeWidth="1.6" />
-          </svg>
-        </RealChip>
-        <RealChip label="Rayos / relámpagos">
-          <svg viewBox="0 0 24 24" className="h-6 w-6">
-            <path d="M13 2 L7 13 L11 13 L9 22 L18 9 L13 9 Z" fill="#FACC15" stroke="#0F172A" strokeWidth="1.2" />
-          </svg>
-        </RealChip>
-        <RealChip label="Vasos y pulmones">
-          <svg viewBox="0 0 24 24" className="h-6 w-6">
-            <path d="M12 22 L12 10 M12 14 L7 9 M12 14 L17 9 M12 10 L8 5 M12 10 L16 5" fill="none" stroke="#DB2777" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </RealChip>
+        <RealChip label="Brócoli romanesco" cells={BROCCOLI} />
+        <RealChip label="Costas y ríos" cells={COAST} />
+        <RealChip label="Rayos / relámpagos" cells={BOLT} />
+        <RealChip label="Vasos y pulmones" cells={LUNGS} />
       </div>
 
       {/* Botón regenerar */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-6"
+        className="absolute bottom-14 left-1/2 z-20 flex max-w-[94vw] -translate-x-1/2 justify-center sm:bottom-6"
       >
-        <button type="button" onClick={regrow} className="arcade-btn-lime">
-          ⟳ VOLVER A CRECER
+        <button type="button" onClick={regrow} className="arcade-btn-lime inline-flex items-center gap-1.5">
+          <PixelGlyph name="replay" />
+          VOLVER A CRECER
         </button>
       </div>
     </div>

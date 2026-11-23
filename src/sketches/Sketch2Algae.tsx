@@ -220,12 +220,14 @@ export default function Sketch2Algae() {
   return (
     <div className="relative h-full w-full">
       <P5Canvas sketch={sketch} />
-      {/* Pista del número áureo: el cociente A:B converge a φ ≈ 1.618 */}
+      {/* Pista del número áureo: el cociente A:B converge a φ ≈ 1.618.
+          Se eleva por encima de la fila del HUD (tag + flechas) para no
+          solaparse con ellos en ningún ancho. */}
       <div
         data-no-swipe="true"
-        className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-4"
+        className="pointer-events-none absolute inset-x-0 bottom-14 z-20 flex justify-center px-4 sm:bottom-4 sm:px-28"
       >
-        <span className="pixel-bevel-sm bg-white px-3 py-1 font-mono text-[10px] font-bold text-[#0F172A] sm:text-xs">
+        <span className="pixel-bevel-sm max-w-full bg-white px-3 py-1 text-center font-mono text-[10px] font-bold text-[#0F172A] sm:text-xs">
           Longitud → <span className="text-[#15803D]">Fibonacci</span> · cociente{' '}
           <span className="text-[#7C3AED]">A:B → φ ≈ {PHI}</span> (número áureo)
         </span>
@@ -240,7 +242,7 @@ export default function Sketch2Algae() {
           disabled={gen >= MAX_GEN}
           className="arcade-btn disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          +     GENERACIÓN
+          + GENERACIÓN
         </button>
         <button type="button" onClick={reset} className="arcade-btn">
           REINICIAR

@@ -223,10 +223,11 @@ export default function Sketch4Plant() {
       </button>
 
       {/* Panel de control 16-bit de día (ignora swipe). En móvil es más
-          estrecho y se puede colapsar; en desktop siempre visible. */}
+          estrecho y se puede colapsar; en desktop siempre visible. En
+          pantallas bajas se desplaza en vez de desbordar sobre el HUD. */}
       <div
         data-no-swipe="true"
-        className={`absolute right-3 top-28 z-20 flex w-44 flex-col gap-2 sm:top-16 sm:w-60
+        className={`thin-scroll absolute right-3 top-28 z-20 flex max-h-[calc(100dvh-8.5rem)] w-44 flex-col gap-2 overflow-y-auto overscroll-contain sm:top-16 sm:max-h-[calc(100dvh-6rem)] sm:w-60
           ${panelOpen ? 'flex' : 'hidden'} sm:!flex`}
       >
         <div className="space-y-3 pixel-bevel bg-white p-4">

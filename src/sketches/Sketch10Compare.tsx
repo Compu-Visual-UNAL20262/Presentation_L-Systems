@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
@@ -211,10 +212,11 @@ export default function Sketch10Compare() {
       {/* Botón regenerar (solo afecta al lado estocástico) */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-6"
+        className="absolute bottom-14 left-1/2 z-20 flex max-w-[94vw] -translate-x-1/2 justify-center sm:bottom-6"
       >
-        <button type="button" onClick={regenerate} className="arcade-btn-lime">
-          ⟳ REGENERAR (SOLO EL LADO DEL DADO)
+        <button type="button" onClick={regenerate} className="arcade-btn-lime inline-flex items-center gap-1.5">
+          <PixelGlyph name="replay" />
+          <span className="truncate">REGENERAR (SOLO EL LADO DEL DADO)</span>
         </button>
       </div>
     </div>

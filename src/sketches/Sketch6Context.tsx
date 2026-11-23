@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
@@ -188,10 +189,11 @@ export default function Sketch6Context() {
       {/* Botón lanzar señal */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-6"
+        className="absolute bottom-14 left-1/2 z-20 flex max-w-[94vw] -translate-x-1/2 justify-center sm:bottom-6"
       >
-        <button type="button" onClick={launch} className="arcade-btn-lime">
-          ▶ LANZAR SEÑAL HORMONAL
+        <button type="button" onClick={launch} className="arcade-btn-lime inline-flex items-center gap-1.5">
+          <PixelGlyph name="play" />
+          LANZAR SEÑAL HORMONAL
         </button>
       </div>
     </div>

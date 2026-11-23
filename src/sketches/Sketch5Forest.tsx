@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 
 /**
  * Sketch 5 — Bosque estocástico (S0L-System) + prueba de estrés.
@@ -352,8 +353,9 @@ export default function Sketch5Forest({ mode = 'stochastic' }: Sketch5ForestProp
         data-no-swipe="true"
         className="absolute bottom-24 left-4 z-20 flex flex-col gap-2 pixel-bevel bg-white/95 p-2 sm:bottom-16"
       >
-        <button type="button" onClick={regenerate} className="arcade-btn">
-          ⟳ REGENERAR BOSQUE
+        <button type="button" onClick={regenerate} className="arcade-btn inline-flex items-center gap-1.5">
+          <PixelGlyph name="replay" />
+          REGENERAR BOSQUE
         </button>
         <div className="flex gap-1.5">
           {ITER_OPTIONS.map((n) => (

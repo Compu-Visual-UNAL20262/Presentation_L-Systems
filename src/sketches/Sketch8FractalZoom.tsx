@@ -2,20 +2,24 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 import { onSlideKey } from './keyboard'
 
 /**
- * Sketch 8 — ¿Qué es un fractal? (autosimilitud por zoom infinito).
+ * Sketch 8 — ¿Qué es un fractal? (autosimilitud por zoom).
  *
  * No es un L-System en sí, sino el apoyo visual que DEFINE el concepto de
  * fractal antes de usarlo en el resto de la charla: una figura hecha de copias
- * más pequeñas de sí misma. Hace un zoom continuo hacia una esquina de la curva
- * de Koch; como la curva es autosimilar, al ampliar reaparece la MISMA forma
- * una y otra vez. Un marcador recuadra "la misma forma" en cada escala.
+ * más pequeñas de sí misma. Hace zoom hacia una esquina de la curva de Koch;
+ * como la curva es autosimilar, al ampliar reaparece la MISMA forma una y otra
+ * vez. Un marcador recuadra "la misma forma" en cada escala.
  *
- * Interacción: ▶ PAUSA / ZOOM para alternar; también ESPACIO. El zoom hace loop
- * suave (cada vez que triplica la escala, reinicia sin salto porque la curva de
- * Koch es exactamente autosimilar con factor 3).
+ * Controles:
+ *   - Auto-zoom continuo (play/pausa, también ESPACIO).
+ *   - Niveles de zoom discretos ×1 / ×2 / ×3 / ×6 / ×9 (teclas 1..5): fijan la
+ *     ampliación para comparar escalas lado a lado sin movimiento.
+ * El zoom hace loop suave: cada vez que triplica la escala reinicia sin salto,
+ * porque la curva de Koch es exactamente autosimilar con factor 3.
  */
 
 const BG = '#E6F7FF'
@@ -28,6 +32,9 @@ const AXIOM = 'F'
 const RULE = 'F+F-F-F+F' // curva de Koch cuadrática (factor de escala 3)
 const ANGLE = 90
 const DEPTH = 5
+
+/** Niveles de zoom fijos ofrecidos al público. */
+export const ZOOM_LEVELS = [1, 2, 3, 6, 9] as const
 
 /** Expande la curva y devuelve los puntos de la tortuga (paso = 1). */
 function buildPoints(): { x: number; y: number }[] {
@@ -55,6 +62,8 @@ function buildPoints(): { x: number; y: number }[] {
 
 interface ZoomParams {
   playing: boolean
+  /** Zoom fijo elegido (null = continuo controlado por auto-zoom). */
+  fixedZoom: number | null
 }
 
 function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: number }[]): SketchFn {
@@ -70,21 +79,26 @@ function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: num
     p.draw = () => {
       p.background(BG)
 
-      // Cuadrícula técnica suave
+      // Cuadrícula técnica suave (se adapta a la densidad del lienzo)
       p.stroke(GRID)
       p.strokeWeight(1)
-      const step = 40
+      const step = p.width < 640 ? 28 : 40
       for (let gx = 0; gx < p.width; gx += step) p.line(gx, 0, gx, p.height)
       for (let gy = 0; gy < p.height; gy += step) p.line(0, gy, p.width, gy)
 
-      if (paramsRef.current.playing) {
+      const fixed = paramsRef.current.fixedZoom
+      if (fixed != null) {
+        // Zoom fijo: acercamiento suave al nivel elegido, sin loop.
+        zoom += (fixed - zoom) * 0.12
+      } else if (paramsRef.current.playing) {
         // Crece exponencialmente; al triplicar reinicia (autosimilitud x3).
         zoom *= 1.006
         if (zoom >= 3) zoom = 1
       }
 
-      // Escala base para encuadrar toda la curva con margen, luego ampliamos.
-      const margin = 0.82
+      // El fractal ocupa casi todo el ancho y buena parte del alto disponible.
+      // Dejamos margen arriba para el título y abajo para los controles/HUD.
+      const margin = p.width < 640 ? 0.92 : 0.88
       const baseScale = (p.width * margin) / spanX
       const scale = baseScale * zoom
 
@@ -92,7 +106,7 @@ function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: num
       // la autosimilitud es evidente. Lo mantenemos centrado al ampliar.
       const focus = pts[Math.floor(pts.length / 3)]
       const cx = p.width / 2
-      const cy = p.height * 0.56
+      const cy = p.height * 0.54
 
       p.push()
       p.translate(cx, cy)
@@ -100,7 +114,7 @@ function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: num
       // Dibuja la curva centrada en el punto focal.
       p.noFill()
       p.stroke(CURVE)
-      p.strokeWeight(Math.max(1.5, Math.min(3, scale * 0.02)))
+      p.strokeWeight(Math.max(1.8, Math.min(4, scale * 0.025)))
       p.beginShape()
       for (const pt of pts) {
         p.vertex((pt.x - focus.x) * scale, (pt.y - focus.y) * scale)
@@ -128,7 +142,7 @@ function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: num
       p.textAlign(p.CENTER, p.CENTER)
       p.textStyle(p.BOLD)
       p.textSize(Math.max(12, Math.min(p.width * 0.018, 18)))
-      p.text(`Zoom ×${zoom.toFixed(2)} · la misma forma reaparece`, p.width / 2, p.height * 0.93)
+      p.text(`Zoom ×${zoom.toFixed(2)} · la misma forma reaparece`, p.width / 2, p.height * 0.9)
     }
   }
 }
@@ -136,21 +150,42 @@ function makeSketch(paramsRef: { current: ZoomParams }, pts: { x: number; y: num
 export default function Sketch8FractalZoom() {
   const pts = useMemo(() => buildPoints(), [])
   const [playing, setPlaying] = useState(true)
-  const paramsRef = useRef<ZoomParams>({ playing: true })
+  const [fixedZoom, setFixedZoom] = useState<number | null>(null)
+  const paramsRef = useRef<ZoomParams>({ playing: true, fixedZoom: null })
   paramsRef.current.playing = playing
+  paramsRef.current.fixedZoom = fixedZoom
 
   const sketch = useMemo(() => makeSketch(paramsRef, pts), [pts])
+
+  const toggleAuto = () => {
+    // Al reanudar el auto-zoom se abandona cualquier nivel fijo.
+    setFixedZoom(null)
+    setPlaying((v) => !v)
+  }
+
+  const pickZoom = (z: number) => {
+    setPlaying(false)
+    setFixedZoom((cur) => (cur === z ? null : z))
+  }
 
   useEffect(
     () =>
       onSlideKey((e) => {
         if (e.key === ' ') {
           e.preventDefault()
-          setPlaying((v) => !v)
+          toggleAuto()
+          return
+        }
+        const n = Number(e.key)
+        if (n >= 1 && n <= ZOOM_LEVELS.length) {
+          e.preventDefault()
+          pickZoom(ZOOM_LEVELS[n - 1])
         }
       }),
     [],
   )
+
+  const autoActive = playing && fixedZoom == null
 
   return (
     <div className="relative h-full w-full">
@@ -159,23 +194,50 @@ export default function Sketch8FractalZoom() {
       {/* Definición de fractal (overlay nítido, responsivo) */}
       <div
         data-no-swipe="true"
-        className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4 sm:top-16"
+        className="pointer-events-none absolute inset-x-0 top-12 z-20 flex justify-center px-3 sm:top-16"
       >
-        <div className="pixel-bevel-sm max-w-[94vw] bg-white px-3 py-1.5 text-center font-mono text-[11px] font-bold text-[#0F172A] sm:text-sm">
+        <div className="pixel-bevel-sm max-w-[94vw] bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold leading-snug text-[#0F172A] sm:text-sm">
           <span className="text-[#0369A1]">Fractal</span> = figura hecha de{' '}
           <span className="text-[#BE185D]">copias más pequeñas de sí misma</span>{' '}
           <span className="hidden sm:inline">· se ve igual a cualquier escala (autosimilitud)</span>
         </div>
       </div>
 
-      {/* Botón pausa/zoom */}
+      {/* Controles de zoom: auto + niveles discretos. Envuelven en pantallas
+          angostas y nunca pisan el HUD inferior. */}
       <div
         data-no-swipe="true"
-        className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-6"
+        className="absolute bottom-14 left-1/2 z-20 flex max-w-[94vw] -translate-x-1/2 flex-wrap
+          items-center justify-center gap-1.5 sm:bottom-6 sm:gap-2"
       >
-        <button type="button" onClick={() => setPlaying((v) => !v)} className="arcade-btn-lime">
-          {playing ? '⏸ PAUSAR ZOOM' : '▶ REANUDAR ZOOM'}
+        <button
+          type="button"
+          onClick={toggleAuto}
+          aria-pressed={autoActive}
+          className="arcade-btn-lime inline-flex items-center gap-1.5"
+        >
+          <PixelGlyph name={autoActive ? 'pause' : 'play'} size={14} />
+          AUTO-ZOOM
         </button>
+
+        <div className="flex items-center gap-1 rounded-md pixel-bevel-sm bg-white/90 px-1.5 py-1">
+          {ZOOM_LEVELS.map((z) => {
+            const active = fixedZoom === z
+            return (
+              <button
+                key={z}
+                type="button"
+                onClick={() => pickZoom(z)}
+                aria-pressed={active}
+                aria-label={`Zoom fijo por ${z}`}
+                className={`font-pixel text-[10px] font-bold h-7 min-w-[2rem] px-1.5 pixel-bevel-sm transition-colors
+                  ${active ? 'bg-[#A3E635] text-[#0F172A]' : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#FACC15]'}`}
+              >
+                ×{z}
+              </button>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

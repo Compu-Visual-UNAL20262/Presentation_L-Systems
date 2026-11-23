@@ -301,10 +301,11 @@ export default function Sketch9Sandbox() {
         {panelOpen ? '✕ EDITOR' : '✎ EDITOR'}
       </button>
 
-      {/* Panel editor (izquierda) */}
+      {/* Panel editor (izquierda). En pantallas bajas se desplaza en vez de
+          desbordar sobre el HUD. */}
       <div
         data-no-swipe="true"
-        className={`absolute left-3 top-28 z-20 w-[16.5rem] max-w-[86vw] flex-col gap-2 sm:top-16 sm:flex
+        className={`thin-scroll absolute left-3 top-28 z-20 max-h-[calc(100dvh-8.5rem)] w-[16.5rem] max-w-[86vw] flex-col gap-2 overflow-y-auto overscroll-contain sm:top-16 sm:max-h-[calc(100dvh-6rem)] sm:flex
           ${panelOpen ? 'flex' : 'hidden'}`}
       >
         <div className="space-y-2.5 pixel-bevel bg-white p-3">

@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import type p5 from 'p5'
 import P5Canvas from '../components/P5Canvas'
 import type { SketchFn } from '../components/P5Canvas'
+import PixelGlyph from '../components/PixelGlyph'
 
 /**
  * Sketch de Cierre — Un bosque estocástico DIVERSO que crece ante la audiencia.
@@ -292,8 +293,9 @@ export default function SketchClosing() {
         data-no-swipe="true"
         className="absolute right-4 top-14 z-20 flex flex-col items-end gap-2 sm:top-16"
       >
-        <button type="button" onClick={replay} className="arcade-btn">
-          ▶ REPLAY
+        <button type="button" onClick={replay} className="arcade-btn inline-flex items-center gap-1.5">
+          <PixelGlyph name="replay" />
+          REPLAY
         </button>
       </div>
     </div>
