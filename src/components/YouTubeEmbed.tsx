@@ -21,6 +21,10 @@ export interface YouTubeEmbedProps {
   end?: number
   /** Etiqueta corta sobre el reproductor (sin texto denso). */
   caption?: string
+  /** Texto de la barra superior (izquierda). Por defecto, la del trailer. */
+  badgeLabel?: string
+  /** Texto de la barra superior (derecha). */
+  cornerLabel?: string
   className?: string
 }
 
@@ -30,6 +34,8 @@ export default function YouTubeEmbed({
   start,
   end,
   caption,
+  badgeLabel = "VIDEO · NO MAN'S SKY",
+  cornerLabel = '▶ TRAILER',
   className = '',
 }: YouTubeEmbedProps) {
   const [active, setActive] = useState(false)
@@ -57,10 +63,10 @@ export default function YouTubeEmbed({
           <span className="h-2.5 w-2.5 border-2 border-[#0F172A] bg-[#FACC15]" />
           <span className="h-2.5 w-2.5 border-2 border-[#0F172A] bg-[#A3E635]" />
           <span className="ml-1 font-pixel text-[9px] font-bold tracking-widest text-[#0F172A]">
-            VIDEO · NO MAN&apos;S SKY
+            {badgeLabel}
           </span>
         </div>
-        <span className="font-pixel text-[9px] font-bold text-[#0F172A]">▶ TRAILER</span>
+        <span className="font-pixel text-[9px] font-bold text-[#0F172A]">{cornerLabel}</span>
       </div>
 
       <div className="relative aspect-video w-full bg-black">
