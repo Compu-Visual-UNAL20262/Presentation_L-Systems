@@ -134,7 +134,6 @@ export function SlideFractalZoomSketch() {
   return (
     <div className="relative h-full w-full">
       <Sketch8FractalZoom />
-      <CornerBadge text="Concepto · ¿Qué es un fractal?" className="absolute bottom-16 right-4" />
     </div>
   )
 }
