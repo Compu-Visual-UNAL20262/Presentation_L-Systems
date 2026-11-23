@@ -15,9 +15,9 @@ import artFractal from '../../assets/art-fractal.webp'
 export default function Slide20Applications() {
   return (
     <ConceptFrame badge="IMPACTO REAL" accent="emerald" title="Mundos Infinitos en Pocos Kilobytes">
-      <div className="grid w-full max-w-5xl gap-3 overflow-y-auto sm:grid-cols-5 sm:items-start sm:gap-4 sm:overflow-visible">
+      <div className="mx-auto grid w-full max-w-5xl place-items-center gap-3 overflow-y-auto sm:grid-cols-5 sm:items-center sm:gap-4 sm:overflow-visible">
         {/* Pieza central: trailer de No Man's Sky recortado a 0:17–0:42 */}
-        <div className="sm:col-span-3">
+        <div className="w-full sm:col-span-3">
           <YouTubeEmbed
             videoId="nLtmEjqzg7M"
             title="No Man's Sky — flora generada proceduralmente (clip 0:17–0:42)"
@@ -28,7 +28,7 @@ export default function Slide20Applications() {
         </div>
 
         {/* Columna de aplicaciones (3 tarjetas compactas) */}
-        <div className="grid gap-3 sm:col-span-2 sm:gap-3">
+        <div className="grid w-full gap-3 sm:col-span-2 sm:gap-3">
           {/* STAGE 01 — Videojuegos (captura de flora procedural) */}
           <div
             className="pixel-bevel bg-white overflow-hidden text-center animate-fade-up"

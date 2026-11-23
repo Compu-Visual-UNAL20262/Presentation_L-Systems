@@ -23,10 +23,10 @@ import { onSlideKey } from './keyboard'
  * cada símbolo decide a ciegas sin mirar a sus vecinos.
  */
 
-const BG = '#F3EAFF'
+const BG = '#C7ECFF' // mismo celeste del deck, para integración visual
 const INK = '#0F172A'
 const STEM = '#15803D'
-const CELL_IDLE = '#DDD6FE' // célula en reposo (lila claro)
+const CELL_IDLE = '#E0F2FE' // célula en reposo (celeste muy claro)
 const CELL_ACTIVE = '#FACC15' // señal pasando (amarillo)
 const CELL_BLOOM = '#F472B6' // célula que ya floreció (rosa)
 const SIGNAL = '#F59E0B'
@@ -66,13 +66,15 @@ function makeSketch(paramsRef: { current: ContextParams }): SketchFn {
 
       p.background(BG)
 
-      // Geometría responsiva: tallo vertical centrado; las celdas se reparten
-      // entre la base (suelo) y la parte alta, con tamaño en función del alto.
-      const marginTop = p.height * 0.1
-      const marginBottom = p.height * 0.12
-      const usableH = p.height - marginTop - marginBottom
+      // Geometría responsiva: tallo vertical centrado. Reservamos margen
+      // superior amplio para el banner de la regla (overlay HTML en top-14/16)
+      // y margen inferior para el botón ▶ LANZAR (bottom-6/16), de modo que las
+      // células nunca queden debajo de esos elementos.
+      const marginTop = Math.max(p.height * 0.26, 170)
+      const marginBottom = Math.max(p.height * 0.2, 120)
+      const usableH = Math.max(40, p.height - marginTop - marginBottom)
       const gap = usableH / (N_CELLS - 1)
-      const cellSize = Math.max(14, Math.min(gap * 0.72, p.width * 0.1, 56))
+      const cellSize = Math.max(12, Math.min(gap * 0.72, p.width * 0.08, 48))
       const cx = p.width / 2
 
       // Posición Y de cada célula (0 = base abajo, N-1 = punta arriba).
@@ -129,18 +131,21 @@ function makeSketch(paramsRef: { current: ContextParams }): SketchFn {
         }
       }
 
-      // ── Etiqueta raíz / punta ──
+      // ── Etiquetas raíz / punta (fuera del tallo, en los márgenes reservados) ──
       p.noStroke()
       p.fill(INK)
-      p.textAlign(p.CENTER, p.CENTER)
       p.textStyle(p.BOLD)
-      p.textSize(Math.max(10, Math.min(cellSize * 0.42, 18)))
-      p.text('raíz · la señal nace aquí', cx, p.height - marginBottom * 0.42)
-      p.text('punta', cx, cellY(N_CELLS - 1) - cellSize * 0.85)
+      const labelSize = Math.max(11, Math.min(cellSize * 0.5, 17))
+      p.textSize(labelSize)
+      // "punta" centrada encima de la célula superior (zona libre bajo el banner).
+      p.textAlign(p.CENTER, p.CENTER)
+      p.text('▲ punta', cx, cellY(N_CELLS - 1) - cellSize * 0.85)
+      // "raíz" a la izquierda de la célula base (la hoja de esa célula sale a la
+      // derecha, así el texto no la tapa) y lejos del botón central.
+      p.textAlign(p.RIGHT, p.CENTER)
+      p.text('raíz · aquí nace la señal ►', cx - cellSize * 0.9, cellY(0))
 
-      // ── Panel de la regla de contexto ──
       p.rectMode(p.CORNER)
-      p.noStroke()
     }
   }
 }

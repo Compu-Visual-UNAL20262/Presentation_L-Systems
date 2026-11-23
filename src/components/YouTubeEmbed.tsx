@@ -36,6 +36,9 @@ export default function YouTubeEmbed({
 
   const params = new URLSearchParams({
     autoplay: '1',
+    // Arranca en silencio: el trailer queda de fondo mientras se exponen los
+    // temas. Los navegadores además exigen mute para permitir autoplay.
+    mute: '1',
     rel: '0',
     modestbranding: '1',
     playsinline: '1',
