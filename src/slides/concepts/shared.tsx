@@ -37,7 +37,12 @@ export function ConceptFrame({
             {subtitle}
           </p>
         )}
-        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden sm:mt-6">
+        {/*
+          Holgura (p-1.5) para que la sombra dura de 4px y el borde de las
+          tarjetas pixel-bevel interiores no queden al ras del recorte
+          (overflow-hidden) y se vean completos en todos los lados.
+        */}
+        <div className="mt-4 flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden p-1.5 sm:mt-6">
           {children}
         </div>
       </div>

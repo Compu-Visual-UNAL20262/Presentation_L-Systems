@@ -1,9 +1,8 @@
 import { ConceptFrame } from './shared'
-import PixelMeme from '../../components/PixelMeme'
 
 /**
  * Slide 14 — El Bosque de los Dados.
- * 3 árboles clonados idénticos vs. 3 distintos, con un dado pixelado + Meme RNG.
+ * 3 árboles clonados idénticos vs. 3 distintos, con un dado pixelado.
  */
 
 function TreeGlyph({ d, color }: { d: string; color: string }) {
@@ -67,10 +66,6 @@ export default function Slide14Dice() {
             </p>
           </div>
         </div>
-
-        {/* Meme narrativo: clones Spider-Man vs RNG.
-            Oculto en móvil para no recortar el contenido en viewports cortos. */}
-        <PixelMeme variant="clones" className="hidden w-full max-w-md sm:block" />
       </div>
     </ConceptFrame>
   )
