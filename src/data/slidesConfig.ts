@@ -17,29 +17,34 @@ export type Accent = 'cyan' | 'emerald' | 'amber' | 'magenta'
  * <P5Canvas>; el resto son slides conceptuales con SVG + CSS.
  */
 export type SlideComponentId =
-  | 'sketch-hook' // 01 Sketch1 (árbol)
-  | 'cover' // 02
-  | 'history' // 03
-  | 'parallel' // 04
-  | 'ingredients' // 05
-  | 'algae-diagram' // 06
-  | 'sketch-algae' // 07 Sketch2
-  | 'turtle' // 08
-  | 'sketch-koch' // 09 Sketch3
-  | 'stack' // 10
-  | 'edge-node' // 11
-  | 'sketch-plant' // 12 Sketch4
-  | 'levels' // 13
-  | 'dice' // 14
-  | 'sketch-forest' // 15 Sketch5 stochastic
-  | 'sketch-context' // 16 Sketch6 IL (sensible a contexto)
-  | 'sketch-parametric' // 17 Sketch7 paramétrico (da Vinci)
-  | 'phototropism' // 18
-  | 'exponential' // 19
-  | 'sketch-stress' // 20 Sketch5 stress
-  | 'three-d' // 21
-  | 'applications' // 22
-  | 'closing' // 23 Sketch1 bosque
+  | 'sketch-hook'
+  | 'cover'
+  | 'history'
+  | 'parallel'
+  | 'ingredients'
+  | 'algae-diagram'
+  | 'sketch-algae'
+  | 'sketch-rewrite' // doble cuaderno / reescritura paralela (Sketch11)
+  | 'turtle'
+  | 'fractal-zoom' // ¿qué es un fractal? autosimilitud (Sketch8)
+  | 'sketch-koch' // Sketch3 fractales de tortuga
+  | 'fern' // fractales en la naturaleza: helecho de Barnsley (Sketch12)
+  | 'stack'
+  | 'edge-node'
+  | 'sketch-plant' // Sketch4
+  | 'sketch-sandbox' // laboratorio abierto: construye tu L-System (Sketch9)
+  | 'levels'
+  | 'dice'
+  | 'sketch-forest' // Sketch5 stochastic
+  | 'sketch-compare' // determinista vs. estocástico (Sketch10)
+  | 'sketch-context' // Sketch6 IL (sensible a contexto)
+  | 'sketch-parametric' // Sketch7 paramétrico (da Vinci)
+  | 'phototropism'
+  | 'exponential'
+  | 'sketch-stress' // Sketch5 stress
+  | 'three-d'
+  | 'applications'
+  | 'closing' // SketchClosing bosque
 
 export interface Act {
   id: number
@@ -119,40 +124,45 @@ export const TEAM_MEMBERS: TeamMember[] = [
 ]
 
 export const SLIDES: Slide[] = [
-  // ── Acto I ──
+  // ── Sección 1 · ORIGEN ──
   { n: 1, act: 1, accent: 'emerald', title: 'Gancho: árbol en vivo', component: 'sketch-hook' },
   { n: 2, act: 1, accent: 'cyan', title: 'L-Systems: El ADN de las Formas', component: 'cover' },
   { n: 3, act: 1, accent: 'cyan', title: '1968: Aristid Lindenmayer', component: 'history' },
   { n: 4, act: 1, accent: 'cyan', title: 'Uno a la Vez vs. Todos al Tiempo', component: 'parallel' },
 
-  // ── Acto II ──
+  // ── Sección 2 · INGREDIENTES ──
   { n: 5, act: 2, accent: 'emerald', title: 'Los 3 Ingredientes', component: 'ingredients' },
   { n: 6, act: 2, accent: 'emerald', title: 'El Alga que Sabe Contar', component: 'algae-diagram' },
   { n: 7, act: 2, accent: 'emerald', title: 'Sketch: Fibonacci emergente', component: 'sketch-algae' },
 
-  // ── Acto III ──
+  // ── Sección 3 · LA TORTUGA ──
   { n: 8, act: 3, accent: 'amber', title: 'De Letras a Píxeles: La Tortuga', component: 'turtle' },
-  { n: 9, act: 3, accent: 'amber', title: 'Sketch: copo de Koch', component: 'sketch-koch' },
-  { n: 10, act: 3, accent: 'amber', title: 'El Superpoder de Recordar: [ y ]', component: 'stack' },
-  { n: 11, act: 3, accent: 'amber', title: 'Crecer por Tallos vs. por Yemas', component: 'edge-node' },
-  { n: 12, act: 3, accent: 'amber', title: 'Sketch: planta ramificada', component: 'sketch-plant' },
+  { n: 9, act: 3, accent: 'amber', title: '¿Qué es un Fractal?', component: 'fractal-zoom' },
+  { n: 10, act: 3, accent: 'amber', title: 'Sketch: fractales de tortuga', component: 'sketch-koch' },
+  { n: 11, act: 3, accent: 'amber', title: 'Fractales en la Naturaleza', component: 'fern' },
+  { n: 12, act: 3, accent: 'amber', title: 'El Superpoder de Recordar: [ y ]', component: 'stack' },
+  { n: 13, act: 3, accent: 'amber', title: 'Crecer por Tallos vs. por Yemas', component: 'edge-node' },
+  { n: 14, act: 3, accent: 'amber', title: 'Sketch: planta ramificada', component: 'sketch-plant' },
+  { n: 15, act: 3, accent: 'amber', title: 'Laboratorio: construye tu L-System', component: 'sketch-sandbox' },
 
-  // ── Acto IV ──
-  { n: 13, act: 4, accent: 'magenta', title: 'Los 5 Niveles de Realismo', component: 'levels' },
-  { n: 14, act: 4, accent: 'magenta', title: 'El Bosque de los Dados', component: 'dice' },
-  { n: 15, act: 4, accent: 'magenta', title: 'Sketch: bosque estocástico', component: 'sketch-forest' },
-  { n: 16, act: 4, accent: 'magenta', title: 'Sketch: señal sensible a contexto', component: 'sketch-context' },
-  { n: 17, act: 4, accent: 'magenta', title: 'Sketch: grosor paramétrico (da Vinci)', component: 'sketch-parametric' },
-  { n: 18, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
+  // ── Sección 4 · NATURALEZA VIVA ──
+  { n: 16, act: 4, accent: 'magenta', title: 'Los 5 Niveles de Realismo', component: 'levels' },
+  { n: 17, act: 4, accent: 'magenta', title: 'El Bosque de los Dados', component: 'dice' },
+  { n: 18, act: 4, accent: 'magenta', title: 'Sketch: bosque estocástico', component: 'sketch-forest' },
+  { n: 19, act: 4, accent: 'magenta', title: 'Sketch: determinista vs. azar', component: 'sketch-compare' },
+  { n: 20, act: 4, accent: 'magenta', title: 'Sketch: señal sensible a contexto', component: 'sketch-context' },
+  { n: 21, act: 4, accent: 'magenta', title: 'Sketch: grosor paramétrico (da Vinci)', component: 'sketch-parametric' },
+  { n: 22, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
 
-  // ── Acto V ──
-  { n: 19, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
-  { n: 20, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
-  { n: 21, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
+  // ── Sección 5 · DETRÁS DE CÁMARAS ──
+  { n: 23, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
+  { n: 24, act: 5, accent: 'cyan', title: 'Sketch: el doble cuaderno en vivo', component: 'sketch-rewrite' },
+  { n: 25, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
+  { n: 26, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
 
-  // ── Acto VI ──
-  { n: 22, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
-  { n: 23, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
+  // ── Sección 6 · IMPACTO REAL ──
+  { n: 27, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
+  { n: 28, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
 ]
 
 /** Devuelve la sección a la que pertenece un slide. */

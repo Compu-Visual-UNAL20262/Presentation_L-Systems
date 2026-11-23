@@ -4,14 +4,19 @@
 
 | Sketch | Tema y Propósito en la Charla | Responsable de Desarrollo | Quién lo Opera en Vivo |
 | :---- | :---- | :---- | :---- |
-| **Sketch 1** | Gancho inicial: árbol frondoso animado rama por rama | **Farid Ardila** | Nicolas Bolaños (Acto 1\) |
-| **Sketch 2** | Crecimiento del alga *Anabaena*, Fibonacci **y cociente áureo A:B → φ** | **Ariadna***(selección aleatoria)* | Nicolas Bolaños (Acto 2\) |
-| **Sketch 3** | Tortuga LOGO, copo de Koch, **dimensión fractal y familias Sierpinski/Dragón** | **Nicolas Bolaños** | Ariadna (Acto 3\) |
-| **Sketch 4** | Planta ramificada con corchetes \[ \] y *sliders* en vivo | **Ariadna** | Nicolas Bolaños (Acto 3\) |
-| **Sketch 5** | Bosque estocástico (probabilidades) \+ prueba de estrés FPS | **Angel Beltran** | Ariadna (Actos 4 y 5\) |
-| **Sketch 6** | **L-System sensible a contexto: señal hormonal que viaja célula a célula** | **Equipo** | Farid Ardila (Acto 4\) |
-| **Sketch 7** | **L-System paramétrico: grosor de ramas con la regla de da Vinci** | **Equipo** | Farid / Angel (Acto 4\) |
-| **Sketch Cierre** | Bosque estocástico **diverso** que crece en ola (payoff final) | **Equipo** | Ariadna (Acto 6\) |
+| **Sketch 1** | Gancho inicial: árbol frondoso animado rama por rama | **Farid Ardila** | Nicolas Bolaños (ORIGEN) |
+| **Sketch 2** | Crecimiento del alga *Anabaena*, Fibonacci **y cociente áureo A:B → φ** | **Ariadna***(selección aleatoria)* | Nicolas Bolaños (INGREDIENTES) |
+| **Sketch 8** | **¿Qué es un fractal? Zoom de autosimilitud sobre la curva de Koch** | **Equipo** | Ariadna (LA TORTUGA) |
+| **Sketch 3** | Tortuga LOGO, copo de Koch, **dimensión fractal y familias Sierpinski/Dragón** | **Nicolas Bolaños** | Ariadna (LA TORTUGA) |
+| **Sketch 12** | **Fractales en la naturaleza: helecho de Barnsley + ejemplos reales** | **Equipo** | Ariadna (LA TORTUGA) |
+| **Sketch 4** | Planta ramificada con corchetes \[ \] y *sliders* en vivo | **Ariadna** | Nicolas Bolaños (LA TORTUGA) |
+| **Sketch 9** | **Laboratorio abierto: el público escribe su propio axioma/regla** | **Equipo** | Nicolas Bolaños + público (LA TORTUGA) |
+| **Sketch 5** | Bosque estocástico (probabilidades) \+ prueba de estrés FPS | **Angel Beltran** | Ariadna (NATURALEZA VIVA / DETRÁS DE CÁMARAS) |
+| **Sketch 10** | **Determinista vs. estocástico lado a lado (aísla el papel del azar)** | **Equipo** | Ariadna (NATURALEZA VIVA) |
+| **Sketch 6** | **L-System sensible a contexto: señal hormonal que viaja célula a célula** | **Equipo** | Farid Ardila (NATURALEZA VIVA) |
+| **Sketch 7** | **L-System paramétrico: grosor de ramas con la regla de da Vinci** | **Equipo** | Farid / Angel (NATURALEZA VIVA) |
+| **Sketch 11** | **El doble cuaderno en vivo: reescritura paralela paso a paso (A→AB, B→A)** | **Equipo** | Angel Beltran (DETRÁS DE CÁMARAS) |
+| **Sketch Cierre** | Bosque estocástico **diverso** que crece en ola (payoff final) | **Equipo** | Ariadna (IMPACTO REAL) |
 
 # **Sketch 1: Árbol Frondoso Animado (Gancho Inicial)**
 

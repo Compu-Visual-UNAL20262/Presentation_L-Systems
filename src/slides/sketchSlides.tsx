@@ -5,6 +5,11 @@ import Sketch4Plant from '../sketches/Sketch4Plant'
 import Sketch5Forest from '../sketches/Sketch5Forest'
 import Sketch6Context from '../sketches/Sketch6Context'
 import Sketch7Parametric from '../sketches/Sketch7Parametric'
+import Sketch8FractalZoom from '../sketches/Sketch8FractalZoom'
+import Sketch9Sandbox from '../sketches/Sketch9Sandbox'
+import Sketch10Compare from '../sketches/Sketch10Compare'
+import Sketch11Rewrite from '../sketches/Sketch11Rewrite'
+import Sketch12Fern from '../sketches/Sketch12Fern'
 import SketchClosing from '../sketches/SketchClosing'
 import { TEAM } from '../data/slidesConfig'
 
@@ -115,6 +120,56 @@ export function Slide18StressSketch() {
       </div>
       <Sketch5Forest mode="stress" />
       <CornerBadge text="Demo · Prueba de estrés" className="absolute bottom-16 right-4" />
+    </div>
+  )
+}
+
+/** Slide — ¿Qué es un fractal? (zoom de autosimilitud). */
+export function SlideFractalZoomSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch8FractalZoom />
+      <CornerBadge text="Concepto · ¿Qué es un fractal?" className="absolute bottom-16 right-4" />
+    </div>
+  )
+}
+
+/** Slide — Fractales en la naturaleza (helecho de Barnsley). */
+export function SlideFernSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch12Fern />
+      <CornerBadge text="Demo · Fractales en la naturaleza" className="absolute bottom-16 left-4" />
+    </div>
+  )
+}
+
+/** Slide — Laboratorio abierto: construye tu propio L-System. */
+export function SlideSandboxSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch9Sandbox />
+      <CornerBadge text="Demo · Construye tu L-System" className="absolute bottom-16 right-4" />
+    </div>
+  )
+}
+
+/** Slide — Determinista vs. estocástico lado a lado. */
+export function SlideCompareSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch10Compare />
+      <CornerBadge text="Demo · Determinista vs. azar" className="absolute bottom-16 left-4" />
+    </div>
+  )
+}
+
+/** Slide — El doble cuaderno (reescritura paralela paso a paso). */
+export function SlideRewriteSketch() {
+  return (
+    <div className="relative h-full w-full">
+      <Sketch11Rewrite />
+      <CornerBadge text="Demo · Doble cuaderno (buffers)" className="absolute bottom-16 right-4" />
     </div>
   )
 }
