@@ -280,7 +280,7 @@ Es el contraste directo con los niveles anteriores, donde cada símbolo decidía
 
 ## **1\. Concepto (Nivel 4 de realismo)**
 
-Modela un **L-System paramétrico** real: cada símbolo transporta un parámetro numérico (aquí, el grosor `w`). La cadena se expande con axioma y regla, y luego se interpreta con la tortuga, igual que los demás sketches:
+Modela un **L-System paramétrico**: cada símbolo transporta un parámetro numérico (aquí, el grosor `w`). Conceptualmente equivale al axioma y la regla:
 
 ```
 Axioma:  A(w0)
@@ -301,9 +301,9 @@ Para dos hijas iguales: `w_hija = w_padre · (1/2)^(1/e)`. El exponente `e` es e
 
 ## **2\. Diseño e Implementación en p5.js**
 
-* Se **expande la cadena paramétrica** (lista de módulos símbolo+grosor) `ITER = 7` veces y se interpreta con la tortuga usando corchetes `[ ]` para la pila, igual que el resto de sketches. La cadena se recacha solo cuando cambian `e` o el grosor base.
-* Cada tramo `F` se dibuja con grosor `w` y una longitud proporcional a `w` (ramas finas → tramos cortos), apertura ±26°; color interpolado de corteza (marrón) a hoja (verde) según el grosor relativo; yema/hoja verde en cada cierre `]`.
-* Controles: slider **Exponente e** (1.2–3), slider **Grosor del tronco w** (6–24 px) y menú **Ley de grosor** con tres presets de exponente (**FRÁGIL e=1.5 / CLÁSICO e=2 / GRUESO e=3**); el botón activo resalta el valor vigente. En móvil, botón **⚙ CONTROLES** colapsa el panel. Un overlay muestra el axioma, la regla y la ley de da Vinci con el exponente actual.
+* El árbol se dibuja con **bifurcación recursiva** (profundidad 7, apertura ±26°), priorizando una silueta llena y natural. En cada bifurcación el grosor de las hijas se calcula con el factor de da Vinci `q = (1/2)^(1/e)` y la longitud se reduce ×0.76. Longitud del tronco y grosor base escalados al alto del lienzo (responsivo).
+* Color de rama interpolado de corteza (marrón) a hoja (verde) según la profundidad; hoja verde en cada punta.
+* Controles: slider **Exponente e** (1.2–3), slider **Grosor del tronco** (6–24 px) y menú **Ley de grosor** con tres presets de exponente (**FRÁGIL e=1.5 / CLÁSICO e=2 / GRUESO e=3**); el botón activo resalta el valor vigente. En móvil, botón **⚙ CONTROLES** colapsa el panel. Un overlay muestra la regla de da Vinci con el exponente actual.
 
 ## **3\. Qué se Planea Mostrar en Vivo**
 

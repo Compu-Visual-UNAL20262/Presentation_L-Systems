@@ -2,26 +2,17 @@ import type { ReactNode } from 'react'
 import type { Accent } from '../../data/slidesConfig'
 import { ACCENT } from '../../data/accent'
 
-/** Badge pixel de sección (16-bit de día, alto contraste). */
-export function ActBadge({ label, accent }: { label: string; accent: Accent }) {
-  const a = ACCENT[accent]
-  return (
-    <span
-      className={`inline-block font-pixel text-[10px] font-bold tracking-widest uppercase
-        px-3 py-1.5 pixel-bevel-sm ${a.bg} text-[#0F172A]`}
-    >
-      ★ {label}
-    </span>
-  )
-}
-
 /**
- * Marco común de una slide conceptual: badge de sección arriba, título grande
- * en tinta oscura de máximo contraste, y debajo el apoyo visual.
+ * Marco común de una slide conceptual: título grande en tinta oscura de máximo
+ * contraste y, debajo, el apoyo visual. La sección (ORIGEN, INGREDIENTES, …) ya
+ * se muestra en el HUD inferior izquierdo, así que aquí no se repite.
+ *
+ * El prop `badge` se conserva en la firma por compatibilidad con las slides que
+ * lo pasan, pero ya no se renderiza.
  */
 export function ConceptFrame({
-  badge,
-  accent,
+  badge: _badge,
+  accent: _accent,
   title,
   subtitle,
   children,
@@ -35,10 +26,9 @@ export function ConceptFrame({
   return (
     <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-14 sm:px-10">
       <div className="animate-fade-up flex h-full min-h-0 w-full max-w-5xl flex-col items-center">
-        <ActBadge label={badge} accent={accent} />
         <h2
-          className="mt-3 shrink-0 text-center font-display text-2xl font-extrabold leading-tight
-            text-[#0F172A] drop-shadow-[0_2px_0_rgba(255,255,255,0.9)] sm:mt-4 sm:text-4xl lg:text-5xl"
+          className="shrink-0 text-center font-display text-2xl font-extrabold leading-tight
+            text-[#0F172A] drop-shadow-[0_2px_0_rgba(255,255,255,0.9)] sm:text-4xl lg:text-5xl"
         >
           {title}
         </h2>
