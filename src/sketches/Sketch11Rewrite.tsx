@@ -118,7 +118,7 @@ function makeSketch(paramsRef: { current: RewriteParams }): SketchFn {
       p.background(BG)
 
       const topY = p.height * 0.26
-      const botY = p.height * 0.58
+      const botY = p.height * 0.62
       const cellApprox = Math.max(16, Math.min(40, (p.width * 0.8) / MAX_LEN))
 
       // Avance temporal
@@ -142,22 +142,46 @@ function makeSketch(paramsRef: { current: RewriteParams }): SketchFn {
       // Panel de MAÑANA (Sₙ₊₁)
       drawRibbon(tomorrow, -1, botY, 'MAÑANA  ·  Sₙ₊₁', 'buffer limpio (se escribe)', '#15803D')
 
-      // Flecha de sucesor del símbolo activo
+      // Flecha de sucesor del símbolo activo.
       if (!swapping && readIdx < today.length) {
+        // La flecha arranca bajo las celdas de HOY y termina MUY por encima del
+        // rótulo de MAÑANA (que se dibuja en botY - cell*0.75), dejando aire.
+        const arrowTop = topY + cellApprox + 6
+        const arrowBottom = botY - cellApprox * 1.9
+        const midX = p.width / 2
+
         p.stroke('#0284C7')
         p.strokeWeight(3)
-        const midX = p.width / 2
-        p.line(midX, topY + cellApprox + 6, midX, botY - cellApprox * 0.9)
+        p.line(midX, arrowTop, midX, arrowBottom)
+        // Punta de flecha
         p.noStroke()
         p.fill('#0284C7')
-        p.textAlign(p.CENTER, p.CENTER)
-        p.textStyle(p.BOLD)
-        p.textSize(Math.max(11, Math.min(15, p.width * 0.016)))
-        p.text(
-          `${today[readIdx]} → ${successor(today[readIdx])}`,
-          midX,
-          (topY + botY) / 2 + cellApprox * 0.1,
+        p.triangle(
+          midX - 6, arrowBottom - 2,
+          midX + 6, arrowBottom - 2,
+          midX, arrowBottom + 7,
         )
+
+        // Etiqueta "X → Y" en una cápsula a la DERECHA de la flecha, para que
+        // la línea no la cruce por el medio.
+        const label = `${today[readIdx]} → ${successor(today[readIdx])}`
+        const labelY = (arrowTop + arrowBottom) / 2
+        p.textStyle(p.BOLD)
+        const fs = Math.max(11, Math.min(15, p.width * 0.016))
+        p.textSize(fs)
+        const padX = 8
+        const chipW = p.textWidth(label) + padX * 2
+        const chipH = fs + 10
+        const chipX = midX + 14 // separada del eje de la flecha
+        p.rectMode(p.CORNER)
+        p.fill('#E0F2FE')
+        p.stroke('#0284C7')
+        p.strokeWeight(2)
+        p.rect(chipX, labelY - chipH / 2, chipW, chipH, 6)
+        p.noStroke()
+        p.fill('#0369A1')
+        p.textAlign(p.LEFT, p.CENTER)
+        p.text(label, chipX + padX, labelY + 1)
       }
 
       // Animación de intercambio de cuadernos

@@ -34,7 +34,6 @@ export type SlideComponentId =
   | 'sketch-plant' // Sketch4
   | 'sketch-sandbox' // laboratorio abierto: construye tu L-System (Sketch9)
   | 'levels'
-  | 'dice'
   | 'sketch-forest' // Sketch5 stochastic
   | 'sketch-compare' // determinista vs. estocástico (Sketch10)
   | 'sketch-context' // Sketch6 IL (sensible a contexto)
@@ -45,6 +44,7 @@ export type SlideComponentId =
   | 'three-d'
   | 'applications'
   | 'closing' // SketchClosing bosque
+  | 'bibliography' // referencias académicas + créditos de videos consultados
 
 export interface Act {
   id: number
@@ -147,22 +147,22 @@ export const SLIDES: Slide[] = [
 
   // ── Sección 4 · NATURALEZA VIVA ──
   { n: 16, act: 4, accent: 'magenta', title: 'Los 5 Niveles de Realismo', component: 'levels' },
-  { n: 17, act: 4, accent: 'magenta', title: 'El Bosque de los Dados', component: 'dice' },
+  { n: 17, act: 4, accent: 'magenta', title: 'Sketch: determinista vs. azar', component: 'sketch-compare' },
   { n: 18, act: 4, accent: 'magenta', title: 'Sketch: bosque estocástico', component: 'sketch-forest' },
-  { n: 19, act: 4, accent: 'magenta', title: 'Sketch: determinista vs. azar', component: 'sketch-compare' },
-  { n: 20, act: 4, accent: 'magenta', title: 'Sketch: señal sensible a contexto', component: 'sketch-context' },
-  { n: 21, act: 4, accent: 'magenta', title: 'Sketch: grosor paramétrico (da Vinci)', component: 'sketch-parametric' },
-  { n: 22, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
+  { n: 19, act: 4, accent: 'magenta', title: 'Sketch: señal sensible a contexto', component: 'sketch-context' },
+  { n: 20, act: 4, accent: 'magenta', title: 'Sketch: grosor paramétrico (da Vinci)', component: 'sketch-parametric' },
+  { n: 21, act: 4, accent: 'magenta', title: 'Cuando la Planta Mira al Sol', component: 'phototropism' },
 
   // ── Sección 5 · DETRÁS DE CÁMARAS ──
-  { n: 23, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
-  { n: 24, act: 5, accent: 'cyan', title: 'Sketch: el doble cuaderno en vivo', component: 'sketch-rewrite' },
-  { n: 25, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
-  { n: 26, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
+  { n: 22, act: 5, accent: 'cyan', title: 'Peligro Exponencial y Doble Cuaderno', component: 'exponential' },
+  { n: 23, act: 5, accent: 'cyan', title: 'Sketch: el doble cuaderno en vivo', component: 'sketch-rewrite' },
+  { n: 24, act: 5, accent: 'cyan', title: 'Sketch: prueba de estrés', component: 'sketch-stress' },
+  { n: 25, act: 5, accent: 'cyan', title: 'Del Plano 2D al Mundo 3D', component: 'three-d' },
 
   // ── Sección 6 · IMPACTO REAL ──
-  { n: 27, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
-  { n: 28, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
+  { n: 26, act: 6, accent: 'emerald', title: 'Mundos Infinitos en Pocos Kilobytes', component: 'applications' },
+  { n: 27, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
+  { n: 28, act: 6, accent: 'emerald', title: 'Bibliografía y créditos', component: 'bibliography' },
 ]
 
 /** Devuelve la sección a la que pertenece un slide. */

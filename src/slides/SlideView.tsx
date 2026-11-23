@@ -10,11 +10,11 @@ import {
   Slide10Stack,
   Slide11EdgeNode,
   Slide13Levels,
-  Slide14Dice,
   Slide16Phototropism,
   Slide17Exponential,
   Slide19ThreeD,
   Slide20Applications,
+  Slide22Bibliography,
 } from './concepts'
 import {
   Slide01Hook,
@@ -56,7 +56,6 @@ const REGISTRY: Record<SlideComponentId, ComponentType> = {
   'sketch-plant': Slide12PlantSketch,
   'sketch-sandbox': SlideSandboxSketch,
   levels: Slide13Levels,
-  dice: Slide14Dice,
   'sketch-forest': Slide15ForestSketch,
   'sketch-compare': SlideCompareSketch,
   'sketch-context': SlideContextSketch,
@@ -67,6 +66,7 @@ const REGISTRY: Record<SlideComponentId, ComponentType> = {
   'three-d': Slide19ThreeD,
   applications: Slide20Applications,
   closing: Slide21Closing,
+  bibliography: Slide22Bibliography,
 }
 
 export default function SlideView({ slide }: { slide: Slide }) {

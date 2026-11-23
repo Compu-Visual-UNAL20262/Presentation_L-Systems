@@ -10,8 +10,11 @@ import Sketch9Sandbox from '../sketches/Sketch9Sandbox'
 import Sketch10Compare from '../sketches/Sketch10Compare'
 import Sketch11Rewrite from '../sketches/Sketch11Rewrite'
 import Sketch12Fern from '../sketches/Sketch12Fern'
+import { useState } from 'react'
 import SketchClosing from '../sketches/SketchClosing'
 import PixelGlyph from '../components/PixelGlyph'
+import InstagramEmbed from '../components/InstagramEmbed'
+import qrMathlens from '../assets/qr-mathlens.svg'
 import { TEAM } from '../data/slidesConfig'
 
 /**
@@ -188,6 +191,8 @@ export function SlideRewriteSketch() {
  * cierre y emblema del equipo Gaymers.
  */
 export function Slide21Closing() {
+  const [reelOpen, setReelOpen] = useState(false)
+
   return (
     <div className="relative h-full w-full">
       <SketchClosing />
@@ -210,6 +215,68 @@ export function Slide21Closing() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Reel de refuerzo (mathlens): una regla + un "dial" de ángulo → árbol
+          fractal; 2¹⁰ puntas; árboles, pulmones, ríos y venas se ramifican
+          igual. Es la tesis de la charla. Abrible a demanda para no tapar el
+          bosque ni el emblema del equipo. */}
+      <div
+        data-no-swipe="true"
+        className="thin-scroll absolute right-3 top-24 z-20 flex max-h-[calc(100dvh-8rem)] w-[min(78vw,20rem)] flex-col items-end gap-2 overflow-y-auto overscroll-contain sm:top-16 sm:max-h-[calc(100dvh-6rem)] sm:w-72"
+      >
+        <button
+          type="button"
+          onClick={() => setReelOpen((o) => !o)}
+          aria-expanded={reelOpen}
+          className="arcade-btn inline-flex items-center gap-1.5"
+        >
+          <PixelGlyph name={reelOpen ? 'pause' : 'play'} />
+          {reelOpen ? 'OCULTAR REEL' : 'VER REEL FRACTAL'}
+        </button>
+
+        {reelOpen && (
+          <>
+            <InstagramEmbed
+              shortcode="Df7IzoEPjaV"
+              kind="reel"
+              author="@mathlenss"
+              hook="«Dibuja una rama. Divídela en dos. Repite.» Tras 10 divisiones: 2¹⁰ = 1.024 puntas. La misma regla + el ángulo dibujan árboles, pulmones, ríos y venas."
+              caption="Reel · @mathlenss (Instagram)"
+              cornerLabel="FRACTAL"
+              className="w-full animate-fade-up"
+            />
+
+            {/* QR al canal de Mathlens (YouTube @lensmath): clases animadas de
+                análisis numérico, cálculo y más. */}
+            <a
+              href="https://www.youtube.com/@lensmath"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-no-swipe="true"
+              className="pixel-bevel flex w-full items-center gap-3 bg-white p-2.5 animate-fade-up transition-colors hover:bg-[#FEF9C3]"
+            >
+              <img
+                src={qrMathlens}
+                alt="Código QR al canal de YouTube de Mathlens (@lensmath)"
+                width={64}
+                height={64}
+                className="h-16 w-16 shrink-0 [image-rendering:pixelated]"
+              />
+              <span className="flex flex-col text-left leading-tight">
+                <span className="font-pixel text-[9px] font-bold uppercase tracking-widest text-[#BE185D]">
+                  Escanea · síguelos
+                </span>
+                <span className="font-display text-xs font-extrabold text-[#0F172A]">
+                  Mathlens · @lensmath
+                </span>
+                <span className="font-mono text-[10px] font-semibold leading-snug text-[#475569]">
+                  Clases animadas de análisis numérico, cálculo y más
+                </span>
+              </span>
+            </a>
+          </>
+        )}
       </div>
     </div>
   )

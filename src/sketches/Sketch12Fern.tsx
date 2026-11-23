@@ -198,13 +198,14 @@ const LUNGS: Array<[number, number, string]> = [
 ]
 
 /** Ejemplo real de fractal: ícono pixel-art + etiqueta. */
+/** Una fila de la leyenda: ícono pixel + etiqueta (no es un botón). */
 function RealChip({ label, cells }: { label: string; cells: Array<[number, number, string]> }) {
   return (
-    <div className="pixel-bevel-sm flex items-center gap-2 bg-white px-2 py-1.5 sm:px-2.5">
+    <div className="flex items-center gap-2 px-2.5 py-1.5">
       <span className="flex h-6 w-6 shrink-0 items-center justify-center">
         <PixelIcon cells={cells} title={label} />
       </span>
-      <span className="font-display text-[10px] font-bold leading-tight text-[#0F172A] sm:text-xs">
+      <span className="font-display text-[10px] font-semibold leading-tight text-[#334155] sm:text-xs">
         {label}
       </span>
     </div>
@@ -247,17 +248,25 @@ export default function Sketch12Fern() {
         </span>
       </div>
 
-      {/* Ejemplos reales de fractales. En móvil: fila compacta de iconos
-          abajo del título; en ≥sm: columna a la derecha. Nunca pisa el HUD. */}
+      {/* Leyenda "fractales en la vida real": un solo panel con encabezado y
+          filas internas (ícono + nombre). Se lee como referencia, NO como
+          botones clicables. Nunca pisa el HUD. */}
       <div
         data-no-swipe="true"
-        className="pointer-events-none absolute right-2 top-[6.5rem] z-20 flex max-w-[44vw] flex-col gap-1.5
-          sm:right-3 sm:top-24 sm:max-w-[13rem]"
+        className="pointer-events-none absolute right-2 top-[6.5rem] z-20 max-w-[46vw]
+          pixel-bevel-sm overflow-hidden bg-white sm:right-3 sm:top-24 sm:max-w-[14rem]"
       >
-        <RealChip label="Brócoli romanesco" cells={BROCCOLI} />
-        <RealChip label="Costas y ríos" cells={COAST} />
-        <RealChip label="Rayos / relámpagos" cells={BOLT} />
-        <RealChip label="Vasos y pulmones" cells={LUNGS} />
+        <div className="border-b-2 border-[#0F172A] bg-[#DCFCE7] px-2.5 py-1">
+          <span className="font-pixel text-[8px] font-bold uppercase tracking-widest text-[#15803D] sm:text-[9px]">
+            También en la vida real
+          </span>
+        </div>
+        <div className="divide-y divide-[#E2E8F0]">
+          <RealChip label="Brócoli romanesco" cells={BROCCOLI} />
+          <RealChip label="Costas y ríos" cells={COAST} />
+          <RealChip label="Rayos / relámpagos" cells={BOLT} />
+          <RealChip label="Vasos y pulmones" cells={LUNGS} />
+        </div>
       </div>
 
       {/* Botón regenerar */}

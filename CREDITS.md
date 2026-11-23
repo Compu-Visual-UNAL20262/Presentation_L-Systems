@@ -19,3 +19,26 @@ fuentes académicas abiertas o de dominio público / licencia libre. Atribución
   explícito de `tree-3d.webp` y `game-flora.webp` con sus autores originales, o
   sustituirlas por equivalentes con licencia libre. `city-procedural.webp` (figura
   de un paper académico) y `art-fractal.webp` (CC0) tienen procedencia clara.
+
+# Videos y recursos audiovisuales
+
+Clips integrados en la presentación mediante carga perezosa (solo se cargan al
+pulsar play). Se usan con fines educativos, acreditando a sus autores/canales.
+
+| Autor / canal | Recurso | Slide | Enlace |
+| :--- | :--- | :--- | :--- |
+| mathlens (`@mathlenss` · YouTube `@lensmath`) | Reel: árbol fractal por ramificación. Canal: clases animadas de análisis numérico, cálculo y más. | 27 · Cierre | https://www.youtube.com/@lensmath |
+| Wild Math | *The Beauty of Fractal Geometry* (SoME2) | 07 · La Tortuga | https://www.youtube.com/watch?v=YkApFcYsP30 |
+| Hello Games | *No Man's Sky* — trailer (flora procedural) | 26 · Mundos Infinitos | https://www.youtube.com/watch?v=nLtmEjqzg7M |
+
+# Bibliografía académica
+
+| Fuente | Referencia |
+| :--- | :--- |
+| Lindenmayer, A. (1968) | *Mathematical models for cellular interactions in development, I & II*. Journal of Theoretical Biology, 18(3), 280–315. |
+| Prusinkiewicz, P. & Lindenmayer, A. (1990) | *The Algorithmic Beauty of Plants (ABOP)*. Springer-Verlag. `algorithmicbotany.org` |
+| Parish, Y. I. H. & Müller, P. (2001) | *Procedural Modeling of Cities*. SIGGRAPH 2001, 301–308. |
+| Barnsley, M. F. (1988) | *Fractals Everywhere* (helecho de Barnsley / IFS). Academic Press. |
+
+> Estos créditos también se muestran dentro de la presentación en la diapositiva
+> final «Bibliografía y Créditos» (slide 28), con enlaces a cada fuente.

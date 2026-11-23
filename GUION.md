@@ -6,11 +6,11 @@
 
 Para evitar la monotonía de una exposición secuencial, la presentación se divide en 6 secciones temáticas. En cada sección participan varios integrantes mediante relevos ágiles de 1.5 a 4 minutos, alternando entre analogías visuales en diapositivas minimalistas y demostraciones interactivas.
 
-> **Nota de implementación:** la presentación es una **aplicación web propia (React + p5.js)** desplegada, no el editor de p5.js. Se navega con las flechas ← →, swipe en móvil, el menú ≡ MENU o los botones ◄ ► del HUD. Los **12 sketches** están embebidos como slides interactivos con sus propios controles en pantalla (botones, sliders, campos editables, presets). No hay que abrir pestañas ni pulsar "Play". Toda la interfaz es responsiva: en móvil los paneles de control se colapsan (botón ⚙/✎ CONTROLES) y los lienzos se reescalan solos. Hay **dos videos embebidos** que arrancan **en silencio** al pulsar ▶ (pensados como fondo mientras el expositor habla): "La belleza de la geometría fractal" (Wild Math · SoME2) en el Slide 08 y el trailer de No Man's Sky (clip 0:17–0:42) en el Slide 27.
+> **Nota de implementación:** la presentación es una **aplicación web propia (React + p5.js)** desplegada, no el editor de p5.js. Se comparte su **enlace por el chat de Meet** al inicio para que el público pueda seguir los sketches desde su propio dispositivo. Se navega con las flechas ← →, swipe en móvil, el menú ≡ MENU o los botones ◄ ► del HUD. Los **12 sketches** están embebidos como slides interactivos con sus propios controles en pantalla (botones, sliders, campos editables, presets). No hay que abrir pestañas ni pulsar "Play". Toda la interfaz es responsiva: en móvil los paneles de control se colapsan (botón ⚙/✎ CONTROLES) y los lienzos se reescalan solos. Hay **dos videos de YouTube** que arrancan **en silencio** al pulsar play (pensados como fondo mientras el expositor habla): "La belleza de la geometría fractal" (Wild Math · SoME2) en el Slide 08 y el trailer de No Man's Sky (clip 0:17–0:42) en el Slide 26. En el **cierre (Slide 27)** hay además un **reel de Instagram de @mathlenss** (abrible con el botón VER REEL FRACTAL) junto a un **QR** al canal de YouTube **@lensmath**. Toda la atribución (papers + canales de los videos) vive en la **diapositiva final de Bibliografía (Slide 28)**.
 
 > **Nota de interfaz (público):** la aplicación ya **no muestra la palabra «Acto»** en pantalla. Cada sección se identifica con una etiqueta temática corta (ORIGEN · INGREDIENTES · LA TORTUGA · NATURALEZA VIVA · DETRÁS DE CÁMARAS · IMPACTO REAL) y los sketches con una etiqueta «Demo · …» o «Concepto · …». La estructura de 6 secciones de este guion es interna, solo para coordinar los relevos del equipo.
 
-> **Actualización de contenido (v3 · ≈55 min):** sobre la v2 se añadieron cinco piezas interactivas para profundizar y ampliar el tiempo con valor: (1) **¿Qué es un fractal?** con zoom de autosimilitud (Slide 09); (2) **Fractales en la naturaleza** con el helecho de Barnsley (Slide 11); (3) **Laboratorio abierto** donde el público escribe su propio axioma/regla (Slide 15); (4) **Determinista vs. azar** lado a lado (Slide 19); y (5) **El doble cuaderno en vivo**, la reescritura paralela paso a paso (Slide 24). Además se definen explícitamente los conceptos *fractal*, *dimensión fractal* y *gramática*.
+> **Actualización de contenido (v3 · ≈55 min):** sobre la v2 se añadieron cinco piezas interactivas para profundizar y ampliar el tiempo con valor: (1) **¿Qué es un fractal?** con zoom de autosimilitud (Slide 09); (2) **Fractales en la naturaleza** con el helecho de Barnsley (Slide 11); (3) **Laboratorio abierto** donde el público escribe su propio axioma/regla (Slide 15); (4) **Determinista vs. azar** lado a lado (Slide 17); y (5) **El doble cuaderno en vivo**, la reescritura paralela paso a paso (Slide 23). Además se definen explícitamente los conceptos *fractal*, *dimensión fractal* y *gramática*.
 
 | Integrante | Rol Principal en Escena | Intervenciones | Tiempo Total aprox. |
 | :---- | :---- | :---- | :---- |
@@ -19,7 +19,7 @@ Para evitar la monotonía de una exposición secuencial, la presentación se div
 | Farid Ardila | **Especialista en Espacio y 3D:** Explica el paralelismo, la ramificación con memoria, la comunicación celular, el grosor paramétrico, el salto al 3D y ciudades. | Secciones 1, 3, 4, 5 y 6 | ~15 min |
 | Angel Beltrán | **Arquitecto de Reglas y Rendimiento:** Traduce el "ADN" (axioma/reglas), explica el azar, el doble cuaderno en vivo y aplicaciones científicas. | Secciones 2, 3, 4, 5 y 6 | ~13 min |
 
-# **Sección 2: Estructura de las Diapositivas (23 slides + navegador)**
+# **Sección 2: Estructura de las Diapositivas (28 slides + navegador)**
 
 **Regla de oro:** Ninguna diapositiva supera las 15 palabras. Cada slide es un ancla visual; la explicación vive en la voz del equipo y en los sketches interactivos embebidos.
 
@@ -41,18 +41,18 @@ Para evitar la monotonía de una exposición secuencial, la presentación se div
 | 14 | Sketch 4: Planta ramificada | Sliders δ / longitud / iteraciones + presets CIPRÉS 15° y ARBUSTO 35°. | Demo en vivo. |
 | 15 | Laboratorio: construye tu L-System | **Editor abierto**: campos de Axioma, Regla F→, Regla X→, ángulo e iteraciones + plantillas; render en vivo. | **(NUEVO)** Momento participativo. |
 | 16 | Los 5 Niveles de Realismo | Escalera de 5 peldaños (D0L · S0L · IL · Paramétrico · Open). | Guía la sección NATURALEZA VIVA. |
-| 17 | El Bosque de los Dados | Clon idéntico vs. variación estocástica. | Introduce el azar. |
-| 18 | Sketch 5: Bosque estocástico | 5 árboles + botón REGENERAR (arranca en iteración 4). | Demo en vivo. |
-| 19 | Sketch: Determinista vs. azar | **Dos mini-bosques lado a lado**: D0L (clones idénticos) vs. S0L (cada árbol único). Botón ⟳ solo afecta al lado del dado. | **(NUEVO)** Aísla el papel del azar. |
-| 20 | Sketch 6: Señal sensible a contexto | Tallo de células; una señal hormonal sube de la raíz a la punta. Regla `S < a → S`. Botón ▶ LANZAR SEÑAL. | Demo en vivo (Nivel 3 · IL). |
-| 21 | Sketch 7: Grosor paramétrico (da Vinci) | **L-System paramétrico**: grosor por ley de áreas de da Vinci. Menú FRÁGIL e=1.5 / CLÁSICO e=2 / GRUESO e=3 + sliders. | Demo en vivo (Nivel 4). |
-| 22 | Cuando la Planta Mira al Sol | Planta curvándose hacia la luz / esquivando obstáculo. | Contexto y entorno (Nivel 5). |
-| 23 | El Peligro Exponencial y el Doble Cuaderno | Curva exponencial + dos buffers (Sₙ → Sₙ₊₁). | Prepara el doble cuaderno y la estrés. |
-| 24 | Sketch: El doble cuaderno en vivo | **Reescritura paralela paso a paso** (A→AB, B→A): cabeza lectora en HOY (Sₙ), escritura en MAÑANA (Sₙ₊₁) y swap. Controles ⏸/⏩/⟳. | **(NUEVO)** Visualiza el double buffering. |
-| 25 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (arranca en 4). | Demo en vivo. |
-| 26 | Del Plano 2D al Mundo 3D | Tortuga 3D **en movimiento** (ejes H/L/U, yaw/pitch/roll) + línea→cilindro + **render real**. | Explica geometría 3D. |
-| 27 | Mundos Infinitos en Pocos Kilobytes | **Trailer de No Man's Sky** (0:17–0:42, en silencio) + 3 tarjetas: flora de videojuego, ciudad procedural (Parish & Müller) y galería de fractales. | Cierre e impacto real. |
-| 28 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. | Conclusión final. |
+| 17 | Sketch: Determinista vs. azar | **Dos mini-bosques lado a lado**: D0L (clones idénticos) vs. S0L (cada árbol único). Botón ⟳ solo afecta al lado del dado. | Aísla el papel del azar (nivel 1 vs. 2). |
+| 18 | Sketch 5: Bosque estocástico | 5 árboles + botón REGENERAR (arranca en iteración 4). | Lleva el azar a un bosque entero. |
+| 19 | Sketch 6: Señal sensible a contexto | Tallo de células; una señal hormonal sube de la raíz a la punta. Regla `S < a → S`. Botón ▶ LANZAR SEÑAL. | Demo en vivo (Nivel 3 · IL). |
+| 20 | Sketch 7: Grosor paramétrico (da Vinci) | **L-System paramétrico**: grosor por ley de áreas de da Vinci. Menú FRÁGIL e=1.5 / CLÁSICO e=2 / GRUESO e=3 + sliders. | Demo en vivo (Nivel 4). |
+| 21 | Cuando la Planta Mira al Sol | Planta curvándose hacia la luz / esquivando obstáculo. | Contexto y entorno (Nivel 5). |
+| 22 | El Peligro Exponencial y el Doble Cuaderno | Curva exponencial + dos buffers (Sₙ → Sₙ₊₁). | Prepara el doble cuaderno y la estrés. |
+| 23 | Sketch: El doble cuaderno en vivo | **Reescritura paralela paso a paso** (A→AB, B→A): cabeza lectora en HOY (Sₙ), escritura en MAÑANA (Sₙ₊₁) y swap. Controles ⏸/⏩/⟳. | Visualiza el double buffering. |
+| 24 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (arranca en 4). | Demo en vivo. |
+| 25 | Del Plano 2D al Mundo 3D | Tortuga 3D **en movimiento** (ejes H/L/U, yaw/pitch/roll) + línea→cilindro + **render real**. | Explica geometría 3D. |
+| 26 | Mundos Infinitos en Pocos Kilobytes | **Trailer de No Man's Sky** (0:17–0:42, en silencio) + 3 tarjetas: flora de videojuego, ciudad procedural (Parish & Müller) y galería de fractales. | Cierre e impacto real. |
+| 27 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. Botón **VER REEL FRACTAL** (reel de @mathlenss + QR al canal @lensmath). | Conclusión final. |
+| 28 | Bibliografía y Créditos | Dos columnas: fuentes académicas (Lindenmayer, ABOP, Parish & Müller, Barnsley) y videos/recursos con crédito a sus canales (Mathlens, Wild Math, Hello Games, Wikimedia). Enlaces ↗. | Cierre con atribución. |
 
 # **Sección 3: Los 12 Sketches Interactivos (embebidos en la app)**
 
@@ -66,11 +66,11 @@ Los 12 sketches ya están integrados como slides interactivos con controles en p
 6. **Sketch 4 (Slide 14):** Planta ramificada. Sliders de ángulo (δ), longitud e iteraciones + presets **CIPRÉS 15°** y **ARBUSTO 35°**. En móvil, botón ⚙ CONTROLES.
 7. **Sketch 9 — Laboratorio abierto (Slide 15):** el público escribe su **propio** L-System. Campos editables de **Axioma**, **Regla F→**, **Regla X→**, controles de **ángulo** e **iteraciones** y plantillas (Arbusto, Helecho, Matorral, Ramo). Render en vivo con pila `[ ]` y tope de seguridad de segmentos. En móvil, botón ✎ EDITOR.
 8. **Sketch 5 (Slides 18 y 25):** Bosque estocástico + estrés. Botón **⟳ REGENERAR BOSQUE** y selector de iteraciones (4–8). **Ambos modos arrancan en iteración 4**; telemetría de Segmentos y FPS con semáforo.
-9. **Sketch 10 — Determinista vs. azar (Slide 19):** dos mini-bosques lado a lado. El izquierdo (D0L) son clones idénticos; el derecho (S0L) tira un dado en cada yema. El botón **⟳ REGENERAR** solo cambia el lado estocástico (el determinista queda fijo).
-10. **Sketch 6 (Slide 20):** L-System sensible al contexto (IL). Señal hormonal que sube de la raíz a la punta; cada célula **mira a su vecina** antes de activarse (regla `S < a → S`). Botón **▶ LANZAR SEÑAL** (también ESPACIO / R).
-11. **Sketch 7 (Slide 21):** L-System paramétrico (grosor de da Vinci). Grosor por la ley de áreas `r_padre^e = r_hija1^e + r_hija2^e`. Menú **Ley de grosor** (FRÁGIL e=1.5 / **CLÁSICO e=2** / GRUESO e=3) + sliders de exponente y grosor. En móvil, botón ⚙ CONTROLES.
-12. **Sketch 11 — El doble cuaderno (Slide 24):** reescritura paralela paso a paso con el alga (A→AB, B→A). Una cabeza lee HOY (Sₙ) y escribe los sucesores en MAÑANA (Sₙ₊₁); al terminar, intercambia los cuadernos. Controles ⏸ PAUSA / ⏩ RÁPIDO / ⟳ REINICIAR (ESPACIO pausa).
-13. **Sketch de Cierre (Slide 28):** Bosque estocástico **diverso** (cada árbol único) que **auto-arranca** y crece en ola; botón ▶ REPLAY. La cantidad de árboles se adapta al ancho (4 en móvil, 6-8 en proyector).
+9. **Sketch 10 — Determinista vs. azar (Slide 17):** dos mini-bosques lado a lado. El izquierdo (D0L) son clones idénticos; el derecho (S0L) tira un dado en cada yema. El botón **⟳ REGENERAR** solo cambia el lado estocástico (el determinista queda fijo).
+10. **Sketch 6 (Slide 19):** L-System sensible al contexto (IL). Señal hormonal que sube de la raíz a la punta; cada célula **mira a su vecina** antes de activarse (regla `S < a → S`). Botón **▶ LANZAR SEÑAL** (también ESPACIO / R).
+11. **Sketch 7 (Slide 20):** L-System paramétrico (grosor de da Vinci). Grosor por la ley de áreas `r_padre^e = r_hija1^e + r_hija2^e`. Menú **Ley de grosor** (FRÁGIL e=1.5 / **CLÁSICO e=2** / GRUESO e=3) + sliders de exponente y grosor. En móvil, botón ⚙ CONTROLES.
+12. **Sketch 11 — El doble cuaderno (Slide 23):** reescritura paralela paso a paso con el alga (A→AB, B→A). Una cabeza lee HOY (Sₙ) y escribe los sucesores en MAÑANA (Sₙ₊₁); al terminar, intercambia los cuadernos. Controles ⏸ PAUSA / ⏩ RÁPIDO / ⟳ REINICIAR (ESPACIO pausa).
+13. **Sketch de Cierre (Slide 27):** Bosque estocástico **diverso** (cada árbol único) que **auto-arranca** y crece en ola; botón ▶ REPLAY. La cantidad de árboles se adapta al ancho (4 en móvil, 6-8 en proyector).
 
 # **Sección 4: Guion Completo de la Presentación (≈ 55 Minutos)**
 
@@ -81,6 +81,8 @@ Los tiempos son una guía de ritmo; conviene cronometrar en el ensayo. Para ajus
 ## **\[00:00 – 02:30 \| Nicolas Bolaños\] — \[EN VIVO: SKETCH 1 (SLIDE 01)\] → \[SLIDE 02\]**
 
 * **Acción en pantalla:** En el Slide 01 (árbol a pantalla completa) haz **clic en el lienzo** o pulsa **ESPACIO** antes de saludar. El árbol crece frente a todos en 4 segundos. Tras presentar la tesis, pulsa el toggle **BOSQUE (3)** para mostrar que la *misma* gramática produce tres árboles distintos; luego vuelve a **1 ÁRBOL**. (El botón ▶ REPLAY relanza la animación cuando quieras.)
+* **Aviso inicial (al público, antes del guion):** "Una cosa rápida antes de empezar: como esta charla tiene **muchos sketches en vivo**, en lugar de pasar diapositivas estáticas montamos **nuestra propia página web con p5.js** que los integra todos como ejemplos interactivos. Voy a **dejar el enlace en el chat del Meet** ahora mismo: si quieren seguir los ejemplos desde su dispositivo, trastear con los controles o revisar algo con más detalle conforme avanzamos, entren cuando quieran. No hace falta, pero ahí queda para quien le interese."
+* **Nota operativa:** pega el enlace de la app desplegada en el chat de Meet justo antes de este saludo, para que esté disponible desde el minuto 0.
 * **Guion:** "Imaginen que tienen que entregar mañana un videojuego con un bosque de diez mil árboles. Si se sientan en Blender a modelar rama por rama y hoja por hoja, no duermen en seis meses y el archivo pesaría gigabytes. Lo que acaban de ver en pantalla no es un modelo 3D guardado ni una imagen: son literalmente **dos reglas de reescritura** ejecutándose en tiempo real. Y miren esto —cambio a modo bosque— con las mismas reglas aparecen tres árboles y ninguno es idéntico. Hoy vamos a entender cómo funciona esa magia detrás de los L-Systems o Sistemas de Lindenmayer: el arte de programar el crecimiento en lugar de esculpir objetos. Y esto no es solo para videojuegos: es cómo la biología, la arquitectura y el cine generan complejidad infinita a partir de reglas simples. En el título pueden ver nuestro lema: no esculpimos formas, programamos su ADN y dejamos que el código crezca. La pregunta es cómo unas pocas reglas pueden producir una forma que parece haber sido cultivada."
 
 ## **\[02:30 – 05:00 \| Ariadna\] — \[SLIDE 03\]**
@@ -137,74 +139,76 @@ Los tiempos son una guía de ritmo; conviene cronometrar en el ensayo. Para ajus
 
 # **NATURALEZA VIVA — De Clones Perfectos a Naturaleza Viva: Los 5 Niveles (29:30 – 41:30)**
 
-## **\[29:30 – 31:30 \| Angel Beltran\] — \[SLIDE 16\] → \[SLIDE 17\]**
+## **\[29:30 – 31:00 \| Angel Beltran\] — \[SLIDE 16\]**
 
-* **Guion:** "Existen cinco niveles de L-Systems para representar la naturaleza con distinto grado de realismo. Empecemos por los dos primeros. Si ponen diez árboles generados con la regla que acaban de ver uno al lado del otro, notarán algo raro: parecen soldados de plástico. Son clones idénticos porque el primer nivel es **determinista**: siempre elige la misma regla. En la naturaleza, el viento, la genética y el azar hacen que dos semillas hermanas crezcan distinto. Por eso pasamos al segundo nivel: los L-Systems **estocásticos**, donde a cada letra le damos varias reglas posibles con una probabilidad, como lanzar un dado en cada rama. La escalera resume la progresión, de exacto hasta sensible al entorno; cada peldaño conserva lo anterior y añade una capacidad nueva."
+* **Guion:** "Existen cinco niveles de L-Systems para representar la naturaleza con distinto grado de realismo. Empecemos por los dos primeros. Si ponen diez árboles generados con la regla que acaban de ver uno al lado del otro, notarán algo raro: parecen soldados de plástico. Son clones idénticos porque el primer nivel es **determinista**: siempre elige la misma regla. En la naturaleza, el viento, la genética y el azar hacen que dos semillas hermanas crezcan distinto. Por eso pasamos al segundo nivel: los L-Systems **estocásticos**, donde a cada letra le damos varias reglas posibles con una probabilidad, como lanzar un dado en cada rama. La escalera resume la progresión, de exacto hasta sensible al entorno; cada peldaño conserva lo anterior y añade una capacidad nueva. Veámoslo en vivo."
 
-## **\[31:30 – 33:00 \| Ariadna\] — \[EN VIVO: SKETCH 5 (SLIDE 18)\]**
+## **\[31:00 – 32:30 \| Ariadna\] — \[EN VIVO: SKETCH 10 — DETERMINISTA vs. AZAR (SLIDE 17)\]**
+
+* **Acción en pantalla:** El Slide 17 muestra dos mini-bosques lado a lado. Pulsa **⟳ REGENERAR** varias veces: el lado izquierdo (determinista) nunca cambia; el derecho (estocástico) nace distinto cada vez.
+* **Guion:** "Veamos los dos niveles enfrentados en la misma pantalla. A la izquierda, un L-System determinista: por más veces que pulse regenerar, los tres árboles salen idénticos, son clones perfectos. A la derecha, el mismo árbol pero con el dado: cada clic produce tres siluetas únicas. Esta es la diferencia exacta entre el nivel 1 y el nivel 2, y es la razón por la que los bosques de los videojuegos no parecen un ejército de fotocopias. La gramática es casi la misma; lo único que cambia es si dejamos entrar el azar. Ahora llevemos ese azar a un bosque entero."
+
+## **\[32:30 – 34:30 \| Ariadna\] — \[EN VIVO: SKETCH 5 (SLIDE 18)\]**
 
 * **Acción en pantalla:** El Slide 18 muestra 5 árboles en iteración 4. Pulsa **⟳ REGENERAR BOSQUE** varias veces para que las 5 siluetas cambien de forma orgánica en cada clic.
 * **Guion:** "Aquí tenemos la misma especie de árbol, pero la regla ya no es única: en cada punta lanzamos un dado. El 80 % de las veces la rama se bifurca y el 20 % crece más recto. Cada vez que regenero, nace un bosque natural donde ningún árbol repite la silueta del vecino. La diferencia no viene de cambiar la especie ni de dibujar cinco modelos: nace de permitir varias decisiones dentro de una misma gramática. El azar da diversidad sin perder coherencia."
 
-## **\[33:00 – 34:30 \| Ariadna\] — \[EN VIVO: SKETCH 10 — DETERMINISTA vs. AZAR (SLIDE 19)\]**
+## **\[34:30 – 36:30 \| Farid Ardila\] — \[EN VIVO: SKETCH 6 (SLIDE 19)\]**
 
-* **Acción en pantalla:** El Slide 19 muestra dos mini-bosques lado a lado. Pulsa **⟳ REGENERAR** varias veces: el lado izquierdo (determinista) nunca cambia; el derecho (estocástico) nace distinto cada vez.
-* **Guion:** "Veamos los dos niveles enfrentados en la misma pantalla. A la izquierda, un L-System determinista: por más veces que pulse regenerar, los tres árboles salen idénticos, son clones perfectos. A la derecha, el mismo árbol pero con el dado: cada clic produce tres siluetas únicas. Esta es la diferencia exacta entre el nivel 1 y el nivel 2, y es la razón por la que los bosques de los videojuegos no parecen un ejército de fotocopias. La gramática es casi la misma; lo único que cambia es si dejamos entrar el azar."
-
-## **\[34:30 – 36:30 \| Farid Ardila\] — \[EN VIVO: SKETCH 6 (SLIDE 20)\]**
-
-* **Acción en pantalla:** El Slide 20 muestra un tallo de células. Pulsa **▶ LANZAR SEÑAL HORMONAL**: una señal amarilla sube desde la raíz y, célula por célula, va floreciendo la rama. Repite el lanzamiento si quieres mostrarlo de nuevo.
+* **Acción en pantalla:** El Slide 19 muestra un tallo de células. Pulsa **▶ LANZAR SEÑAL HORMONAL**: una señal amarilla sube desde la raíz y, célula por célula, va floreciendo la rama. Repite el lanzamiento si quieres mostrarlo de nuevo.
 * **Guion:** "Subamos al tercer nivel, el más sutil: los sistemas **sensibles al contexto**. Hasta ahora cada letra cambiaba mirándose solo a sí misma. Pero en la naturaleza las células hablan con sus vecinas. Miren la pantalla: lanzo una señal hormonal desde la raíz, abajo. La regla que gobierna esto se lee así: una célula solo se activa *si su vecina de abajo ya tiene la señal* —eso es lo que significa `S < a → S`, el símbolo mira a su izquierda antes de transformarse—. Así la señal sube de célula en célula, como las hormonas vegetales reales que viajan de la raíz a la copa avisando cuándo florecer. Vean cómo la floración recorre el tallo en orden: ninguna célula se adelanta, porque cada una espera a que su vecina reciba primero el mensaje. Esto es lo que permite simular comunicación interna en una planta: el crecimiento deja de ser ciego y empieza a coordinarse."
 
-## **\[36:30 – 38:30 \| Farid Ardila / Angel Beltran\] — \[EN VIVO: SKETCH 7 (SLIDE 21)\]**
+## **\[36:30 – 38:30 \| Farid Ardila / Angel Beltran\] — \[EN VIVO: SKETCH 7 (SLIDE 20)\]**
 
-* **Acción en pantalla:** El Slide 21 muestra un árbol frondoso cuyo grosor sigue la ley de da Vinci (visible arriba en pantalla). Con el menú **Ley de grosor** fija el exponente: **CLÁSICO e=2** (tronco creíble, botón resaltado por defecto), **FRÁGIL e=1.5** (ramas que se afilan de golpe) y **GRUESO e=3** (tronco suculento). El slider de exponente permite valores intermedios y el de grosor cambia el grosor del tronco.
+* **Acción en pantalla:** El Slide 20 muestra un árbol frondoso cuyo grosor sigue la ley de da Vinci (visible arriba en pantalla). Con el menú **Ley de grosor** fija el exponente: **CLÁSICO e=2** (tronco creíble, botón resaltado por defecto), **FRÁGIL e=1.5** (ramas que se afilan de golpe) y **GRUESO e=3** (tronco suculento). El slider de exponente permite valores intermedios y el de grosor cambia el grosor del tronco.
 * **Guion:** "El cuarto nivel son los L-Systems **paramétricos**: cada símbolo ya no es solo una letra, carga un número en una mochila, como el grosor de la rama. ¿Qué número usamos para adelgazar las ramas al bifurcarse? El que descubrió Leonardo da Vinci hace 500 años: cuando un tronco se parte en ramas, el **área** se conserva. En fórmula, el grosor del padre elevado al cuadrado es igual a la suma de los grosores de las hijas al cuadrado; ese exponente 2 es la ley clásica de áreas. Con el preset CLÁSICO e=2 obtenemos este tronco que se afina de forma natural y creíble. Si bajo a FRÁGIL, las ramas se afilan demasiado rápido; si subo a GRUESO, el árbol engorda. Fíjense que no cambié el dibujo a mano: cambié el parámetro de grosor que viaja en cada símbolo y toda la ramificación se recalculó. Por eso los árboles de los videojuegos modernos se ven reales: aplican exactamente esta regla paramétrica."
 
-## **\[38:30 – 41:30 \| Nicolas Bolaños\] — \[SLIDE 22\]**
+## **\[38:30 – 41:30 \| Nicolas Bolaños\] — \[SLIDE 21\]**
 
 * **Guion:** "Y el quinto nivel es el más inteligente: los L-Systems abiertos o sensibles al entorno. Aquí la planta deja de crecer a ciegas y empieza a hacerle preguntas al mundo 3D que la rodea: ¿Hay una pared enfrente? ¿De dónde viene la luz del sol? Si una rama detecta sombra o un obstáculo, detiene su crecimiento o curva su ángulo buscando claridad. Es literalmente simular el fototropismo vegetal dentro de un motor gráfico. La ilustración muestra dos respuestas distintas: seguir hacia la luz o modificar el recorrido para esquivar un obstáculo. El sistema ya no depende solo de su propia cadena, sino también de la escena que lo contiene. Gracias a esa interacción, dos plantas con las mismas reglas pueden crecer de forma distinta en diferentes espacios."
 
 # **DETRÁS DE CÁMARAS — Detrás de Cámaras en Computación Visual (41:30 – 51:00)**
 
-## **\[41:30 – 43:30 \| Angel Beltran\] — \[SLIDE 23\]**
+## **\[41:30 – 43:30 \| Angel Beltran\] — \[SLIDE 22\]**
 
 * **Guion:** "El truco técnico detrás de cámaras es cómo evitamos hacer trampa al reescribir. Si intentamos modificar la cadena de texto sobre sí misma mientras la vamos leyendo de izquierda a derecha, las letras nuevas que acabamos de crear se volverían a transformar antes de tiempo, rompiendo el paralelismo biológico. Por eso siempre usamos la técnica del **doble cuaderno**: leemos el estado completo de hoy en una lista de solo lectura, escribimos el resultado de mañana en una lista limpia, y al terminar el ciclo intercambiamos los cuadernos. La curva ascendente representa la otra consecuencia clave: cada generación añade más símbolos, y el trabajo crece de forma exponencial, O(bⁿ). Una gramática sencilla puede pasar de cientos de símbolos en la iteración 4 a decenas de millones en la 12."
 
-## **\[43:30 – 46:00 \| Angel Beltran\] — \[EN VIVO: SKETCH 11 — DOBLE CUADERNO (SLIDE 24)\]**
+## **\[43:30 – 46:00 \| Angel Beltran\] — \[EN VIVO: SKETCH 11 — DOBLE CUADERNO (SLIDE 23)\]**
 
-* **Acción en pantalla:** El Slide 24 anima la reescritura paso a paso con el alga (A→AB, B→A). Deja correr; usa **⏩ RÁPIDO** para acelerar y **⏸ PAUSA** para congelar en un símbolo concreto y explicarlo. **⟳ REINICIAR** vuelve a la generación inicial.
+* **Acción en pantalla:** El Slide 23 anima la reescritura paso a paso con el alga (A→AB, B→A). Deja correr; usa **⏩ RÁPIDO** para acelerar y **⏸ PAUSA** para congelar en un símbolo concreto y explicarlo. **⟳ REINICIAR** vuelve a la generación inicial.
 * **Guion:** "Veamos ese doble cuaderno en acción, sin magia. Arriba está el cuaderno de HOY, la generación actual, y es de **solo lectura**. La cabeza naranja recorre símbolo por símbolo: lee una A y, según la regla A→AB, escribe AB abajo, en el cuaderno de MAÑANA, que empezó vacío. Lee una B y escribe A. Fíjense: jamás tocamos la cadena que estamos leyendo; solo escribimos en la hoja limpia. Cuando la cabeza llega al final, intercambiamos los cuadernos —lo de mañana pasa a ser lo de hoy— y arranca la siguiente generación. Gracias a esto todas las reglas parten exactamente del mismo estado: eso es lo que hace que la reescritura sea verdaderamente paralela, como la división simultánea de las células."
 
-## **\[46:00 – 48:30 \| Ariadna\] — \[EN VIVO: SKETCH 5 ESTRÉS (SLIDE 25)\]**
+## **\[46:00 – 48:30 \| Ariadna\] — \[EN VIVO: SKETCH 5 ESTRÉS (SLIDE 24)\]**
 
-* **Acción en pantalla:** El Slide 25 (modo estrés) **arranca en iteración 4**. Sube el selector 4 → 5 → 6 → 7 (y opcionalmente 8), señalando el contador de **Segmentos** y el indicador de **FPS** (verde → amarillo → rojo).
+* **Acción en pantalla:** El Slide 24 (modo estrés) **arranca en iteración 4**. Sube el selector 4 → 5 → 6 → 7 (y opcionalmente 8), señalando el contador de **Segmentos** y el indicador de **FPS** (verde → amarillo → rojo).
 * **Guion:** "Como ingenieros y artistas visuales, hay una trampa en la que todos caemos la primera vez que programamos un L-System: entusiasmarse subiendo las iteraciones. Miren el contador de segmentos arriba. En la iteración 4 tenemos unos cientos de segmentos y vamos a 60 cuadros por segundo. En la 6 ya son decenas de miles. Si subo más, pasamos a cientos de miles de líneas y el navegador se arrastra. Ese crecimiento exponencial —el mismo O(bⁿ) de hace un momento— es el principal reto de rendimiento. El semáforo verde, amarillo y rojo nos dice cuándo la belleza visual deja de ser viable a velocidad interactiva. Optimizar no significa borrar detalles, sino encontrar el nivel suficiente para mantener fluidez."
 
-## **\[48:30 – 51:00 \| Farid Ardila\] — \[SLIDE 26\]**
+## **\[48:30 – 51:00 \| Farid Ardila\] — \[SLIDE 25\]**
 
-* **Acción en pantalla:** El Slide 26 muestra la **tortuga 3D en movimiento**: el avión de papel rota mostrando sus tres ejes —H (frontal, cian), L (izquierda, magenta) y U (arriba, verde)— recorriendo yaw, pitch y roll. A la derecha, el render real pasa de wireframe a malla con hojas.
+* **Acción en pantalla:** El Slide 25 muestra la **tortuga 3D en movimiento**: el avión de papel rota mostrando sus tres ejes —H (frontal, cian), L (izquierda, magenta) y U (arriba, verde)— recorriendo yaw, pitch y roll. A la derecha, el render real pasa de wireframe a malla con hojas.
 * **Guion:** "Finalmente, ¿cómo pasamos de estas líneas planas en p5.js a los árboles volumétricos de un videojuego? Primero, nuestra tortuga deja de moverse en una mesa 2D y pasa a pilotar como un avión en 3D: miren cómo gira. Ya no basta con girar izquierda-derecha; ahora tiene tres ejes propios: puede hacer *yaw* alrededor del eje de arriba, *pitch* subiendo y bajando la nariz, y *roll* rotando sobre su propio eje frontal. Esos tres ejes, H, L y U, son una base ortonormal que viaja con la tortuga. Segundo, en lugar de pintar líneas delgadas sin grosor, envolvemos cada tramo con cilindros conectados que se estrechan hacia la punta —aplicando la regla de da Vinci que acabamos de ver— y en los extremos pegamos hojas reutilizando una sola geometría en la tarjeta gráfica miles de veces, lo que se llama *instancing*. La transición visible a la derecha es de un trazo alámbrico a una malla con volumen, sombra y cientos de hojas."
 
 # **IMPACTO REAL — Impacto Real y Cierre (51:00 – 55:00+)**
 
-## **\[51:00 – 52:15 \| Nicolas Bolaños\] — \[SLIDE 27\]**
+## **\[51:00 – 52:15 \| Nicolas Bolaños\] — \[SLIDE 26\]**
 
-* **Acción en pantalla:** En el Slide 27, pulsa el botón ▶ del reproductor del **trailer de No Man's Sky** (arranca en 0:17, en **silencio** y se detiene solo en 0:42): queda de fondo mientras narras los tres usos reales. Al estar muteado no compite con la voz; el clip muestra flora alienígena generada en vivo mientras el jugador explora.
+* **Acción en pantalla:** En el Slide 26, pulsa el botón ▶ del reproductor del **trailer de No Man's Sky** (arranca en 0:17, en **silencio** y se detiene solo en 0:42): queda de fondo mientras narras los tres usos reales. Al estar muteado no compite con la voz; el clip muestra flora alienígena generada en vivo mientras el jugador explora.
 * **Guion:** "¿Dónde vemos todo esto fuera del aula? En prácticamente toda la industria del entretenimiento. Miren este trailer de No Man's Sky: cada planta, cada árbol raro que ven en ese planeta no está guardado en el disco. Herramientas estándar de cine y videojuegos como SpeedTree —usada desde Avatar hasta The Witcher— se basan en L-Systems paramétricos. Y en un juego como este, donde existen trillones de planetas, sería imposible guardar los árboles uno por uno; en cambio, el juego guarda una pequeña semilla numérica y un L-System cultiva la flora de cada planeta en tiempo real frente al jugador, justo como lo están viendo. La fuerza principal no es guardar más geometría, sino guardar menos datos y generar la forma cuando se necesita. Una semilla reproduce siempre la misma planta con las mismas reglas: ahorra almacenamiento y mantiene resultados consistentes en mundos enormes."
 
-## **\[52:15 – 53:00 \| Farid Ardila\] — \[SLIDE 27\]**
+## **\[52:15 – 53:00 \| Farid Ardila\] — \[SLIDE 26\]**
 
 * **Guion:** "Pero los L-Systems no solo sirven para plantas. En 2001, Parish y Müller demostraron que una ciudad crece igual que una raíz buscando agua. Extendieron los L-Systems para trazar redes viales completas: las avenidas principales avanzan buscando conectar centros poblados, mientras las calles secundarias se ramifican en cuadrículas y se detienen automáticamente si chocan contra un río o una montaña. La imagen de la ciudad procedural muestra el mismo principio adaptado a calles, manzanas y restricciones del terreno. Las reglas eligen dirección según la densidad urbana, y las restricciones del entorno impiden que las calles crucen obstáculos naturales."
 
-## **\[53:00 – 53:45 \| Angel Beltran\] — \[SLIDE 27\]**
+## **\[53:00 – 53:45 \| Angel Beltran\] — \[SLIDE 26\]**
 
 * **Guion:** "Incluso la ciencia pura los utiliza: en agronomía existen modelos virtuales de cultivos que combinan L-Systems paramétricos con simulación de luz solar para predecir cuánto va a producir una cosecha antes de sembrar una sola semilla. Y en el arte generativo, los mismos símbolos de giro y avance se traducen a notas y duraciones para componer música algorítmica con estructura fractal. La aplicación científica anticipa resultados y reduce costos; la artística convierte un proceso geométrico en otra forma de expresión."
 
-## **\[53:45 – 55:00+ \| Ariadna\] — \[EN VIVO: BOSQUE DE CIERRE (SLIDE 28)\]**
+## **\[53:45 – 55:00+ \| Ariadna\] — \[EN VIVO: BOSQUE DE CIERRE (SLIDE 27)\]**
 
-* **Acción en pantalla:** El Slide 28 (cierre) **arranca solo**: un **bosque estocástico diverso** crece ante la audiencia en una ola de izquierda a derecha, donde **cada árbol es único** (misma gramática + azar). El botón ▶ REPLAY vuelve a hacer crecer el bosque durante la conclusión.
-* **Guion:** "Al final, la lección más poderosa de los L-Systems para la computación visual es un cambio de mentalidad: dejar de pensar en los objetos como formas estáticas que tenemos que dibujar píxel a píxel, y empezar a verlos como sistemas vivos gobernados por reglas simples. Miren la pantalla: empezamos esta charla con un solo árbol, y ahora, con el mismo puñado de reglas y una pizca de azar, nace un bosque entero donde ningún árbol se repite. Recorrimos el paralelismo, la tortuga, los fractales y su dimensión, la memoria de la pila, el azar, la comunicación entre células, el grosor de da Vinci y el salto al 3D; e incluso construimos nuestras propias reglas en vivo. Con un alfabeto diminuto, una semilla y la capacidad de recordar de dónde venimos, podemos hacer que la computadora cultive mundos enteros. Muchas gracias."
+* **Acción en pantalla:** El Slide 27 (cierre) **arranca solo**: un **bosque estocástico diverso** crece ante la audiencia en una ola de izquierda a derecha, donde **cada árbol es único** (misma gramática + azar). El botón ▶ REPLAY vuelve a hacer crecer el bosque durante la conclusión.
+* **Acción opcional (reel + QR):** a la derecha hay un botón **VER REEL FRACTAL**. Al pulsarlo se muestra un **reel de Instagram de @mathlenss** (ramificar una rama en dos → 2¹⁰ = 1.024 puntas; árboles, pulmones, ríos y venas se ramifican igual), que resume la tesis de la charla, más un **código QR al canal de YouTube @lensmath** (clases animadas de análisis numérico, cálculo y más). Pulsa el botón solo si hay tiempo o si alguien del público lo pide; el crédito al autor y a todas las fuentes está en la **diapositiva final de Bibliografía (Slide 28)**.
+* **Guion:** "Al final, la lección más poderosa de los L-Systems para la computación visual es un cambio de mentalidad: dejar de pensar en los objetos como formas estáticas que tenemos que dibujar píxel a píxel, y empezar a verlos como sistemas vivos gobernados por reglas simples. Miren la pantalla: empezamos esta charla con un solo árbol, y ahora, con el mismo puñado de reglas y una pizca de azar, nace un bosque entero donde ningún árbol se repite. Recorrimos el paralelismo, la tortuga, los fractales y su dimensión, la memoria de la pila, el azar, la comunicación entre células, el grosor de da Vinci y el salto al 3D; e incluso construimos nuestras propias reglas en vivo. Con un alfabeto diminuto, una semilla y la capacidad de recordar de dónde venimos, podemos hacer que la computadora cultive mundos enteros. (Opcional, abriendo el reel) Y no somos los únicos fascinados con esto: miren este reel de @mathlenss —una sola regla, dividir una rama en dos, repetida diez veces da más de mil puntas, y la misma idea dibuja árboles, pulmones, ríos y venas. Les dejo el QR por si quieren seguir ese tipo de contenido. Todas las fuentes y créditos están en la última diapositiva. Muchas gracias."
+* **Transición final:** avanza una vez más a la **diapositiva 28 (Bibliografía y Créditos)** para cerrar mostrando las referencias y los canales de los videos mientras se agradece / se responden preguntas.
 
 # **Sección 5: Notas de Ritmo y Recortes**
 
@@ -214,6 +218,6 @@ La charla está dimensionada para **≈ 55 minutos** de exposición pura (00:00 
 1. Acortar el laboratorio abierto (Slide 15) a una sola regla propuesta por el público (−1.5 min).
 2. En el Sketch 3 (Slide 10), mostrar solo una familia extra (Sierpinski **o** dragón) en lugar de las dos (−45 s).
 3. Comprimir la enumeración de aplicaciones del cierre (ciudades + ciencia) a una sola intervención (−1 min).
-4. Omitir el modo ⏩ RÁPIDO del doble cuaderno (Slide 24) y mostrar solo una generación (−1 min).
+4. Omitir el modo ⏩ RÁPIDO del doble cuaderno (Slide 23) y mostrar solo una generación (−1 min).
 
-**Si la charla se queda corta**, ampliar: más iteraciones y familias en el laboratorio (Slide 15), varias regeneraciones del comparador (Slide 19), y lanzar la señal de contexto (Slide 20) dos veces señalando el orden estricto de floración.
+**Si la charla se queda corta**, ampliar: más iteraciones y familias en el laboratorio (Slide 15), varias regeneraciones del comparador (Slide 17), y lanzar la señal de contexto (Slide 19) dos veces señalando el orden estricto de floración.
