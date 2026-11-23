@@ -280,13 +280,20 @@ Es el contraste directo con los niveles anteriores, donde cada símbolo decidía
 
 ## **1\. Concepto (Nivel 4 de realismo)**
 
-Modela un **L-System paramétrico**: cada símbolo transporta parámetros numéricos. El parámetro estrella es el **grosor de las ramas**, que sigue la observación de da Vinci sobre la conservación del área al ramificarse:
+Modela un **L-System paramétrico** real: cada símbolo transporta un parámetro numérico (aquí, el grosor `w`). La cadena se expande con axioma y regla, y luego se interpreta con la tortuga, igual que los demás sketches:
 
 ```
-r_padre ^ e  =  r_hija1 ^ e  +  r_hija2 ^ e        (e = 2 en la ley clásica)
+Axioma:  A(w0)
+Regla:   A(w)  →  F(w) [ +A(w·q) ] [ -A(w·q) ]      con q = (1/2)^(1/e)
 ```
 
-Para dos hijas iguales: `r_hija = r_padre · (1/2)^(1/e)`. El exponente `e` es editable en vivo:
+`F(w)` dibuja un tramo de grosor `w`; `A(w)` es una yema que se bifurca en dos hijas de grosor `w·q`. El factor `q` sale de imponer la ley de da Vinci sobre el **área** de sección al ramificarse:
+
+```
+w_padre ^ e  =  w_hija1 ^ e  +  w_hija2 ^ e        (e = 2 en la ley clásica de áreas)
+```
+
+Para dos hijas iguales: `w_hija = w_padre · (1/2)^(1/e)`. El exponente `e` es editable en vivo:
 
 * **e = 2** → ley de área clásica (tronco realista).
 * **e < 2** → las ramas se afilan más rápido (aspecto frágil).
@@ -294,10 +301,10 @@ Para dos hijas iguales: `r_hija = r_padre · (1/2)^(1/e)`. El exponente `e` es e
 
 ## **2\. Diseño e Implementación en p5.js**
 
-* Árbol generado **recursivamente** (profundidad 7, apertura ±26°) para centrar el foco en el grosor, no en la cadena. Longitud del tronco y grosor base escalados al alto del lienzo (responsivo).
-* Color de rama interpolado de corteza (marrón) a hoja (verde) según la profundidad; hoja verde en cada punta.
-* Controles: slider **Exponente e** (1.2–3), slider **Grosor del tronco** (6–24 px) y presets **FRÁGIL / CLÁSICO e=2 / GRUESO**. En móvil, botón **⚙ CONTROLES** colapsa el panel. Un overlay muestra la fórmula con el exponente actual.
+* Se **expande la cadena paramétrica** (lista de módulos símbolo+grosor) `ITER = 7` veces y se interpreta con la tortuga usando corchetes `[ ]` para la pila, igual que el resto de sketches. La cadena se recacha solo cuando cambian `e` o el grosor base.
+* Cada tramo `F` se dibuja con grosor `w` y una longitud proporcional a `w` (ramas finas → tramos cortos), apertura ±26°; color interpolado de corteza (marrón) a hoja (verde) según el grosor relativo; yema/hoja verde en cada cierre `]`.
+* Controles: slider **Exponente e** (1.2–3), slider **Grosor del tronco w** (6–24 px) y menú **Ley de grosor** con tres presets de exponente (**FRÁGIL e=1.5 / CLÁSICO e=2 / GRUESO e=3**); el botón activo resalta el valor vigente. En móvil, botón **⚙ CONTROLES** colapsa el panel. Un overlay muestra el axioma, la regla y la ley de da Vinci con el exponente actual.
 
 ## **3\. Qué se Planea Mostrar en Vivo**
 
-* El expositor parte de **e = 2** (tronco creíble), baja el exponente para ver cómo las ramas se vuelven frágiles y sube para engordarlas. El mensaje: un solo número cargado en cada símbolo controla toda la credibilidad del árbol, y es la razón por la que la vegetación de los videojuegos modernos se ve real.
+* El expositor parte de **e = 2** (tronco creíble), baja el exponente para ver cómo las ramas se vuelven frágiles y sube para engordarlas. El mensaje clave: **no se redibuja el árbol a mano**; se cambia un número dentro de la regla del L-System y la cadena entera se reescribe con el nuevo grosor. Es la razón por la que la vegetación de los videojuegos modernos se ve real.

@@ -1,7 +1,7 @@
 import { ActBadge } from './shared'
-import { TEAM_MEMBERS, TEAM_MOTTO, TEAM_NAME } from '../../data/slidesConfig'
+import { TEAM_MEMBERS, TEAM_NAME } from '../../data/slidesConfig'
 
-/** Slide 02 — Portada 16-bit de día: identidad Team Gaymers + frase conceptual + 4 integrantes. */
+/** Slide 02 — Portada 16-bit de día: identidad Team Gaymers + 4 integrantes. */
 export default function Slide02Cover() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center px-4 pb-14 pt-10 text-center sm:px-6">
@@ -23,14 +23,9 @@ export default function Slide02Cover() {
           <p className="mx-auto mt-3 max-w-xl font-display text-sm font-semibold text-[#334155] sm:text-xl">
             Programar el crecimiento en lugar de esculpirlo.
           </p>
-
-          {/* Frase / Gancho conceptual de inicio */}
-          <div className="mt-4 inline-block pixel-bevel-sm bg-[#FFFBEB] px-4 py-2 font-mono text-xs font-bold text-[#0369A1] sm:text-sm">
-            🌱 {TEAM_MOTTO}
-          </div>
         </div>
 
-        {/* Los 4 integrantes con su rol técnico */}
+        {/* Los 4 integrantes (etiqueta de color + nombre, sin rol) */}
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-7">
           {TEAM_MEMBERS.map((member) => (
             <span
@@ -43,9 +38,6 @@ export default function Slide02Cover() {
                 {member.player}
               </span>
               <span>{member.name}</span>
-              <span className="hidden rounded bg-[#F1F5F9] px-1.5 py-0.5 text-[10px] font-semibold text-[#64748B] sm:inline-block">
-                {member.role}
-              </span>
             </span>
           ))}
         </div>
