@@ -72,6 +72,12 @@ const MEDIA: RefItem[] = [
     where: 'Imagen · slide «Mundos Infinitos»',
     href: 'https://commons.wikimedia.org/',
   },
+  {
+    authors: 'Ice Fractal',
+    title: 'Musicalator — generador de música fractal (binario bitwise)',
+    where: 'Herramienta web · slide «Mundos Infinitos»',
+    href: 'https://icefractal.com/musicalator/',
+  },
 ]
 
 function RefRow({ item }: { item: RefItem }) {

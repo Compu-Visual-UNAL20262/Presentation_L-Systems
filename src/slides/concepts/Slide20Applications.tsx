@@ -1,22 +1,29 @@
+import { useState } from 'react'
 import { ConceptFrame } from './shared'
 import PixelPhoto from '../../components/PixelPhoto'
 import YouTubeEmbed from '../../components/YouTubeEmbed'
+import WebEmbed from '../../components/WebEmbed'
 import gameFlora from '../../assets/game-flora.webp'
 import cityProcedural from '../../assets/city-procedural.webp'
 import artFractal from '../../assets/art-fractal.webp'
+import qrMusicalator from '../../assets/qr-musicalator.svg'
 
 /**
- * Slide 22 — Mundos Infinitos en Pocos Kilobytes.
- * Reproductor del trailer de No Man's Sky (clip 0:17–0:42, flora procedural en
- * vivo) como pieza central + 3 tarjetas 16-bit con capturas reales:
- * Videojuegos (flora procedural), Ciudades (Parish & Müller) y Arte generativo.
+ * Slide 26 — Mundos Infinitos en Pocos Kilobytes.
+ * Reproductor del trailer de No Man's Sky (en bucle desde 0:18) como pieza
+ * central + 3 tarjetas 16-bit con capturas reales: Videojuegos, Ciudades
+ * (Parish & Müller) y Arte & Ciencia. Esta última abre, a demanda, el generador
+ * de música fractal "Musicalator" (iframe perezoso) o su QR como recomendación.
  */
 
 export default function Slide20Applications() {
+  const [musicOpen, setMusicOpen] = useState(false)
+
   return (
     <ConceptFrame badge="IMPACTO REAL" accent="emerald" title="Mundos Infinitos en Pocos Kilobytes">
-      <div className="mx-auto grid w-full max-w-5xl place-items-center gap-3 overflow-y-auto sm:grid-cols-5 sm:items-center sm:gap-4 sm:overflow-visible">
-        {/* Pieza central: trailer de No Man's Sky recortado a 0:17–0:42 */}
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-3 overflow-y-auto sm:overflow-visible">
+        <div className="grid w-full place-items-center gap-3 sm:grid-cols-5 sm:items-center sm:gap-4">
+        {/* Pieza central: trailer de No Man's Sky en bucle desde 0:18 */}
         <div className="w-full sm:col-span-3">
           <YouTubeEmbed
             videoId="nLtmEjqzg7M"
@@ -77,9 +84,14 @@ export default function Slide20Applications() {
             </div>
           </div>
 
-          {/* STAGE 03 — Arte generativo fractal (galería de L-systems, CC0) */}
-          <div
-            className="pixel-bevel bg-white overflow-hidden text-center animate-fade-up"
+          {/* STAGE 03 — Arte & Ciencia. Botón: abre el generador de música
+              fractal (Musicalator) o su QR como recomendación. */}
+          <button
+            type="button"
+            data-no-swipe="true"
+            onClick={() => setMusicOpen((o) => !o)}
+            aria-expanded={musicOpen}
+            className="pixel-bevel bg-white overflow-hidden text-center animate-fade-up transition-colors hover:bg-[#FEF9C3]"
             style={{ animationDelay: '0.34s' }}
           >
             <div className="flex items-stretch">
@@ -97,11 +109,31 @@ export default function Slide20Applications() {
                 <div className="font-display text-[11px] font-semibold text-[#334155]">
                   Fractales · agronomía · música
                 </div>
+                <div className="mt-0.5 font-pixel text-[8px] font-bold uppercase tracking-widest text-[#BE185D]">
+                  {musicOpen ? '▾ ocultar música fractal' : '▸ música fractal en vivo'}
+                </div>
               </div>
             </div>
-          </div>
+          </button>
         </div>
+        </div>
+
+        {/* Panel desplegable: generador de música fractal (Musicalator). */}
+        {musicOpen && (
+          <div className="w-full max-w-3xl animate-fade-up">
+            <WebEmbed
+              url="https://icefractal.com/musicalator/"
+              title="MUSICALATOR · ICE FRACTAL"
+              hook="Genera música a partir de fractales binarios (triángulo de Pascal): patrones musicales autosimilares. Mismo principio que vimos, pero en sonido."
+              qrSrc={qrMusicalator}
+              cornerLabel="MÚSICA FRACTAL"
+              openLabel="ABRIR EN VIVO"
+              className="w-full"
+            />
+          </div>
+        )}
       </div>
     </ConceptFrame>
   )
 }
+

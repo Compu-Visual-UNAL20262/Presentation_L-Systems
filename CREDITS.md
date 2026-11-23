@@ -28,8 +28,9 @@ pulsar play). Se usan con fines educativos, acreditando a sus autores/canales.
 | Autor / canal | Recurso | Slide | Enlace |
 | :--- | :--- | :--- | :--- |
 | mathlens (`@mathlenss` · YouTube `@lensmath`) | Reel: árbol fractal por ramificación. Canal: clases animadas de análisis numérico, cálculo y más. | 27 · Cierre | https://www.youtube.com/@lensmath |
-| Wild Math | *The Beauty of Fractal Geometry* (SoME2) | 07 · La Tortuga | https://www.youtube.com/watch?v=YkApFcYsP30 |
-| Hello Games | *No Man's Sky* — trailer (flora procedural) | 26 · Mundos Infinitos | https://www.youtube.com/watch?v=nLtmEjqzg7M |
+| Wild Math | *The Beauty of Fractal Geometry* (SoME2) | 08 · La Tortuga | https://www.youtube.com/watch?v=YkApFcYsP30 |
+| Hello Games | *No Man's Sky* — trailer (flora procedural, en bucle desde 0:18) | 26 · Mundos Infinitos | https://www.youtube.com/watch?v=nLtmEjqzg7M |
+| Ice Fractal | *Musicalator* — generador de música fractal (binario bitwise), embebido a demanda | 26 · Mundos Infinitos | https://icefractal.com/musicalator/ |
 
 # Bibliografía académica
 
