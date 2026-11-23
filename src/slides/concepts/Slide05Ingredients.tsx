@@ -47,7 +47,7 @@ const CARDS = [
 
 export default function Slide05Ingredients() {
   return (
-    <ConceptFrame badge="ACTO II" accent="emerald" title="Los 3 Ingredientes">
+    <ConceptFrame badge="INGREDIENTES" accent="emerald" title="Los 3 Ingredientes">
       <div className="grid w-full max-w-4xl gap-4 sm:grid-cols-3">
         {CARDS.map((c, i) => (
           <div

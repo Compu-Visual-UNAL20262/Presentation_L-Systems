@@ -11,7 +11,7 @@ export default function Slide03History() {
   const cells = Array.from({ length: 7 })
   return (
     <ConceptFrame
-      badge="ACTO I"
+      badge="ORIGEN"
       accent="cyan"
       title="1968 · Aristid Lindenmayer"
       subtitle="Se preguntó cómo crecen las algas filamentosas bajo el microscopio?"

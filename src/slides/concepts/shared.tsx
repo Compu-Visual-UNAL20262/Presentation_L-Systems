@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Accent } from '../../data/slidesConfig'
 import { ACCENT } from '../../data/accent'
 
-/** Badge pixel de Acto (16-bit de día, alto contraste). */
+/** Badge pixel de sección (16-bit de día, alto contraste). */
 export function ActBadge({ label, accent }: { label: string; accent: Accent }) {
   const a = ACCENT[accent]
   return (
@@ -16,7 +16,7 @@ export function ActBadge({ label, accent }: { label: string; accent: Accent }) {
 }
 
 /**
- * Marco común de una slide conceptual: badge de Acto arriba, título grande
+ * Marco común de una slide conceptual: badge de sección arriba, título grande
  * en tinta oscura de máximo contraste, y debajo el apoyo visual.
  */
 export function ConceptFrame({

@@ -6,9 +6,9 @@ import type { SketchFn } from '../components/P5Canvas'
 /**
  * Sketch de Cierre — Un bosque estocástico DIVERSO que crece ante la audiencia.
  *
- * Es el "payoff" de toda la charla: lo que empezó como un árbol (Acto 1) ahora
+ * Es el "payoff" de toda la charla: lo que empezó como un árbol al inicio ahora
  * es un ecosistema entero donde cada árbol es único, generado por las mismas
- * reglas simples + azar (Acto 4). Recoge visualmente la tesis: reglas simples →
+ * reglas simples + azar. Recoge visualmente la tesis: reglas simples →
  * mundos infinitos.
  *
  * S0L-System (gramática del Sketch 5, bosque estocástico):

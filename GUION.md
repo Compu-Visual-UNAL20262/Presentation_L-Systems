@@ -6,7 +6,9 @@
 
 Para evitar la monotonía de una exposición secuencial de 11 minutos por persona, la presentación se divide en 6 actos narrativos. En cada acto participan varios integrantes mediante relevos ágiles de 1.5 a 4 minutos, alternando entre analogías visuales en diapositivas minimalistas y demostraciones interactivas.
 
-> **Nota de implementación:** la presentación es una **aplicación web propia (React + p5.js)** desplegada, no el editor de p5.js. Se navega con las flechas ← →, swipe en móvil, el menú ≡ MENU o los botones ◄ ► del HUD. Los **7 sketches** están embebidos como slides interactivos con sus propios controles en pantalla (botones, sliders, presets). No hay que abrir pestañas ni pulsar "Play". Toda la interfaz es responsiva: en móvil los paneles de control se colapsan (botón ⚙ CONTROLES) y los lienzos se reescalan solos.
+> **Nota de implementación:** la presentación es una **aplicación web propia (React + p5.js)** desplegada, no el editor de p5.js. Se navega con las flechas ← →, swipe en móvil, el menú ≡ MENU o los botones ◄ ► del HUD. Los **7 sketches** están embebidos como slides interactivos con sus propios controles en pantalla (botones, sliders, presets). No hay que abrir pestañas ni pulsar "Play". Toda la interfaz es responsiva: en móvil los paneles de control se colapsan (botón ⚙ CONTROLES) y los lienzos se reescalan solos. El Slide 22 incluye un **reproductor de video embebido** (trailer de No Man's Sky recortado a 0:17–0:42) que carga solo al pulsar ▶.
+
+> **Nota de interfaz (público):** la aplicación ya **no muestra la palabra «Acto»** en pantalla. Cada sección se identifica con una etiqueta temática corta (ORIGEN · INGREDIENTES · LA TORTUGA · NATURALEZA VIVA · DETRÁS DE CÁMARAS · IMPACTO REAL) y los sketches con una etiqueta «Demo · …». La estructura de 6 secciones de este guion es interna, solo para coordinar los relevos del equipo.
 
 > **Actualización de contenido (v2 · 45 min):** respecto a la versión de 30 minutos se añadieron (1) el cociente áureo A:B → φ en el Sketch 2; (2) la dimensión fractal y dos familias fractales nuevas (Sierpinski y curva del dragón) en el Sketch 3; (3) un **nuevo Sketch 6** de L-System sensible al contexto (señal hormonal que viaja célula a célula); (4) un **nuevo Sketch 7** paramétrico con la regla de grosor de da Vinci; y (5) la tortuga 3D en movimiento real (yaw/pitch/roll) en el Slide 21.
 
@@ -44,7 +46,7 @@ Para evitar la monotonía de una exposición secuencial de 11 minutos por person
 | 19 | El Peligro Exponencial y el Doble Cuaderno | Curva exponencial + dos buffers (Sₙ → Sₙ₊₁). | Prepara la prueba de estrés. |
 | 20 | Sketch 5: Prueba de estrés | Selector de iteraciones + telemetría Segmentos/FPS (**arranca en 4**). | Demo en vivo. |
 | 21 | Del Plano 2D al Mundo 3D | Tortuga 3D **en movimiento** mostrando los ejes H/L/U (yaw/pitch/roll) + línea→cilindro + **render real** (wireframe → malla con hojas). | Explica geometría 3D. |
-| 22 | Mundos Infinitos en Pocos Kilobytes | **Capturas reales**: flora de videojuego + ciudad procedural (Parish & Müller) + galería de fractales L-system (arte/ciencia). | Cierre e impacto real. |
+| 22 | Mundos Infinitos en Pocos Kilobytes | **Trailer de No Man's Sky** (clip 0:17–0:42, flora procedural en vivo) + 3 tarjetas con capturas reales: flora de videojuego, ciudad procedural (Parish & Müller) y galería de fractales (arte/ciencia). | Cierre e impacto real. |
 | 23 | Cierre: Reglas Simples, Mundos Infinitos | **Bosque estocástico diverso** que crece en ola (auto-arranca) + emblema Gaymers. | Conclusión final. |
 
 # **Sección 3: Los 7 Sketches Interactivos (embebidos en la app)**
@@ -156,7 +158,8 @@ Los tiempos son una guía de ritmo; conviene cronometrar en el ensayo y recortar
 
 ## **\[42:00 – 43:15 \| Nicolas Bolaños\] — \[SLIDE 22\]**
 
-* **Guion:** "¿Dónde vemos todo esto fuera del aula? En prácticamente toda la industria del entretenimiento. Herramientas estándar de cine y videojuegos como SpeedTree —usada desde Avatar hasta The Witcher— se basan en L-Systems paramétricos. Y en juegos de exploración espacial como No Man's Sky, donde existen trillones de planetas, sería imposible guardar los árboles en el disco duro; en cambio, el juego guarda una pequeña semilla numérica y un L-System cultiva la flora de cada planeta en tiempo real frente al jugador. La fuerza principal no es guardar más geometría, sino guardar menos datos y generar la forma cuando se necesita. Una semilla reproduce siempre la misma planta con las mismas reglas: ahorra almacenamiento y mantiene resultados consistentes en mundos enormes."
+* **Acción en pantalla:** En el Slide 22, pulsa el botón ▶ del reproductor del **trailer de No Man's Sky** (arranca en 0:17 y se detiene solo en 0:42): 25 segundos de flora alienígena generada en vivo mientras el jugador explora. Déjalo correr mientras narras.
+* **Guion:** "¿Dónde vemos todo esto fuera del aula? En prácticamente toda la industria del entretenimiento. Miren este trailer de No Man's Sky: cada planta, cada árbol raro que ven en ese planeta no está guardado en el disco. Herramientas estándar de cine y videojuegos como SpeedTree —usada desde Avatar hasta The Witcher— se basan en L-Systems paramétricos. Y en un juego como este, donde existen trillones de planetas, sería imposible guardar los árboles uno por uno; en cambio, el juego guarda una pequeña semilla numérica y un L-System cultiva la flora de cada planeta en tiempo real frente al jugador, justo como lo están viendo. La fuerza principal no es guardar más geometría, sino guardar menos datos y generar la forma cuando se necesita. Una semilla reproduce siempre la misma planta con las mismas reglas: ahorra almacenamiento y mantiene resultados consistentes en mundos enormes."
 
 ## **\[43:15 – 44:00 \| Farid Ardila\] — \[SLIDE 22\]**
 

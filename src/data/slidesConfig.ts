@@ -1,15 +1,15 @@
 /**
  * Configuración declarativa del flujo de la presentación.
  *
- * 6 Actos narrativos · 21 slides en orden lineal. Cada entrada declara su
- * número, el Acto al que pertenece, su acento neón, un título corto (para el
- * menú y el HUD) y el identificador del componente que lo renderiza.
+ * 6 secciones temáticas · 23 slides en orden lineal. Cada entrada declara su
+ * número, la sección a la que pertenece, su acento neón, un título corto (para
+ * el menú y el HUD) y el identificador del componente que lo renderiza.
  *
  * Regla de oro: cada slide muestra ≤ 15 palabras; la explicación vive en la
  * voz del equipo. Interfaz 100 % limpia, sin notas ni guion en pantalla.
  */
 
-/** Acentos neón disponibles por Acto. */
+/** Acentos neón disponibles por sección. */
 export type Accent = 'cyan' | 'emerald' | 'amber' | 'magenta'
 
 /**
@@ -43,16 +43,18 @@ export type SlideComponentId =
 
 export interface Act {
   id: number
-  /** Número romano para el badge pixel. */
+  /** Número romano (uso interno para agrupar; ya no se muestra al público). */
   label: string
   title: string
+  /** Etiqueta corta visible para el público (sin la palabra «Acto»). */
+  tag: string
   accent: Accent
 }
 
 export interface Slide {
-  /** Número de slide 1..21. */
+  /** Número de slide en orden lineal. */
   n: number
-  /** Acto al que pertenece (1..6). */
+  /** Sección temática a la que pertenece (1..6, uso interno). */
   act: number
   accent: Accent
   /** Título corto para el menú / HUD (no es necesariamente el texto en pantalla). */
@@ -62,12 +64,12 @@ export interface Slide {
 }
 
 export const ACTS: Act[] = [
-  { id: 1, label: 'I', title: 'El Enganche Visual y el Origen Biológico', accent: 'cyan' },
-  { id: 2, label: 'II', title: 'Los 3 Ingredientes del ADN Digital', accent: 'emerald' },
-  { id: 3, label: 'III', title: 'La Tortuga y el Poder de Recordar', accent: 'amber' },
-  { id: 4, label: 'IV', title: 'De Clones Perfectos a Naturaleza Viva', accent: 'magenta' },
-  { id: 5, label: 'V', title: 'Detrás de Cámaras en Computación Visual', accent: 'cyan' },
-  { id: 6, label: 'VI', title: 'Impacto Real y Cierre', accent: 'emerald' },
+  { id: 1, label: 'I', title: 'El Enganche Visual y el Origen Biológico', tag: 'ORIGEN', accent: 'cyan' },
+  { id: 2, label: 'II', title: 'Los 3 Ingredientes del ADN Digital', tag: 'INGREDIENTES', accent: 'emerald' },
+  { id: 3, label: 'III', title: 'La Tortuga y el Poder de Recordar', tag: 'LA TORTUGA', accent: 'amber' },
+  { id: 4, label: 'IV', title: 'De Clones Perfectos a Naturaleza Viva', tag: 'NATURALEZA VIVA', accent: 'magenta' },
+  { id: 5, label: 'V', title: 'Detrás de Cámaras en Computación Visual', tag: 'DETRÁS DE CÁMARAS', accent: 'cyan' },
+  { id: 6, label: 'VI', title: 'Impacto Real y Cierre', tag: 'IMPACTO REAL', accent: 'emerald' },
 ]
 
 export const TEAM_NAME = 'GAYMERS'
@@ -153,7 +155,7 @@ export const SLIDES: Slide[] = [
   { n: 23, act: 6, accent: 'emerald', title: 'Cierre: reglas simples, mundos infinitos', component: 'closing' },
 ]
 
-/** Devuelve el Acto al que pertenece un slide. */
+/** Devuelve la sección a la que pertenece un slide. */
 export function actForSlide(n: number): Act {
   const slide = SLIDES.find((s) => s.n === n)
   const actId = slide?.act ?? 1

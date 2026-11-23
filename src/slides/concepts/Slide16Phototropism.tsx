@@ -6,7 +6,7 @@ import { ConceptFrame, Card } from './shared'
  */
 export default function Slide16Phototropism() {
   return (
-    <ConceptFrame badge="ACTO IV" accent="magenta" title="Cuando la Planta Mira al Sol">
+    <ConceptFrame badge="NATURALEZA VIVA" accent="magenta" title="Cuando la Planta Mira al Sol">
       <Card accent="magenta" className="w-full max-w-2xl p-6 sm:p-8">
         <svg viewBox="0 0 320 180" className="w-full" role="img" aria-label="Fototropismo">
           <rect x="4" y="4" width="312" height="172" rx="6" fill="#E0F2FE" stroke="#0F172A" strokeWidth="2" />

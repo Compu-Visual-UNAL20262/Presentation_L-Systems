@@ -31,7 +31,7 @@ function CommandCard({
 
 export default function Slide08Turtle() {
   return (
-    <ConceptFrame badge="ACTO III" accent="amber" title="De Letras a Píxeles: La Tortuga">
+    <ConceptFrame badge="LA TORTUGA" accent="amber" title="De Letras a Píxeles: La Tortuga">
       <div className="flex w-full max-w-4xl flex-col items-center gap-4 sm:gap-5">
         {/* Cursor vectorial (tortuga con lápiz en tarjeta clara) */}
         <div className="pixel-bevel-sm bg-white px-6 py-2">

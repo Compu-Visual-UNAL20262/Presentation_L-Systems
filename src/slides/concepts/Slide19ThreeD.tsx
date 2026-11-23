@@ -19,7 +19,7 @@ function AxisChip({ label, pillBg }: { label: string; pillBg: string }) {
 
 export default function Slide19ThreeD() {
   return (
-    <ConceptFrame badge="ACTO V" accent="cyan" title="Del Plano 2D al Mundo 3D">
+    <ConceptFrame badge="DETRÁS DE CÁMARAS" accent="cyan" title="Del Plano 2D al Mundo 3D">
       <div className="flex h-full w-full max-w-4xl flex-col items-center gap-3 sm:gap-4">
         <div className="grid w-full shrink-0 gap-3 sm:grid-cols-2 sm:gap-4">
           {/* Avión/tortuga 3D con base ortonormal H, L, U que rota en vivo */}

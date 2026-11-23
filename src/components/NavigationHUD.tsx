@@ -55,7 +55,7 @@ export default function NavigationHUD({ index, total, onPrev, onNext }: Navigati
         </div>
       </div>
 
-      {/* Numeración + Acto (esquina inferior izquierda, alto contraste) */}
+      {/* Sección temática + numeración (esquina inferior izquierda, alto contraste) */}
       <div
         data-no-swipe="true"
         className="fixed bottom-3.5 left-4 z-30 flex items-center gap-2 select-none"
@@ -64,7 +64,7 @@ export default function NavigationHUD({ index, total, onPrev, onNext }: Navigati
           className={`font-pixel text-[10px] font-bold tracking-widest uppercase px-2.5 py-1.5
             pixel-bevel-sm ${accent.bg} text-[#0F172A]`}
         >
-          ACTO {act.label}
+          {act.tag}
         </span>
         <span className="font-pixel text-[11px] font-bold text-[#0F172A] bg-white pixel-bevel-sm px-2.5 py-1.5">
           {String(current.n).padStart(2, '0')}

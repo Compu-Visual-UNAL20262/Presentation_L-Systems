@@ -8,7 +8,7 @@ import PixelMeme from '../../components/PixelMeme'
 export default function Slide17Exponential() {
   return (
     <ConceptFrame
-      badge="ACTO V"
+      badge="DETRÁS DE CÁMARAS"
       accent="cyan"
       title="El Peligro Exponencial y el Doble Cuaderno"
     >

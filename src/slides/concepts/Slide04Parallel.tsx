@@ -115,7 +115,7 @@ export default function Slide04Parallel() {
   }, [])
 
   return (
-    <ConceptFrame badge="ACTO I" accent="cyan" title="Uno a la Vez vs. Todos al Tiempo">
+    <ConceptFrame badge="ORIGEN" accent="cyan" title="Uno a la Vez vs. Todos al Tiempo">
       <div className="w-full max-w-4xl pixel-bevel bg-white p-5 sm:p-7">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-0 sm:divide-x-2 sm:divide-[#E2E8F0]">
           {/* Columna Izquierda: Chomsky (secuencial) */}

@@ -7,7 +7,7 @@ export default function Slide02Cover() {
     <div className="flex h-full w-full flex-col items-center justify-center px-4 pb-14 pt-10 text-center sm:px-6">
       <div className="animate-fade-up flex max-w-4xl flex-col items-center">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <ActBadge label="ACTO I" accent="cyan" />
+          <ActBadge label="ORIGEN" accent="cyan" />
           <span className="pixel-bevel-sm bg-[#F472B6] px-3 py-1 font-pixel text-[10px] font-bold tracking-widest text-[#0F172A]">
             ♥ TEAM {TEAM_NAME}
           </span>

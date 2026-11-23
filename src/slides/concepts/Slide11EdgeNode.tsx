@@ -25,7 +25,7 @@ export default function Slide11EdgeNode() {
   }, [])
 
   return (
-    <ConceptFrame badge="ACTO III" accent="amber" title="Crecer por Tallos vs. por Yemas">
+    <ConceptFrame badge="LA TORTUGA" accent="amber" title="Crecer por Tallos vs. por Yemas">
       <div className="w-full max-w-4xl pixel-bevel bg-white p-5 sm:p-7">
         {/* Selector de Generación (Arcade Pills) */}
         <div className="mb-5 flex items-center justify-center gap-3">

@@ -52,7 +52,7 @@ export default function Slide10Stack() {
   const isPopped = step === 3
 
   return (
-    <ConceptFrame badge="ACTO III" accent="amber" title="El Superpoder de Recordar: [ y ]">
+    <ConceptFrame badge="LA TORTUGA" accent="amber" title="El Superpoder de Recordar: [ y ]">
       <div className="w-full max-w-4xl pixel-bevel bg-white p-5 sm:p-7">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-0 sm:divide-x-2 sm:divide-[#E2E8F0]">
           {/* =========================================================

@@ -9,7 +9,7 @@ interface ActMenuProps {
 
 /**
  * Menú desplegable estilo botón "MENU" amarillo moneda (16-bit de día) para
- * saltar directo a cualquiera de los 6 Actos o las slides de la charla.
+ * saltar directo a cualquiera de las 6 secciones o las slides de la charla.
  */
 export default function ActMenu({ index, onJump }: ActMenuProps) {
   const [open, setOpen] = useState(false)
@@ -74,7 +74,7 @@ export default function ActMenu({ index, onJump }: ActMenuProps) {
                     className={`font-pixel text-[10px] font-bold tracking-widest uppercase px-2 py-0.5
                       pixel-bevel-sm ${accent.bg} text-[#0F172A]`}
                   >
-                    ACTO {act.label}
+                    {act.tag}
                   </span>
                   <span className="font-display text-xs font-semibold text-[#0F172A] truncate">
                     {act.title}

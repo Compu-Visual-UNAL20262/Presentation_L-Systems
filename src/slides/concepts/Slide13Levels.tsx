@@ -15,7 +15,7 @@ const LEVELS = [
 
 export default function Slide13Levels() {
   return (
-    <ConceptFrame badge="ACTO IV" accent="magenta" title="Los 5 Niveles de Realismo">
+    <ConceptFrame badge="NATURALEZA VIVA" accent="magenta" title="Los 5 Niveles de Realismo">
       <div className="flex w-full max-w-4xl items-end justify-center gap-2 sm:gap-3.5">
         {LEVELS.map((lvl, i) => (
           <div

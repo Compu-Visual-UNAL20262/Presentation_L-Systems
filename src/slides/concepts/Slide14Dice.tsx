@@ -41,7 +41,7 @@ const VARIANTS = [
 
 export default function Slide14Dice() {
   return (
-    <ConceptFrame badge="ACTO IV" accent="magenta" title="El Bosque de los Dados">
+    <ConceptFrame badge="NATURALEZA VIVA" accent="magenta" title="El Bosque de los Dados">
       <div className="flex w-full max-w-4xl flex-col items-center gap-3.5 sm:gap-4">
         <div className="grid w-full gap-3.5 sm:grid-cols-2 sm:gap-4">
           <div className="pixel-bevel border-t-4 border-[#64748B] bg-white p-4 text-center sm:p-5">

@@ -45,7 +45,7 @@ export function Slide07AlgaeSketch() {
   return (
     <div className="relative h-full w-full">
       <Sketch2Algae />
-      <CornerBadge text="ACTO II · Sketch 2" className="absolute bottom-16 left-4" />
+      <CornerBadge text="Demo · Fibonacci emergente" className="absolute bottom-16 left-4" />
     </div>
   )
 }
@@ -64,7 +64,7 @@ export function Slide12PlantSketch() {
   return (
     <div className="relative h-full w-full">
       <Sketch4Plant />
-      <CornerBadge text="ACTO III · Sketch 4" className="absolute bottom-16 left-4" />
+      <CornerBadge text="Demo · Planta ramificada" className="absolute bottom-16 left-4" />
     </div>
   )
 }
@@ -74,7 +74,7 @@ export function SlideContextSketch() {
   return (
     <div className="relative h-full w-full">
       <Sketch6Context />
-      <CornerBadge text="ACTO IV · Sensible a contexto (IL)" className="absolute bottom-16 right-4" />
+      <CornerBadge text="Demo · Sensible a contexto (IL)" className="absolute bottom-16 right-4" />
     </div>
   )
 }
@@ -84,7 +84,7 @@ export function SlideParametricSketch() {
   return (
     <div className="relative h-full w-full">
       <Sketch7Parametric />
-      <CornerBadge text="ACTO IV · Paramétrico (da Vinci)" className="absolute bottom-16 left-4" />
+      <CornerBadge text="Demo · Paramétrico (da Vinci)" className="absolute bottom-16 left-4" />
     </div>
   )
 }
@@ -95,11 +95,11 @@ export function Slide15ForestSketch() {
     <div className="relative h-full w-full">
       <div className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4">
         <span className="pixel-bevel-sm bg-white px-3.5 py-1 font-pixel text-[9px] font-bold text-[#0F172A] sm:text-[10px]">
-          🌲 ACTO IV · BIODIVERSIDAD CON REGLAS ESTOCÁSTICAS (S0L)
+          🌲 BIODIVERSIDAD CON REGLAS ESTOCÁSTICAS (S0L)
         </span>
       </div>
       <Sketch5Forest mode="stochastic" />
-      <CornerBadge text="ACTO IV · Sketch 5" className="absolute bottom-16 right-4" />
+      <CornerBadge text="Demo · Bosque estocástico" className="absolute bottom-16 right-4" />
     </div>
   )
 }
@@ -110,11 +110,11 @@ export function Slide18StressSketch() {
     <div className="relative h-full w-full">
       <div className="pointer-events-none absolute inset-x-0 top-14 z-20 flex justify-center px-4">
         <span className="pixel-bevel-sm bg-[#FFF1F2] border-2 border-[#E11D48] px-3.5 py-1 font-pixel text-[9px] font-black text-[#E11D48] sm:text-[10px]">
-          ⚠️ ACTO V · PRUEBA DE ESTRÉS: EXPLOSIÓN DE SEGMENTOS Y CAÍDA DE FPS
+          ⚠️ PRUEBA DE ESTRÉS: EXPLOSIÓN DE SEGMENTOS Y CAÍDA DE FPS
         </span>
       </div>
       <Sketch5Forest mode="stress" />
-      <CornerBadge text="ACTO V · Prueba de estrés" className="absolute bottom-16 right-4" />
+      <CornerBadge text="Demo · Prueba de estrés" className="absolute bottom-16 right-4" />
     </div>
   )
 }
@@ -131,7 +131,7 @@ export function Slide21Closing() {
       <div className="pointer-events-none absolute inset-x-0 top-12 flex flex-col items-center px-4 text-center sm:top-14">
         <div className="pixel-bevel bg-white/95 px-5 py-3 sm:px-7 sm:py-4">
           <span className="inline-block pixel-bevel-sm bg-[#FACC15] px-2.5 py-0.5 font-pixel text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">
-            ACTO VI · GAME CLEAR · GAYMERS
+            GAME CLEAR · GAYMERS
           </span>
           <h2 className="mt-2 font-display text-2xl font-bold text-[#0F172A] sm:text-4xl">
             Reglas Simples. Mundos Infinitos.
