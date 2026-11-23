@@ -19,6 +19,8 @@ export interface YouTubeEmbedProps {
   start?: number
   /** Segundo de fin del clip. */
   end?: number
+  /** Si es true, el video se repite en bucle (reiniciando en `start`). */
+  loop?: boolean
   /** Etiqueta corta sobre el reproductor (sin texto denso). */
   caption?: string
   /** Texto de la barra superior (izquierda). Por defecto, la del trailer. */
@@ -33,6 +35,7 @@ export default function YouTubeEmbed({
   title,
   start,
   end,
+  loop = false,
   caption,
   badgeLabel = "VIDEO · NO MAN'S SKY",
   cornerLabel = '▶ TRAILER',
@@ -50,7 +53,15 @@ export default function YouTubeEmbed({
     playsinline: '1',
   })
   if (start != null) params.set('start', String(start))
-  if (end != null) params.set('end', String(end))
+  // En modo bucle NO fijamos `end`: YouTube reinicia el video al terminar y,
+  // gracias a `start`, cada vuelta arranca en ese segundo. `loop` requiere
+  // `playlist` con el mismo id para funcionar en el reproductor embebido.
+  if (loop) {
+    params.set('loop', '1')
+    params.set('playlist', videoId)
+  } else if (end != null) {
+    params.set('end', String(end))
+  }
 
   const src = `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`
   const poster = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`

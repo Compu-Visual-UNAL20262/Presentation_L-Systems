@@ -20,9 +20,9 @@ export default function Slide20Applications() {
         <div className="w-full sm:col-span-3">
           <YouTubeEmbed
             videoId="nLtmEjqzg7M"
-            title="No Man's Sky — flora generada proceduralmente (clip 0:17–0:42)"
-            start={17}
-            end={42}
+            title="No Man's Sky — flora generada proceduralmente (en bucle desde 0:18)"
+            start={18}
+            loop
             caption="No Man's Sky: cada planeta cultiva su flora con una semilla + L-System"
           />
         </div>
