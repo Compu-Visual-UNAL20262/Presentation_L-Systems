@@ -4,6 +4,17 @@ Plataforma interactiva para la exploración, simulación y comprensión de los *
 
 ---
 
+## 📚 Documentación Especializada
+
+Para una inmersión técnica detallada, el proyecto cuenta con guías monográficas en el directorio [`docs/`](./docs/):
+
+- 📐 **[Fundamentos Teóricos y Matemáticos (`docs/L_SYSTEMS_THEORY.md`)](./docs/L_SYSTEMS_THEORY.md):** Formalismo matemático de D0L, S0L, IL (sensibles al contexto), L-Systems paramétricos (da Vinci), Open L-Systems, derivación de Fibonacci, el número áureo y cálculo de dimensión fractal de Hausdorff.
+- 🎨 **[Catálogo y Referencia Técnica de Sketches (`docs/SKETCHES_REFERENCE.md`)](./docs/SKETCHES_REFERENCE.md):** Ficha técnica detallada de los 13 sketches interactivos en p5.js con sus gramáticas formales, parámetros de control, estados y atajos.
+- 🏗️ **[Arquitectura del Sistema y Frontend (`docs/ARCHITECTURE.md`)](./docs/ARCHITECTURE.md):** Funcionamiento interno del motor de presentación `SlideDeck`, integración en Instance Mode con `P5Canvas`, prevención de fugas de memoria y sistema de diseño retro-arcade.
+- 🛠️ **[Guía del Desarrollador y Extensibilidad (`docs/DEVELOPER_GUIDE.md`)](./docs/DEVELOPER_GUIDE.md):** Manual paso a paso para crear nuevos sketches, registrar diapositivas, reglas de optimización de rendimiento y despliegue continuo (Vercel / GitHub Pages).
+
+---
+
 ## Índice
 
 1. [Fundamentos Teóricos y Matemáticos](#1-fundamentos-teóricos-y-matemáticos)
